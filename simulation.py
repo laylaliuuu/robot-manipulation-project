@@ -1,6 +1,8 @@
 import time
 import pybullet as p
 import pybullet_data
+from perception import PerceptionModule
+
 
 def get_controllable_joints(robot_id):
     num_joints = p.getNumJoints(robot_id)
@@ -135,6 +137,15 @@ def main():
     # robot_id = p.loadURDF("husky/husky.urdf", start_pos, start_orientation)
     robot_id = p.loadURDF("franka_panda/panda.urdf", start_pos, start_orientation, useFixedBase=True)
 
+    red_block_id = p.loadURDF("cube_small.urdf", [0.7, 0.2, 0.05], useFixedBase=False)
+    p.changeVisualShape(red_block_id, -1, rgbaColor=[1, 0, 0, 1])
+
+    green_cube_id = p.loadURDF("cube_small.urdf", [0.3, 0.3, 0.05], useFixedBase=False)
+    p.changeVisualShape(green_cube_id, -1, rgbaColor=[0, 1, 0, 1])
+
+    blue_sphere_id = p.loadURDF("sphere_small.urdf", [0.5, -0.2, 0.05], useFixedBase=False)
+    p.changeVisualShape(blue_sphere_id, -1, rgbaColor=[0, 0, 1, 1])
+
     for i in range(p.getNumJoints(robot_id)):
         print(p.getJointInfo(robot_id, i))
 
@@ -146,6 +157,27 @@ def main():
                          cube_start_pos,
                          cube_start_orientation,
                          useFixedBase=False)
+    object_map = {
+    'red_block': red_block_id,
+    'green_cube': green_cube_id,
+    'blue_sphere': blue_sphere_id,
+    'cube': cube_id
+    }
+    perception = PerceptionModule(robot_id, object_map)
+    
+
+    print("\n" + "="*50)
+    print("PERCEPTION TEST")
+    print("="*50)
+
+    test_objects = ['red_block', 'green_cube', 'blue_sphere','cube']
+    for obj in test_objects:
+        pos = perception.detect_object(obj)
+        print(f"{obj}: {pos}")
+        assert pos is not None, f"Failed to detect {obj}"
+
+        print("\nAll objects detected successfully!\n")
+
     joint_indices = get_controllable_joints(robot_id)
     arm_joint_indices = [j for j in joint_indices if j < 7]
     print("\n" + "="*50)
