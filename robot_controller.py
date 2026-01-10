@@ -18,6 +18,8 @@ class RobotController:
         self.gripper_right = gripper_right_id
         self.perception = perception_module
         self.parser = parser
+        self.held_object_id = None
+
 
         # Robot configuration
         self.arm_joints = list(range(7))   # Joints 0-6 for Franka arm
@@ -117,8 +119,8 @@ class RobotController:
             if not self.move_to_position(approach_pos, duration=2.0):
                 return False, "Failed to move above object"
 
-            # move down slightly above object (NOT exactly at obj_pos)
-            if not self.move_to_position(obj_pos, duration=1.5):
+            grasp_pos = obj_pos + np.array([0, 0, 0.02])  # 2cm above base center
+            if not self.move_to_position(grasp_pos, duration=1.5):
                 return False, "Failed to reach grasp pose"
             self.wait(0.3)
 
@@ -135,35 +137,57 @@ class RobotController:
             if new_pos[2] < obj_pos[2] + 0.05:
                 return False, "Grasp failed (object did not lift)"
 
+            self.held_object_id = obj_id
             return True, f"Successfully picked up '{object_name}'"
 
     def place_object(self, target_name):
-            """
-            Place held object on/at target.
+        target_pos = self.perception.detect_object(target_name)
+        if target_pos is None:
+            return False, f"Could not find target '{target_name}'"
 
-            Returns: (success: bool, message: str)
-            """
-            # Detect target
-            target_pos = self.perception.detect_object(target_name)
-            if target_pos is None:
-                return False, f"Could not find target '{target_name}'"
+        target_id = self.perception.object_map.get(target_name)
+        if target_id is None:
+            return False, f"Target id not found for '{target_name}'"
 
-            print(f"Placing object on '{target_name}' at {target_pos}")
+        if self.held_object_id is None:
+            return False, "No object currently held"
 
-            # Move above target
-            approach_pos = target_pos + np.array([0, 0, 0.15])
-            if not self.move_to_position(approach_pos, duration=2.0):
-                return False, "Failed to move to target"
+        print(f"Placing object on '{target_name}' at {target_pos}")
 
-            # Open gripper to release object
-            self.open_gripper()
+        # --- compute "top of target" and "half height of held object" using AABB ---
+        t_min, t_max = p.getAABB(target_id)
+        o_min, o_max = p.getAABB(self.held_object_id)
 
-            # Move back to home
-            home_pos = np.array([0, 0, 0.5])
-            if not self.move_to_position(home_pos, duration=2.0):
-                return False, "Failed to return home"
+        target_top_z = t_max[2]
+        obj_half_h = 0.5 * (o_max[2] - o_min[2])
 
-            return True, f"Successfully placed object on '{target_name}'"
+        # desired place position: center aligned in XY, Z sits on top + tiny epsilon
+        place_pos = np.array([target_pos[0], target_pos[1], target_top_z + obj_half_h + 0.002])
+
+        # --- approach above ---
+        approach_pos = place_pos + np.array([0, 0, 0.15])
+        if not self.move_to_position(approach_pos, duration=2.0):
+            return False, "Failed to move above target"
+
+        # --- descend close to placement height (don’t drop from above) ---
+        pre_place = place_pos + np.array([0, 0, 0.02])
+        if not self.move_to_position(pre_place, duration=1.0):
+            return False, "Failed to descend near placement"
+
+        if not self.move_to_position(place_pos, duration=0.8):
+            return False, "Failed to reach placement pose"
+
+        # settle, then release
+        self.wait(0.5)
+        self.open_gripper()
+        self.wait(0.5)
+
+        # retreat up (prevents knocking it)
+        if not self.move_to_position(approach_pos, duration=1.2):
+            return False, "Failed to retreat"
+
+        self.held_object_id = None
+        return True, f"Successfully placed object on '{target_name}'"
 
     def execute_command(self, command: str):
             """
@@ -185,18 +209,42 @@ class RobotController:
 
             # Execute each action
             for action, obj, target in actions:
+
+                # how many retries per action
+                tries = 1
                 if action == "pick":
-                    success, msg = self.pick_object(obj)
+                    tries = 5
                 elif action == "place":
-                    success, msg = self.place_object(obj)
-                elif action == "open_gripper":
-                    self.open_gripper()
-                    success, msg = True, "Opened gripper"
-                elif action == "close_gripper":
-                    self.close_gripper()
-                    success, msg = True, "Closed gripper"
-                else:
-                    success, msg = False, f"Unknown action: {action}"
+                    tries = 3
+
+                success, msg = False, ""
+
+                for attempt in range(tries):
+                    if tries > 1:
+                        print(f"  → {action} attempt {attempt+1}/{tries}")
+
+                    if action == "pick":
+                        success, msg = self.pick_object(obj)
+
+                    elif action == "place":
+                        success, msg = self.place_object(obj)
+
+                    elif action == "open_gripper":
+                        self.open_gripper()
+                        success, msg = True, "Opened gripper"
+
+                    elif action == "close_gripper":
+                        self.close_gripper()
+                        success, msg = True, "Closed gripper"
+
+                    else:
+                        success, msg = False, f"Unknown action: {action}"
+
+                    if success:
+                        break
+
+                    # small settle before retry (helps physics a lot)
+                    self.wait(0.4)
 
                 if not success:
                     return False, f"Action '{action}' failed: {msg}"

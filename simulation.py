@@ -260,7 +260,6 @@ def main():
     print("-" * 60)
 
     demo_commands = [
-        "pick up the red block",
         "place the red block on the green cube",
     ]
 
