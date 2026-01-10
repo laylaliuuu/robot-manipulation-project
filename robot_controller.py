@@ -19,6 +19,13 @@ class RobotController:
         self.perception = perception_module
         self.parser = parser
         self.held_object_id = None
+        # Cache gripper max opening from joint limits (per finger upper limit)
+        left_info = p.getJointInfo(self.robot_id, self.gripper_left)
+        right_info = p.getJointInfo(self.robot_id, self.gripper_right)
+        left_hi = left_info[9]
+        right_hi = right_info[9]
+        self.gripper_max_open = 2.0 * min(left_hi, right_hi)   # total opening (both fingers)
+
 
 
         # Robot configuration
@@ -30,14 +37,24 @@ class RobotController:
         steps = int(seconds * 240)
         for _ in range(steps):
             p.stepSimulation()
-    def move_to_position(self, target_pos, duration=2.0):
-        joint_target = p.calculateInverseKinematics(
-            self.robot_id,
-            self.end_effector_link,
-            targetPosition=target_pos
-        )
+    def move_to_position(self, target_pos, duration=2.0, use_down_orientation=False):
+        # tool pointing “down” (you can tweak later)
+        down_orn = p.getQuaternionFromEuler([np.pi, 0, 0])
 
-        # current joint positions
+        if use_down_orientation:
+            joint_target = p.calculateInverseKinematics(
+                self.robot_id,
+                self.end_effector_link,
+                targetPosition=target_pos,
+                targetOrientation=down_orn
+            )
+        else:
+            joint_target = p.calculateInverseKinematics(
+                self.robot_id,
+                self.end_effector_link,
+                targetPosition=target_pos
+            )
+
         current = [p.getJointState(self.robot_id, j)[0] for j in self.arm_joints]
 
         steps = max(1, int(duration * 240))
@@ -50,8 +67,8 @@ class RobotController:
                 self.arm_joints,
                 p.POSITION_CONTROL,
                 targetPositions=blended,
-                forces=[50] * 7,          # lower force helps stability
-                positionGains=[0.03] * 7  # softer controller (less violent)
+                forces=[50] * 7,
+                positionGains=[0.03] * 7
             )
             p.stepSimulation()
 
@@ -79,17 +96,74 @@ class RobotController:
             p.stepSimulation()
 
     def close_gripper(self):
+        """Close gripper gradually to avoid bumping the object away, then squeeze."""
+        # Read current finger positions (start from wherever they are)
+        left_pos = p.getJointState(self.robot_id, self.gripper_left)[0]
+        right_pos = p.getJointState(self.robot_id, self.gripper_right)[0]
+
+        # We'll close toward 0.0 in small steps
+        steps = 20
+        gentle_force = 60.0      # gentle close first (prevents flicking)
+        squeeze_force = self.gripper_force  # 200.0 (your strong hold)
+        stalled_count = 0
+
+        for i in range(steps):
+            # linearly move target toward 0
+            alpha = (i + 1) / steps
+            target = (1 - alpha) * max(left_pos, right_pos) + alpha * 0.0
+
+            p.setJointMotorControl2(
+                self.robot_id, self.gripper_left, p.POSITION_CONTROL,
+                targetPosition=target, force=gentle_force
+            )
+            p.setJointMotorControl2(
+                self.robot_id, self.gripper_right, p.POSITION_CONTROL,
+                targetPosition=target, force=gentle_force
+            )
+
+            # simulate a bit so the fingers move
+            for _ in range(12):
+                p.stepSimulation()
+
+            # Detect "stall": if fingers stop changing much, likely contacted object
+            new_left = p.getJointState(self.robot_id, self.gripper_left)[0]
+            new_right = p.getJointState(self.robot_id, self.gripper_right)[0]
+
+            if abs(new_left - target) > 0.004 and abs(new_right - target) > 0.004:
+                stalled_count += 1
+            else:
+                stalled_count = 0
+
+            # If we stall for a couple steps, switch to squeeze force and hold
+            if stalled_count >= 2:
+                p.setJointMotorControl2(
+                    self.robot_id, self.gripper_left, p.POSITION_CONTROL,
+                    targetPosition=0.0, force=squeeze_force
+                )
+                p.setJointMotorControl2(
+                    self.robot_id, self.gripper_right, p.POSITION_CONTROL,
+                    targetPosition=0.0, force=squeeze_force
+                )
+                for _ in range(240):  # hold ~1 second
+                    p.stepSimulation()
+                return
+
+        # If we never stalled, still finish with a strong hold at closed
+        p.setJointMotorControl2(
+            self.robot_id, self.gripper_left, p.POSITION_CONTROL,
+            targetPosition=0.0, force=squeeze_force
+        )
+        p.setJointMotorControl2(
+            self.robot_id, self.gripper_right, p.POSITION_CONTROL,
+            targetPosition=0.0, force=squeeze_force
+        )
+        for _ in range(240):
+            p.stepSimulation()
+
         """Close gripper to grasp object."""
         p.setJointMotorControl2(
             self.robot_id,
             self.gripper_left,
-            p.POSITION_CONTROL,
-            targetPosition=0.0,
-            force=self.gripper_force
-        )
-        p.setJointMotorControl2(
-            self.robot_id,
-            self.gripper_right,
             p.POSITION_CONTROL,
             targetPosition=0.0,
             force=self.gripper_force
@@ -108,28 +182,38 @@ class RobotController:
             if obj_id is None:
                 return False, f"Object id not found for '{object_name}'"
 
+            # ---- Check if object fits in gripper opening ----
+            o_min, o_max = p.getAABB(obj_id)
+            dx = o_max[0] - o_min[0]
+            dy = o_max[1] - o_min[1]
+            obj_width = max(dx, dy)  # conservative
+            if obj_width > self.gripper_max_open - 0.002:
+                return False, f"Object too wide for gripper (obj ~{obj_width:.3f}m, gripper max ~{self.gripper_max_open:.3f}m)"
+
             print(f"Picking up '{object_name}' at {obj_pos}")
-            self.wait(0.5)
-
-            # open before approaching (important)
-            self.open_gripper()
-
-            # move above
-            approach_pos = obj_pos + np.array([0, 0, 0.2])
-            if not self.move_to_position(approach_pos, duration=2.0):
-                return False, "Failed to move above object"
-
-            grasp_pos = obj_pos + np.array([0, 0, 0.02])  # 2cm above base center
-            if not self.move_to_position(grasp_pos, duration=1.5):
-                return False, "Failed to reach grasp pose"
             self.wait(0.3)
 
-            # close gripper
+            # open before approaching
+            self.open_gripper()
+
+            # Keep wrist consistent (down) during approach + grasp for better accuracy
+            approach_pos = obj_pos + np.array([0, 0, 0.20])
+            if not self.move_to_position(approach_pos, duration=2.0, use_down_orientation=True):
+                return False, "Failed to move above object"
+
+            grasp_pos = obj_pos + np.array([0, 0, 0.02])
+            if not self.move_to_position(grasp_pos, duration=1.2, use_down_orientation=True):
+                return False, "Failed to reach grasp pose"
+
+            self.wait(0.2)
+
+            # close gradually (prevents knocking it away)
             self.close_gripper()
+            self.wait(0.2)
 
             # lift
             lift_pos = obj_pos + np.array([0, 0, 0.25])
-            if not self.move_to_position(lift_pos, duration=2.0):
+            if not self.move_to_position(lift_pos, duration=2.0, use_down_orientation=True):
                 return False, "Failed to lift object"
 
             # verify object moved upward
@@ -139,6 +223,7 @@ class RobotController:
 
             self.held_object_id = obj_id
             return True, f"Successfully picked up '{object_name}'"
+
 
     def place_object(self, target_name):
         target_pos = self.perception.detect_object(target_name)
