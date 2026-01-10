@@ -218,7 +218,7 @@ def main():
         'red_block': red_block_id,
         'green_cube': green_cube_id,
         'blue_sphere': blue_sphere_id,
-        'cube': cube_id
+        'white_cube': cube_id
     }
 
     perception = PerceptionModule(robot_id, object_map)
@@ -236,7 +236,7 @@ def main():
     print("PERCEPTION TEST")
     print("=" * 50)
 
-    test_objects = ['red_block', 'green_cube', 'blue_sphere', 'cube']
+    test_objects = ['red_block', 'green_cube', 'blue_sphere', 'white_cube']
     for obj in test_objects:
         pos = perception.detect_object(obj)
         print(f"{obj}: {pos}")
@@ -260,7 +260,7 @@ def main():
     print("-" * 60)
 
     demo_commands = [
-        "place the red block on the green cube",
+        "place the red block on the white cube",
     ]
 
     for cmd in demo_commands:
