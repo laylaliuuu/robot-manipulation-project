@@ -146,7 +146,7 @@ class PerceptionModule:
         image = self.render_scene_image()
         detections = self.detect_color_objects(image)
         
-        color = object_name.split()[0].lower()
+        color = object_name.split("_")[0].lower()
         if color in detections:
             cx, cy = detections[color]
             world_pos = self.pixel_to_world(cx, cy)

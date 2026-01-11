@@ -25,67 +25,149 @@ class RobotController:
         right_hi = right_info[9]
         self.gripper_max_open = 2.0 * min(left_hi, right_hi)
 
-        self.elbow_link = 4
-        self.elbow_min_z = 0.18
-        self.elbow_weight = 0.6
-
         self.arm_joints = list(range(7))
         self.end_effector_link = 11
         self.gripper_force = 200.0
-        self.move_speed = 1.0
+
+        # Optional "home" arm pose (stable default)
+        self.home_joints = [0.0, -0.7, 0.0, -2.2, 0.0, 2.0, 0.8]
 
     def wait(self, seconds=0.5):
         steps = int(seconds * 240)
         for _ in range(steps):
             p.stepSimulation()
 
+    # -----------------------------
+    # IK helpers
+    # -----------------------------
     def _elbow_bias_restpose(self, target_pos):
         dist = float(np.linalg.norm(np.array(target_pos[:2])))
         elbow = -2.0 - 0.6 * np.tanh(dist * 2.0)
-        return [
-            0.0,
-            -0.9,
-            0.8,
-            elbow,
-            0.0,
-            2.2,
-            0.9
-        ]
+        return [0.0, -0.9, 0.8, elbow, 0.0, 2.2, 0.9]
 
-    def move_to_position(self, target_pos, duration=2.0, use_down_orientation=False):
+    def _get_joint_limits(self):
+        lows, highs, ranges = [], [], []
+        for j in self.arm_joints:
+            info = p.getJointInfo(self.robot_id, j)
+            lo, hi = info[8], info[9]
+            # Guard weird URDF limits
+            if lo > hi or lo < -10 or hi > 10:
+                lo, hi = -2.9, 2.9
+            lows.append(lo)
+            highs.append(hi)
+            ranges.append(hi - lo)
+        return lows, highs, ranges
+
+    def _ik(self, target_pos, use_down_orientation):
+        lows, highs, ranges = self._get_joint_limits()
+        rest = self._elbow_bias_restpose(target_pos)
+
         if use_down_orientation:
-            down_orientation = p.getQuaternionFromEuler([np.pi, 0, 0])
-            joint_target = p.calculateInverseKinematics(
+            target_orn = p.getQuaternionFromEuler([np.pi, 0, 0])
+            sol = p.calculateInverseKinematics(
                 self.robot_id,
                 self.end_effector_link,
                 targetPosition=target_pos,
-                targetOrientation=down_orientation
+                targetOrientation=target_orn,
+                lowerLimits=lows,
+                upperLimits=highs,
+                jointRanges=ranges,
+                restPoses=rest,
+                maxNumIterations=160,
+                residualThreshold=1e-4,
             )
         else:
-            joint_target = p.calculateInverseKinematics(
+            sol = p.calculateInverseKinematics(
                 self.robot_id,
                 self.end_effector_link,
-                targetPosition=target_pos
+                targetPosition=target_pos,
+                lowerLimits=lows,
+                upperLimits=highs,
+                jointRanges=ranges,
+                restPoses=rest,
+                maxNumIterations=120,
+                residualThreshold=1e-4,
             )
+
+        return sol[:7]
+
+    # -----------------------------
+    # NON-DESTRUCTIVE reachability check (fixes your err=0.179 issue)
+    # -----------------------------
+    def _fk_error_for_joints(self, joint_positions, target_pos):
+        saved = [p.getJointState(self.robot_id, j)[0] for j in self.arm_joints]
+
+        for j, q in zip(self.arm_joints, joint_positions):
+            p.resetJointState(self.robot_id, j, q)
+
+        ee_pos = np.array(p.getLinkState(self.robot_id, self.end_effector_link)[4])
+        err = float(np.linalg.norm(ee_pos - np.array(target_pos)))
+
+        for j, q in zip(self.arm_joints, saved):
+            p.resetJointState(self.robot_id, j, q)
+
+        return err
+
+    def is_reachable(self, target_pos, use_down_orientation=False, tol=0.04):
+        """
+        Pure kinematic check: IK -> FK error, no stepping, no moving the sim.
+        tol default 4cm (more realistic).
+        """
+        x, y, z = float(target_pos[0]), float(target_pos[1]), float(target_pos[2])
+        r_xy = float(np.linalg.norm([x, y]))
+
+        # Workspace guardrails (tune later)
+        if r_xy < 0.12 or r_xy > 0.95:
+            return False, f"Out of XY workspace (r={r_xy:.3f})"
+        if z < 0.02 or z > 0.90:
+            return False, f"Out of Z workspace (z={z:.3f})"
+
+        jt = self._ik(target_pos, use_down_orientation)
+        err = self._fk_error_for_joints(jt, target_pos)
+
+        if err > tol:
+            return False, f"IK could not reach pose (FK err={err:.3f}m)"
+        return True, "OK"
+
+    # -----------------------------
+    # Motion
+    # -----------------------------
+    def move_to_position(self, target_pos, duration=2.0, use_down_orientation=False):
+        joint_target = self._ik(target_pos, use_down_orientation)
 
         current = [p.getJointState(self.robot_id, j)[0] for j in self.arm_joints]
         steps = max(1, int(duration * 240))
 
         for t in range(steps):
             alpha = (t + 1) / steps
-            blended = [(1 - alpha) * c + alpha * jt for c, jt in zip(current, joint_target[:7])]
+            blended = [(1 - alpha) * c + alpha * jt for c, jt in zip(current, joint_target)]
             p.setJointMotorControlArray(
                 self.robot_id,
                 self.arm_joints,
                 p.POSITION_CONTROL,
                 targetPositions=blended,
-                forces=[50] * 7,
-                positionGains=[0.03] * 7
+                forces=[80] * 7,
+                positionGains=[0.06] * 7
             )
             p.stepSimulation()
 
         return True
 
+    def go_home(self):
+        p.setJointMotorControlArray(
+            self.robot_id,
+            self.arm_joints,
+            p.POSITION_CONTROL,
+            targetPositions=self.home_joints,
+            forces=[80] * 7,
+            positionGains=[0.06] * 7
+        )
+        for _ in range(240):
+            p.stepSimulation()
+
+    # -----------------------------
+    # Gripper
+    # -----------------------------
     def open_gripper(self):
         p.setJointMotorControl2(self.robot_id, self.gripper_left, p.POSITION_CONTROL,
                                 targetPosition=0.04, force=self.gripper_force)
@@ -132,30 +214,15 @@ class RobotController:
         for _ in range(240):
             p.stepSimulation()
 
-    # ------------------------------------------------------------
-    # Key new piece: re-center after pick to reach far targets
-    # ------------------------------------------------------------
-    def go_to_safe_carry_pose(self):
-        ee = np.array(p.getLinkState(self.robot_id, self.end_effector_link)[4])
-
-        # lift up first
-        lift = np.array([ee[0], ee[1], max(ee[2], 0.55)])
-        self.move_to_position(lift, duration=1.2, use_down_orientation=False)
-        self.wait(0.2)
-
-        # recenter (tune x if you want more reach: try 0.50–0.60)
-        carry = np.array([0.45, 0.0, 0.55])
-        self.move_to_position(carry, duration=1.6, use_down_orientation=False)
-        self.wait(0.2)
-
-
-    # ------------------------------------------------------------
-    # Pick (keep your “works” version: no forced down orientation)
-    # ------------------------------------------------------------
+    # -----------------------------
+    # Pick
+    # -----------------------------
     def pick_object(self, object_name):
         obj_pos = self.perception.detect_object(object_name)
         if obj_pos is None:
             return False, f"Could not find '{object_name}'"
+
+        obj_pos = np.array(obj_pos, dtype=float)
 
         obj_id = self.perception.object_map.get(object_name)
         if obj_id is None:
@@ -174,24 +241,29 @@ class RobotController:
             )
 
         print(f"Picking up '{object_name}' at {obj_pos}")
-        self.wait(0.3)
         self.open_gripper()
 
         approach_pos = obj_pos + np.array([0, 0, 0.20])
-        if not self.move_to_position(approach_pos, duration=2.0, use_down_orientation=True):
-            return False, "Failed to move above object"
+        ok, reason = self.is_reachable(approach_pos, use_down_orientation=True)
+        if not ok:
+            return False, f"Unreachable approach pose: {reason}"
+        self.move_to_position(approach_pos, duration=2.0, use_down_orientation=True)
 
         grasp_pos = obj_pos + np.array([0, 0, 0.02])
-        if not self.move_to_position(grasp_pos, duration=1.2, use_down_orientation=True):
-            return False, "Failed to reach grasp pose"
+        ok, reason = self.is_reachable(grasp_pos, use_down_orientation=True)
+        if not ok:
+            return False, f"Unreachable grasp pose: {reason}"
+        self.move_to_position(grasp_pos, duration=1.2, use_down_orientation=True)
 
-        self.wait(0.2)
+        self.wait(0.1)
         self.close_gripper()
-        self.wait(0.2)
+        self.wait(0.1)
 
         lift_pos = obj_pos + np.array([0, 0, 0.25])
-        if not self.move_to_position(lift_pos, duration=2.0, use_down_orientation=True):
-            return False, "Failed to lift object"
+        ok, reason = self.is_reachable(lift_pos, use_down_orientation=True)
+        if not ok:
+            return False, f"Unreachable lift pose: {reason}"
+        self.move_to_position(lift_pos, duration=1.5, use_down_orientation=True)
 
         new_pos, _ = p.getBasePositionAndOrientation(obj_id)
         if new_pos[2] < obj_pos[2] + 0.05:
@@ -200,10 +272,9 @@ class RobotController:
         self.held_object_id = obj_id
         return True, f"Successfully picked up '{object_name}'"
 
-
-    # ------------------------------------------------------------
-    # Place (key change: do NOT force down orientation so it can reach far)
-    # ------------------------------------------------------------
+    # -----------------------------
+    # Place
+    # -----------------------------
     def place_object(self, target_name):
         target_id = self.perception.object_map.get(target_name)
         if target_id is None:
@@ -225,48 +296,41 @@ class RobotController:
             target_top_z + obj_half_h + 0.002
         ])
 
-        # APPROACH: higher + flexible orientation
+        # APPROACH (FIXED VARIABLE NAME)
         approach_pos = desired_obj_pos + np.array([0, 0, 0.28])
-        if not self.move_to_position(approach_pos, duration=2.2, use_down_orientation=False):
-            return False, "Failed to move above target"
-        self.wait(0.15)
+        ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
+        if not ok:
+            return False, f"Unreachable place approach: {reason}"
+        self.move_to_position(approach_pos, duration=2.2, use_down_orientation=False)
+        self.wait(0.1)
 
-        # DESCEND: still flexible
+        # PRE-PLACE (actually used now)
         pre_place = desired_obj_pos + np.array([0, 0, 0.07])
-        if not self.move_to_position(pre_place, duration=1.4, use_down_orientation=False):
-            return False, "Failed to descend near target"
-        self.wait(0.15)
+        ok, reason = self.is_reachable(pre_place, use_down_orientation=False)
+        if not ok:
+            return False, f"Unreachable pre-place pose: {reason}"
+        self.move_to_position(pre_place, duration=1.2, use_down_orientation=False)
+        self.wait(0.1)
 
-        # Optional XY micro-correction (still flexible orientation)
-        gain = 0.6
-        for _ in range(12):
-            obj_now, _ = p.getBasePositionAndOrientation(self.held_object_id)
-            obj_xy = np.array(obj_now[:2])
-            err = target_xy - obj_xy
-            if np.linalg.norm(err) < 0.0015:
-                break
+        # FINAL PLACE
+        ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
+        if not ok:
+            return False, f"Unreachable place pose: {reason}"
+        self.move_to_position(desired_obj_pos, duration=1.0, use_down_orientation=False)
 
-            ee_now = np.array(p.getLinkState(self.robot_id, self.end_effector_link)[4])
-            ee_target = ee_now + np.array([gain * err[0], gain * err[1], 0.0])
-            self.move_to_position(ee_target, duration=0.30, use_down_orientation=False)
-            self.wait(0.10)
-
-        # FINAL DESCEND: flexible (this is what preserves reach)
-        if not self.move_to_position(desired_obj_pos, duration=1.0, use_down_orientation=False):
-            return False, "Failed to reach place pose"
-
-        self.wait(1.0)
+        self.wait(0.3)
         self.open_gripper()
-        self.wait(1.0)
+        self.wait(0.2)
 
-        # retreat
-        if not self.move_to_position(approach_pos, duration=1.2, use_down_orientation=False):
-            return False, "Failed to retreat"
+        # RETREAT
+        self.move_to_position(approach_pos, duration=1.2, use_down_orientation=False)
 
         self.held_object_id = None
         return True, f"Successfully placed object on '{target_name}'"
 
-
+    # -----------------------------
+    # Command loop
+    # -----------------------------
     def execute_command(self, command: str):
         print(f"\n>>> Executing: '{command}'")
 
@@ -305,7 +369,9 @@ class RobotController:
                 if success:
                     break
 
-                self.wait(0.4)
+                # Optional: reset to a known good pose before retrying (helps a lot)
+                self.go_home()
+                self.wait(0.2)
 
             if not success:
                 return False, f"Action '{action}' failed: {msg}"
@@ -313,9 +379,3 @@ class RobotController:
             print(f"✓ {msg}")
 
         return True, "Command executed successfully"
-
-
-
-
-
-

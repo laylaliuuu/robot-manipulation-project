@@ -261,6 +261,9 @@ def main():
 
     demo_commands = [
         "place the red block on the white cube",
+        "pick up the green cube",
+        "place the green cube on the red cube",
+        "place the blue cube on green cube"
     ]
 
     for cmd in demo_commands:
