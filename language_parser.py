@@ -1,14 +1,14 @@
 import re
-from typing import List, Tuple, Optional
 
 class CommandParser:
     """
     Rule-based parser for natural language commands.
-    Outputs object keys that match your object_map, e.g. "red_block".
+    Outputs canonical object keys that match your object_map, e.g. "red_block".
+    Supports common aliases like "red cube" -> "red_block".
     """
 
     def __init__(self):
-        # NOTE: We assume objects are two words like "red block", "green cube"
+        # Two-word object mentions like "red block", "green cube", etc.
         self.pick_place_pattern = (
             r"(?:put|place|move|pick up).*?(?:the\s+)?(\w+\s+\w+)"
             r".*?(?:on|onto|under|above).*?(?:the\s+)?(\w+\s+\w+)"
@@ -22,9 +22,39 @@ class CommandParser:
             r".*?(?:on|under|over).*?(?:the\s+)?(\w+\s+\w+)"
         )
 
+        # Canonical object names in your sim
+        self.alias = {
+            # canonical
+            "red block": "red_block",
+            "green cube": "green_cube",
+            "blue sphere": "blue_sphere",
+            "white cube": "white_cube",
+
+            # common user slips
+            "red cube": "red_block",
+            "green block": "green_cube",
+            "blue cube": "blue_sphere",   # you only have a blue_sphere right now
+            "white block": "white_cube",
+
+            # optional single-word shortcuts (comment out if you dislike)
+            "red": "red_block",
+            "green": "green_cube",
+            "blue": "blue_sphere",
+            "white": "white_cube",
+        }
+
     def _norm(self, name: str) -> str:
-        # "red block" -> "red_block"
-        return name.strip().lower().replace(" ", "_")
+        """
+        Normalize user object mention to canonical object_map key.
+        """
+        raw = name.strip().lower()
+        raw = re.sub(r"\s+", " ", raw)  # collapse multiple spaces
+
+        if raw in self.alias:
+            return self.alias[raw]
+
+        # fallback: "red block" -> "red_block"
+        return raw.replace(" ", "_")
 
     def parse(self, command: str):
         command = command.lower().strip()
@@ -73,8 +103,8 @@ class CommandParser:
 
     def normalize_command(self, command: str) -> str:
         """
-        Normalize command with synonyms, but DO NOT change cube<->block etc.
-        (because that breaks your object_map keys).
+        Normalize command with synonyms, but do NOT change cube<->block etc.
+        Aliasing is handled in _norm().
         """
         synonyms = {
             "grab": "pick up",
