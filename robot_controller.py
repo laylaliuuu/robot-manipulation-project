@@ -243,28 +243,44 @@ class RobotController:
         print(f"Picking up '{object_name}' at {obj_pos}")
         self.open_gripper()
 
-        approach_pos = obj_pos + np.array([0, 0, 0.20])
-        ok, reason = self.is_reachable(approach_pos, use_down_orientation=True)
+        # ------------------------------------------------------------
+        # 1) APPROACH: flexible orientation (easier IK near reach limit)
+        # ------------------------------------------------------------
+        approach_pos = obj_pos + np.array([0, 0, 0.10])  # <- was 0.20, too high for table setup
+        ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable approach pose: {reason}"
-        self.move_to_position(approach_pos, duration=2.0, use_down_orientation=True)
+        self.move_to_position(approach_pos, duration=2.0, use_down_orientation=False)
 
-        grasp_pos = obj_pos + np.array([0, 0, 0.02])
+        # ------------------------------------------------------------
+        # 2) GRASP: try down orientation, fallback if it fails
+        # ------------------------------------------------------------
+        grasp_pos = obj_pos + np.array([0, 0, 0.015])
+
         ok, reason = self.is_reachable(grasp_pos, use_down_orientation=True)
+        use_down = True
         if not ok:
-            return False, f"Unreachable grasp pose: {reason}"
-        self.move_to_position(grasp_pos, duration=1.2, use_down_orientation=True)
+            ok2, reason2 = self.is_reachable(grasp_pos, use_down_orientation=False)
+            if not ok2:
+                return False, f"Unreachable grasp pose: {reason} | fallback: {reason2}"
+            use_down = False
+
+        self.move_to_position(grasp_pos, duration=1.2, use_down_orientation=use_down)
 
         self.wait(0.1)
         self.close_gripper()
         self.wait(0.1)
 
-        lift_pos = obj_pos + np.array([0, 0, 0.25])
-        ok, reason = self.is_reachable(lift_pos, use_down_orientation=True)
+        # ------------------------------------------------------------
+        # 3) LIFT: flexible orientation again
+        # ------------------------------------------------------------
+        lift_pos = obj_pos + np.array([0, 0, 0.18])
+        ok, reason = self.is_reachable(lift_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable lift pose: {reason}"
-        self.move_to_position(lift_pos, duration=1.5, use_down_orientation=True)
+        self.move_to_position(lift_pos, duration=1.5, use_down_orientation=False)
 
+        # Verify object lifted
         new_pos, _ = p.getBasePositionAndOrientation(obj_id)
         if new_pos[2] < obj_pos[2] + 0.05:
             return False, "Grasp failed (object did not lift)"
@@ -272,9 +288,9 @@ class RobotController:
         self.held_object_id = obj_id
         return True, f"Successfully picked up '{object_name}'"
 
-    # -----------------------------
-    # Place
-    # -----------------------------
+        # -----------------------------
+        # Place
+        # -----------------------------
     def place_object(self, target_name):
         target_id = self.perception.object_map.get(target_name)
         if target_id is None:
@@ -296,34 +312,34 @@ class RobotController:
             target_top_z + obj_half_h + 0.002
         ])
 
-        # APPROACH (FIXED VARIABLE NAME)
-        approach_pos = desired_obj_pos + np.array([0, 0, 0.28])
+        # ✅ LOWER APPROACH HEIGHT (was +0.28 which makes z ~0.98 on a table)
+        approach_pos = desired_obj_pos + np.array([0, 0, 0.10])
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable place approach: {reason}"
-        self.move_to_position(approach_pos, duration=2.2, use_down_orientation=False)
+        self.move_to_position(approach_pos, duration=2.0, use_down_orientation=False)
         self.wait(0.1)
 
-        # PRE-PLACE (actually used now)
-        pre_place = desired_obj_pos + np.array([0, 0, 0.07])
+        # ✅ LOWER PRE-PLACE (was +0.07)
+        pre_place = desired_obj_pos + np.array([0, 0, 0.04])
         ok, reason = self.is_reachable(pre_place, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable pre-place pose: {reason}"
-        self.move_to_position(pre_place, duration=1.2, use_down_orientation=False)
+        self.move_to_position(pre_place, duration=1.0, use_down_orientation=False)
         self.wait(0.1)
 
         # FINAL PLACE
         ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable place pose: {reason}"
-        self.move_to_position(desired_obj_pos, duration=1.0, use_down_orientation=False)
+        self.move_to_position(desired_obj_pos, duration=0.8, use_down_orientation=False)
 
         self.wait(0.3)
         self.open_gripper()
         self.wait(0.2)
 
         # RETREAT
-        self.move_to_position(approach_pos, duration=1.2, use_down_orientation=False)
+        self.move_to_position(approach_pos, duration=1.0, use_down_orientation=False)
 
         self.held_object_id = None
         return True, f"Successfully placed object on '{target_name}'"

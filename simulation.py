@@ -145,6 +145,7 @@ def apply_keyboard_control_with_gripper(robot_id, arm_joint_indices, gripper_lef
             targetPosition=target, force=200.0
         )
 
+
 def find_gripper_joints(robot_id):
     """Return (left_finger_joint_index, right_finger_joint_index) by name."""
     finger_joints = []
@@ -163,10 +164,10 @@ def find_gripper_joints(robot_id):
     if len(finger_joints) < 2:
         raise RuntimeError("Could not find 2 finger joints. Check URDF/joint names printed above.")
 
-    # Typically there are exactly two: panda_finger_joint1 and panda_finger_joint2
     left = finger_joints[0][0]
     right = finger_joints[1][0]
     return left, right
+
 
 def main():
     # Connect to physics server with GUI
@@ -179,7 +180,7 @@ def main():
     p.setGravity(0, 0, -9.81)
     plane_id = p.loadURDF("plane.urdf")
 
-    # Load Franka Panda robot arm
+    # Load Franka Panda robot arm (keep same)
     start_pos = [0, 0, 0]
     start_orientation = p.getQuaternionFromEuler([0, 0, 0])
     robot_id = p.loadURDF(
@@ -190,47 +191,61 @@ def main():
     )
     gripper_left_index, gripper_right_index = find_gripper_joints(robot_id)
 
+    # ------------------------------------------------------------
+    # NEW: Add a table "where the red block used to be"
+    # ------------------------------------------------------------
+    table_pos = [1, 0, 0.0]  # <-- roughly your old red_block location
+    table_orn = p.getQuaternionFromEuler([0, 0, 0])
+    table_id = p.loadURDF("table/table.urdf", table_pos, table_orn, useFixedBase=True)
 
-    # Colored objects
-    red_block_id = p.loadURDF("cube_small.urdf", [0.7, 0.2, 0.05], useFixedBase=False)
+    # Compute table top Z from AABB so objects sit on top correctly
+    table_aabb_min, table_aabb_max = p.getAABB(table_id)
+    table_top_z = table_aabb_max[2]
+
+    # Optional: move camera to look at table
+    p.resetDebugVisualizerCamera(
+        cameraDistance=1.4,
+        cameraYaw=45,
+        cameraPitch=-35,
+        cameraTargetPosition=[table_pos[0], table_pos[1], table_top_z]
+    )
+
+    # ------------------------------------------------------------
+    # HARD-CODED reachable positions near table edge
+    # ------------------------------------------------------------
+    z_on_table = table_top_z + 0.03
+
+    red_block_id = p.loadURDF("cube_small.urdf", [0.38,  0.10, z_on_table], useFixedBase=False)
     p.changeVisualShape(red_block_id, -1, rgbaColor=[1, 0, 0, 1])
 
-    green_cube_id = p.loadURDF("cube_small.urdf", [0.3, 0.3, 0.05], useFixedBase=False)
+    green_cube_id = p.loadURDF("cube_small.urdf", [0.32, -0.05, z_on_table], useFixedBase=False)
     p.changeVisualShape(green_cube_id, -1, rgbaColor=[0, 1, 0, 1])
 
-    blue_sphere_id = p.loadURDF(
-        "sphere_small.urdf", [0.5, -0.2, 0.05], useFixedBase=False
-    )
+    blue_sphere_id = p.loadURDF("sphere_small.urdf", [0.30,  0.08, z_on_table], useFixedBase=False)
     p.changeVisualShape(blue_sphere_id, -1, rgbaColor=[0, 0, 1, 1])
 
-    # Extra cube (kept for completeness; used as 'cube' in object_map)
-    cube_start_pos = [0.7, 0, 0.05]
-    cube_start_orientation = p.getQuaternionFromEuler([0, 0, 0])
-    cube_id = p.loadURDF(
-        "cube_small.urdf",
-        cube_start_pos,
-        cube_start_orientation,
-        useFixedBase=False
-    )
+    white_cube_id = p.loadURDF("cube_small.urdf", [0.35, -0.12, z_on_table], useFixedBase=False)
+    p.changeVisualShape(white_cube_id, -1, rgbaColor=[1, 1, 1, 1])
 
-    # Map from names to object IDs (for perception)
     object_map = {
-        'red_block': red_block_id,
-        'green_cube': green_cube_id,
-        'blue_sphere': blue_sphere_id,
-        'white_cube': cube_id
+        "red_block": red_block_id,
+        "green_cube": green_cube_id,
+        "blue_sphere": blue_sphere_id,
+        "white_cube": white_cube_id,
     }
+
 
     perception = PerceptionModule(robot_id, object_map)
     parser = CommandParser()
 
     controller = RobotController(
-        robot_id,
-        gripper_left_id=gripper_left_index,
-        gripper_right_id=gripper_right_index,
-        perception_module=perception,
-        parser=parser
-)
+            robot_id,
+            gripper_left_id=gripper_left_index,
+            gripper_right_id=gripper_right_index,
+            perception_module=perception,
+            parser=parser
+        )    
+
 
     print("\n" + "=" * 50)
     print("PERCEPTION TEST")
@@ -255,15 +270,16 @@ def main():
     print("GRIPPER: O (open), P (close)")
     print("=" * 50 + "\n")
 
-    # Test full pipeline
+    # Test full pipeline (leave as-is for now)
     print("\nStep 3: Testing Full Pipeline")
     print("-" * 60)
 
     demo_commands = [
         "place the red block on the white cube",
         "pick up the green cube",
-        "place the green cube on the red cube",
-        "place the blue cube on green cube"
+        "place the green cube on the white cube",
+        "pick up the blue sphere",
+        "place the blue sphere on the green cube"
     ]
 
     for cmd in demo_commands:
@@ -284,9 +300,15 @@ def main():
             time.sleep(1.0 / 240.0)
     else:
         while True:
-            apply_keyboard_control_with_gripper(robot_id, arm_joint_indices, gripper_left_index, gripper_right_index)
+            apply_keyboard_control_with_gripper(
+                robot_id,
+                arm_joint_indices,
+                gripper_left_index,
+                gripper_right_index
+            )
             p.stepSimulation()
             time.sleep(1.0 / 240.0)
+
 
 if __name__ == "__main__":
     main()
