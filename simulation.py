@@ -217,7 +217,7 @@ def main():
             return
         print(f"\n[RUN] Executing: {cmd}")
         ok, msg = controller.execute_command(cmd)
-        print(("✓ " if ok else "✗ ") + msg)
+        print(("Good: " if ok else "Bad: ") + msg)
 
     # ------------------------------------------------------------
     # BUILDER MODE UI

@@ -408,6 +408,6 @@ class RobotController:
             if not success:
                 return False, f"Action '{action}' failed: {msg}"
 
-            print(f"✓ {msg}")
+            print(f"{msg}")
         self.go_home()
         return True, "Command executed successfully"
