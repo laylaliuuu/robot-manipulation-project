@@ -10,17 +10,17 @@ class CommandParser:
     def __init__(self):
         # Two-word object mentions like "red block", "green cube", etc.
         self.pick_place_pattern = (
-            r"(?:put|place|move|pick up).*?(?:the\s+)?(\w+\s+\w+)"
-            r".*?(?:on|onto|under|above).*?(?:the\s+)?(\w+\s+\w+)"
+            r"(?:put|place|move|pick up).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
+            r".*?(?:on|onto|under|above).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
+        )
+        self.stack_pattern = (
+            r"(?:stack|put).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
+            r".*?(?:on|under|over).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
         )
         self.pick_pattern = r"(?:pick up|grab|get).*?(?:the\s+)?(\w+\s+\w+)"
         self.place_pattern = r"(?:place|put).*?(?:the\s+)?(\w+\s+\w+)"
         self.open_gripper_pattern = r"(?:open|release).*?gripper"
         self.close_gripper_pattern = r"(?:close|grip|grasp).*?gripper"
-        self.stack_pattern = (
-            r"(?:stack|put).*?(?:the\s+)?(\w+\s+\w+)"
-            r".*?(?:on|under|over).*?(?:the\s+)?(\w+\s+\w+)"
-        )
 
         # Canonical object names in your sim
         self.alias = {
@@ -29,6 +29,8 @@ class CommandParser:
             "green cube": "green_cube",
             "blue sphere": "blue_sphere",
             "white cube": "white_cube",
+            "table": "the_table",
+            "the table": "the_table",
 
             # common user slips
             "red cube": "red_block",

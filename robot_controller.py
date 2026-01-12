@@ -31,6 +31,8 @@ class RobotController:
 
         # Optional "home" arm pose (stable default)
         self.home_joints = [0.0, -0.7, 0.0, -2.2, 0.0, 2.0, 0.8]
+        self.table_drop_xy = np.array([0.75, 0.0], dtype=float)  # default fallback
+        self.table_drop_z_on_table = 0.65     
 
     def wait(self, seconds=0.5):
         steps = int(seconds * 240)
@@ -292,6 +294,7 @@ class RobotController:
         # Place
         # -----------------------------
     def place_object(self, target_name):
+        self.go_home()
         target_id = self.perception.object_map.get(target_name)
         if target_id is None:
             return False, f"Target id not found for '{target_name}'"
@@ -299,12 +302,21 @@ class RobotController:
         if self.held_object_id is None:
             return False, "No object currently held"
 
-        t_min, t_max = p.getAABB(target_id)
-        target_xy = 0.5 * (np.array(t_min[:2]) + np.array(t_max[:2]))
-        target_top_z = t_max[2]
-
+        # object height (so it sits on the surface, not inside it)
         o_min, o_max = p.getAABB(self.held_object_id)
         obj_half_h = 0.5 * (o_max[2] - o_min[2])
+
+        # ----------------------------
+        # TABLE: use the saved drop spot from builder spawn logic
+        # ----------------------------
+        if target_name in ("table", "the_table"):
+            target_xy = np.array(self.table_drop_xy, dtype=float)
+            target_top_z = float(self.table_drop_z_on_table)+ 0.02  # this is "table surface z"
+        else:
+            # generic target: use its AABB center
+            t_min, t_max = p.getAABB(target_id)
+            target_xy = 0.5 * (np.array(t_min[:2]) + np.array(t_max[:2]))
+            target_top_z = t_max[2]
 
         desired_obj_pos = np.array([
             target_xy[0],
@@ -312,34 +324,37 @@ class RobotController:
             target_top_z + obj_half_h + 0.002
         ])
 
-        # ✅ LOWER APPROACH HEIGHT (was +0.28 which makes z ~0.98 on a table)
+        print("[PLACE] desired_obj_pos =", [round(x, 3) for x in desired_obj_pos])
+
+        # Approach above
         approach_pos = desired_obj_pos + np.array([0, 0, 0.10])
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable place approach: {reason}"
-        self.move_to_position(approach_pos, duration=2.0, use_down_orientation=False)
-        self.wait(0.1)
+        self.move_to_position(approach_pos, duration=1.6, use_down_orientation=False)
+        self.wait(0.05)
 
-        # ✅ LOWER PRE-PLACE (was +0.07)
+        # Pre-place
         pre_place = desired_obj_pos + np.array([0, 0, 0.04])
         ok, reason = self.is_reachable(pre_place, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable pre-place pose: {reason}"
         self.move_to_position(pre_place, duration=1.0, use_down_orientation=False)
-        self.wait(0.1)
+        self.wait(0.05)
 
-        # FINAL PLACE
+        # Final
         ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable place pose: {reason}"
         self.move_to_position(desired_obj_pos, duration=0.8, use_down_orientation=False)
 
-        self.wait(0.3)
+        self.wait(0.1)
         self.open_gripper()
-        self.wait(0.2)
+        self.wait(0.1)
 
-        # RETREAT
-        self.move_to_position(approach_pos, duration=1.0, use_down_orientation=False)
+        # Retreat
+        self.move_to_position(pre_place, duration=0.7, use_down_orientation=False)
+        self.move_to_position(approach_pos, duration=0.9, use_down_orientation=False)
 
         self.held_object_id = None
         return True, f"Successfully placed object on '{target_name}'"
@@ -348,6 +363,7 @@ class RobotController:
     # Command loop
     # -----------------------------
     def execute_command(self, command: str):
+        self.go_home()
         print(f"\n>>> Executing: '{command}'")
 
         command = self.parser.normalize_command(command)
@@ -393,5 +409,5 @@ class RobotController:
                 return False, f"Action '{action}' failed: {msg}"
 
             print(f"✓ {msg}")
-
+        self.go_home()
         return True, "Command executed successfully"
