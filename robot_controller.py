@@ -33,6 +33,8 @@ class RobotController:
         self.home_joints = [0.0, -0.7, 0.0, -2.2, 0.0, 2.0, 0.8]
         self.table_drop_xy = np.array([0.75, 0.0], dtype=float)  # default fallback
         self.table_drop_z_on_table = 0.65     
+        self.table_top_z = None
+
 
     def wait(self, seconds=0.5):
         steps = int(seconds * 240)
@@ -294,7 +296,9 @@ class RobotController:
         # Place
         # -----------------------------
     def place_object(self, target_name):
+        # (Optional but helps) start from a safe pose
         self.go_home()
+
         target_id = self.perception.object_map.get(target_name)
         if target_id is None:
             return False, f"Target id not found for '{target_name}'"
@@ -302,60 +306,109 @@ class RobotController:
         if self.held_object_id is None:
             return False, "No object currently held"
 
-        # object height (so it sits on the surface, not inside it)
-        o_min, o_max = p.getAABB(self.held_object_id)
+        held_id = self.held_object_id  # keep local so we can verify after release
+
+        # Height of object being placed
+        o_min, o_max = p.getAABB(held_id)
         obj_half_h = 0.5 * (o_max[2] - o_min[2])
 
-        # ----------------------------
-        # TABLE: use the saved drop spot from builder spawn logic
-        # ----------------------------
+        # -------------------------------------------------
+        # TABLE CASE
+        # -------------------------------------------------
         if target_name in ("table", "the_table"):
             target_xy = np.array(self.table_drop_xy, dtype=float)
-            target_top_z = float(self.table_drop_z_on_table)+ 0.02  # this is "table surface z"
-        else:
-            # generic target: use its AABB center
-            t_min, t_max = p.getAABB(target_id)
-            target_xy = 0.5 * (np.array(t_min[:2]) + np.array(t_max[:2]))
-            target_top_z = t_max[2]
 
+            # Use the REAL table surface Z if available; else fallback from AABB
+            if getattr(self, "table_top_z", None) is None:
+                t_min, t_max = p.getAABB(target_id)
+                target_top_z = float(t_max[2])
+            else:
+                target_top_z = float(self.table_top_z)
+
+        # -------------------------------------------------
+        # STACK CASE (on another object)
+        # -------------------------------------------------
+        else:
+            t_min, t_max = p.getAABB(target_id)
+            t_min = np.array(t_min, dtype=float)
+            t_max = np.array(t_max, dtype=float)
+
+            target_xy = 0.5 * (t_min[:2] + t_max[:2])
+            target_top_z = float(t_max[2])
+
+        # FINAL desired drop position
         desired_obj_pos = np.array([
-            target_xy[0],
-            target_xy[1],
-            target_top_z + obj_half_h + 0.002
-        ])
+            float(target_xy[0]),
+            float(target_xy[1]),
+            float(target_top_z + obj_half_h + 0.010)  # clearance
+        ], dtype=float)
 
         print("[PLACE] desired_obj_pos =", [round(x, 3) for x in desired_obj_pos])
 
-        # Approach above
-        approach_pos = desired_obj_pos + np.array([0, 0, 0.10])
+        # -------------------------------
+        # Approach (higher to avoid scraping table)
+        # -------------------------------
+        approach_pos = desired_obj_pos + np.array([0, 0, 0.14], dtype=float)
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable place approach: {reason}"
-        self.move_to_position(approach_pos, duration=1.6, use_down_orientation=False)
+        self.move_to_position(approach_pos, duration=1.4)
         self.wait(0.05)
 
+        # -------------------------------
         # Pre-place
-        pre_place = desired_obj_pos + np.array([0, 0, 0.04])
+        # -------------------------------
+        pre_place = desired_obj_pos + np.array([0, 0, 0.06], dtype=float)
         ok, reason = self.is_reachable(pre_place, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable pre-place pose: {reason}"
-        self.move_to_position(pre_place, duration=1.0, use_down_orientation=False)
+        self.move_to_position(pre_place, duration=0.9)
         self.wait(0.05)
 
-        # Final
+        # -------------------------------
+        # Final place (slow)
+        # -------------------------------
         ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
         if not ok:
             return False, f"Unreachable place pose: {reason}"
-        self.move_to_position(desired_obj_pos, duration=0.8, use_down_orientation=False)
+        self.move_to_position(desired_obj_pos, duration=0.8)
+        self.wait(0.08)
 
-        self.wait(0.1)
+        # Release
         self.open_gripper()
-        self.wait(0.1)
+        self.wait(0.15)
 
-        # Retreat
-        self.move_to_position(pre_place, duration=0.7, use_down_orientation=False)
-        self.move_to_position(approach_pos, duration=0.9, use_down_orientation=False)
+        # -------------------------------
+        # Lift straight up before moving sideways (prevents knocking)
+        # -------------------------------
+        lift_after_release = desired_obj_pos + np.array([0, 0, 0.16], dtype=float)
+        ok, _ = self.is_reachable(lift_after_release, use_down_orientation=False)
+        if ok:
+            self.move_to_position(lift_after_release, duration=0.9)
+            self.wait(0.05)
+        else:
+            # fallback retreat
+            self.move_to_position(pre_place, duration=0.6)
+            self.move_to_position(approach_pos, duration=0.8)
 
+        # -------------------------------
+        # Verify placement actually happened (basic success check)
+        # -------------------------------
+        placed_pos, _ = p.getBasePositionAndOrientation(held_id)
+        placed_pos = np.array(placed_pos, dtype=float)
+
+        xy_err = float(np.linalg.norm(placed_pos[:2] - desired_obj_pos[:2]))
+        z_ok = placed_pos[2] > (target_top_z + obj_half_h) - 0.03  # loose but useful
+
+        if xy_err > 0.18 or not z_ok:
+            # IMPORTANT: do NOT clear held_object_id here.
+            # Let the command-level retry repick if needed.
+            return False, (
+                f"Place unstable: landed at {[round(v,3) for v in placed_pos]} "
+                f"(xy_err={xy_err:.3f})"
+            )
+
+        # Only clear on real success
         self.held_object_id = None
         return True, f"Successfully placed object on '{target_name}'"
 
@@ -378,7 +431,7 @@ class RobotController:
             if action == "pick":
                 tries = 5
             elif action == "place":
-                tries = 3
+                tries = 1
 
             success, msg = False, ""
             for attempt in range(tries):

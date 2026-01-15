@@ -194,6 +194,12 @@ def main():
     parser=parser,
     )   
 
+    # ---------- FIXED TABLE DROP ZONE ----------
+    controller.table_drop_xy = np.array([0.62, 0.00], dtype=float)  # safe reachable zone
+    table_aabb_min, table_aabb_max = p.getAABB(table_id)
+    controller.table_top_z = float(table_aabb_max[2])
+    print("[DROP ZONE LOCKED] xy =", controller.table_drop_xy, "z =", controller.table_top_z)
+
     # ------------------------------------------------------------
     # Command UI: type in terminal -> click RUN (toggle) or press R
     # ------------------------------------------------------------
@@ -215,9 +221,30 @@ def main():
         if not cmd:
             print("[RUN] No pending command. Type one in terminal first.")
             return
-        print(f"\n[RUN] Executing: {cmd}")
-        ok, msg = controller.execute_command(cmd)
-        print(("Good: " if ok else "Bad: ") + msg)
+
+        MAX_CMD_RETRIES = 2
+
+        for attempt in range(MAX_CMD_RETRIES):
+            print(f"\n[RUN] Executing (command attempt {attempt+1}/{MAX_CMD_RETRIES}): {cmd}")
+            ok, msg = controller.execute_command(cmd)
+
+            if ok:
+                print("Good: " + msg)
+                return
+
+            print("Bad: " + msg)
+
+            # ---------------------------
+            # 🔁 ROBOT-ONLY RECOVERY
+            # ---------------------------
+            print("[RECOVERY] Resetting robot to home + clearing held state...")
+
+            controller.held_object_id = None
+            controller.go_home()
+            controller.open_gripper()
+            controller.wait(0.3)
+
+        print("[RUN] Command failed after retries.")
 
     # ------------------------------------------------------------
     # BUILDER MODE UI
@@ -287,7 +314,6 @@ def main():
         x = edge_x_near_robot + depth
 
         # ✅ store drop spot that matches spawn location
-        controller.table_drop_xy = np.array([x, y], dtype=float)
         controller.table_drop_z_on_table = float(z_on_table)
         print("[DROP SPOT SET]", [round(x,3), round(y,3), round(z_on_table,3)])
 

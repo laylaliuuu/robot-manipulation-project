@@ -10,12 +10,12 @@ class CommandParser:
     def __init__(self):
         # Two-word object mentions like "red block", "green cube", etc.
         self.pick_place_pattern = (
-            r"(?:put|place|move|pick up).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
-            r".*?(?:on|onto|under|above).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
+            r"(?:put|place|move|pick up).*?(?:the\s+)?(\w+\s+\w+)"
+            r".*?(?:on|onto|under|above)(?:\s+top\s+of)?\s+(?:the\s+)?(\w+\s+\w+)"
         )
         self.stack_pattern = (
-            r"(?:stack|put).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
-            r".*?(?:on|under|over).*?(?:the\s+)?(\w+(?:\s+\w+)?)"
+            r"(?:stack|put).*?(?:the\s+)?(\w+\s+\w+)"
+            r".*?(?:on|under|over)(?:\s+top\s+of)?\s+(?:the\s+)?(\w+\s+\w+)"
         )
         self.pick_pattern = r"(?:pick up|grab|get).*?(?:the\s+)?(\w+\s+\w+)"
         self.place_pattern = r"(?:place|put).*?(?:the\s+)?(\w+\s+\w+)"
