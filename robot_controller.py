@@ -2,6 +2,9 @@ import pybullet as p
 import numpy as np
 from perception import PerceptionModule
 from language_parser import CommandParser
+import time
+import json
+import os
 
 
 class RobotController:
@@ -34,7 +37,37 @@ class RobotController:
         self.table_drop_xy = np.array([0.75, 0.0], dtype=float)  # default fallback
         self.table_drop_z_on_table = 0.65     
         self.table_top_z = None
+        # -----------------------------
+        # Logging (JSONL)
+        # -----------------------------
+        self.log_path = "attempts.jsonl"
 
+        # -----------------------------
+        # Settle + success verification
+        # -----------------------------
+        self.settle_seconds = 0.60      # wait after release
+        self.settle_check_dt = 0.10     # sampling interval (0.10s => 6 samples over 0.6s)
+        self.max_xy_drift = 0.05        # allowed XY drift during settle window
+        self.max_tilt_deg_table = 35.0  # table can be tilted but not insane
+        self.max_tilt_deg_stack = 25.0  # stacking should be tighter
+
+    def _log_attempt(self, row: dict):
+        row = dict(row)
+        row.setdefault("ts", time.time())
+
+        # Make sure folder exists if you set log_path like "logs/attempts.jsonl"
+        folder = os.path.dirname(self.log_path)
+        if folder:
+            os.makedirs(folder, exist_ok=True)
+
+        with open(self.log_path, "a") as f:
+            f.write(json.dumps(row) + "\n")
+
+    def _held_name(self):
+        for name, oid in getattr(self.perception, "object_map", {}).items():
+            if oid == self.held_object_id:
+                return name
+        return "held_object"
 
     def wait(self, seconds=0.5):
         steps = int(seconds * 240)
@@ -111,6 +144,42 @@ class RobotController:
             p.resetJointState(self.robot_id, j, q)
 
         return err
+    def _quat_to_tilt_deg(self, quat):
+        """
+        Tilt angle from world +Z in degrees.
+        0° = upright, 90° = sideways.
+        """
+        rot = np.array(p.getMatrixFromQuaternion(quat), dtype=float).reshape(3, 3)
+        z_axis = rot[:, 2]  # local +Z axis in world coords
+        cosang = float(np.clip(z_axis[2], -1.0, 1.0))
+        tilt = float(np.degrees(np.arccos(cosang)))
+        return tilt
+
+    def _settle_and_measure(self, body_id, seconds=None):
+        """
+        Step sim and measure where the object ENDS UP.
+        Returns: final_pos, final_quat, max_xy_drift, final_tilt_deg
+        """
+        if seconds is None:
+            seconds = self.settle_seconds
+
+        n = max(1, int(seconds / self.settle_check_dt))
+        pos0, quat0 = p.getBasePositionAndOrientation(body_id)
+        pos0 = np.array(pos0, dtype=float)
+
+        max_drift = 0.0
+        final_pos, final_quat = pos0, quat0
+
+        for _ in range(n):
+            self.wait(self.settle_check_dt)
+            final_pos, final_quat = p.getBasePositionAndOrientation(body_id)
+            final_pos = np.array(final_pos, dtype=float)
+
+            drift = float(np.linalg.norm(final_pos[:2] - pos0[:2]))
+            max_drift = max(max_drift, drift)
+
+        tilt_deg = self._quat_to_tilt_deg(final_quat)
+        return final_pos, final_quat, max_drift, tilt_deg
 
     def is_reachable(self, target_pos, use_down_orientation=False, tol=0.04):
         """
@@ -224,21 +293,53 @@ class RobotController:
     def pick_object(self, object_name):
         obj_pos = self.perception.detect_object(object_name)
         if obj_pos is None:
+            self._log_attempt({
+                "action": "pick",
+                "object": object_name,
+                "target": None,
+                "features": {"reason": "not_found"},
+                "success": False,
+                "fail_type": "not_found",
+                "msg": f"Could not find '{object_name}'",
+            })
             return False, f"Could not find '{object_name}'"
 
         obj_pos = np.array(obj_pos, dtype=float)
 
         obj_id = self.perception.object_map.get(object_name)
         if obj_id is None:
+            self._log_attempt({
+                "action": "pick",
+                "object": object_name,
+                "target": None,
+                "features": {"obj_pos": [float(x) for x in obj_pos]},
+                "success": False,
+                "fail_type": "id_missing",
+                "msg": f"Object id not found for '{object_name}'",
+            })
             return False, f"Object id not found for '{object_name}'"
 
-        # Check object fits in gripper opening
+        # Features to log (for ML)
+        features = {"obj_pos": [float(x) for x in obj_pos]}
+
+        # Width check
         o_min, o_max = p.getAABB(obj_id)
-        dx = o_max[0] - o_min[0]
-        dy = o_max[1] - o_min[1]
-        obj_width = max(dx, dy)
+        dx = float(o_max[0] - o_min[0])
+        dy = float(o_max[1] - o_min[1])
+        obj_width = float(max(dx, dy))
+        features["obj_width"] = obj_width
+        features["gripper_max_open"] = float(self.gripper_max_open)
 
         if obj_width > self.gripper_max_open - 0.002:
+            self._log_attempt({
+                "action": "pick",
+                "object": object_name,
+                "target": None,
+                "features": features,
+                "success": False,
+                "fail_type": "too_wide",
+                "msg": "Object too wide for gripper",
+            })
             return False, (
                 f"Object too wide for gripper (obj ~{obj_width:.3f}m, "
                 f"gripper max ~{self.gripper_max_open:.3f}m)"
@@ -247,168 +348,296 @@ class RobotController:
         print(f"Picking up '{object_name}' at {obj_pos}")
         self.open_gripper()
 
-        # ------------------------------------------------------------
-        # 1) APPROACH: flexible orientation (easier IK near reach limit)
-        # ------------------------------------------------------------
-        approach_pos = obj_pos + np.array([0, 0, 0.10])  # <- was 0.20, too high for table setup
+        # 1) Approach
+        approach_pos = obj_pos + np.array([0, 0, 0.10], dtype=float)
+        features["approach"] = [float(x) for x in approach_pos]
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
+            self._log_attempt({
+                "action": "pick",
+                "object": object_name,
+                "target": None,
+                "features": features,
+                "success": False,
+                "fail_type": "unreachable_approach",
+                "msg": f"Unreachable approach pose: {reason}",
+            })
             return False, f"Unreachable approach pose: {reason}"
         self.move_to_position(approach_pos, duration=2.0, use_down_orientation=False)
 
-        # ------------------------------------------------------------
-        # 2) GRASP: try down orientation, fallback if it fails
-        # ------------------------------------------------------------
-        grasp_pos = obj_pos + np.array([0, 0, 0.015])
-
+        # 2) Grasp (down + fallback)
+        grasp_pos = obj_pos + np.array([0, 0, 0.015], dtype=float)
+        features["grasp"] = [float(x) for x in grasp_pos]
         ok, reason = self.is_reachable(grasp_pos, use_down_orientation=True)
         use_down = True
         if not ok:
             ok2, reason2 = self.is_reachable(grasp_pos, use_down_orientation=False)
             if not ok2:
+                self._log_attempt({
+                    "action": "pick",
+                    "object": object_name,
+                    "target": None,
+                    "features": features,
+                    "success": False,
+                    "fail_type": "unreachable_grasp",
+                    "msg": f"Unreachable grasp pose: {reason} | fallback: {reason2}",
+                })
                 return False, f"Unreachable grasp pose: {reason} | fallback: {reason2}"
             use_down = False
+        features["use_down_grasp"] = 1.0 if use_down else 0.0
 
         self.move_to_position(grasp_pos, duration=1.2, use_down_orientation=use_down)
-
         self.wait(0.1)
         self.close_gripper()
         self.wait(0.1)
 
-        # ------------------------------------------------------------
-        # 3) LIFT: flexible orientation again
-        # ------------------------------------------------------------
-        lift_pos = obj_pos + np.array([0, 0, 0.18])
+        # 3) Lift
+        lift_pos = obj_pos + np.array([0, 0, 0.18], dtype=float)
+        features["lift"] = [float(x) for x in lift_pos]
         ok, reason = self.is_reachable(lift_pos, use_down_orientation=False)
         if not ok:
+            self._log_attempt({
+                "action": "pick",
+                "object": object_name,
+                "target": None,
+                "features": features,
+                "success": False,
+                "fail_type": "unreachable_lift",
+                "msg": f"Unreachable lift pose: {reason}",
+            })
             return False, f"Unreachable lift pose: {reason}"
         self.move_to_position(lift_pos, duration=1.5, use_down_orientation=False)
 
-        # Verify object lifted
+        # Verify lifted
         new_pos, _ = p.getBasePositionAndOrientation(obj_id)
+        new_pos = np.array(new_pos, dtype=float)
+        features["new_pos"] = [float(x) for x in new_pos]
         if new_pos[2] < obj_pos[2] + 0.05:
+            self._log_attempt({
+                "action": "pick",
+                "object": object_name,
+                "target": None,
+                "features": features,
+                "success": False,
+                "fail_type": "grasp_failed",
+                "msg": "Grasp failed (object did not lift)",
+            })
             return False, "Grasp failed (object did not lift)"
 
         self.held_object_id = obj_id
+        self._log_attempt({
+            "action": "pick",
+            "object": object_name,
+            "target": None,
+            "features": features,
+            "success": True,
+            "fail_type": None,
+            "msg": f"Successfully picked up '{object_name}'",
+        })
         return True, f"Successfully picked up '{object_name}'"
 
-        # -----------------------------
-        # Place
-        # -----------------------------
+    def _stack_target_xy_topz(self, target_id):
+        """
+        More consistent stacking target than AABB center:
+
+        - XY: use the target object's *base position* (true center), not AABB center.
+        - Z: use AABB top (ok for height, much less sensitive than using it for XY).
+        """
+        pos, quat = p.getBasePositionAndOrientation(target_id)
+        pos = np.array(pos, dtype=float)
+
+        t_min, t_max = p.getAABB(target_id)
+        target_top_z = float(t_max[2])
+
+        target_xy = pos[:2]  # <- key change
+        return target_xy, target_top_z
+
+
     def place_object(self, target_name):
-        # (Optional but helps) start from a safe pose
-        self.go_home()
+        # IMPORTANT: do NOT go_home here.
+        # We assume we are already lifted safely after pick.
 
         target_id = self.perception.object_map.get(target_name)
         if target_id is None:
+            self._log_attempt({
+                "action": "place",
+                "object": self._held_name(),
+                "target": target_name,
+                "features": {"reason": "target_missing"},
+                "success": False,
+                "fail_type": "target_missing",
+                "msg": f"Target id not found for '{target_name}'",
+            })
             return False, f"Target id not found for '{target_name}'"
 
         if self.held_object_id is None:
+            self._log_attempt({
+                "action": "place",
+                "object": "none",
+                "target": target_name,
+                "features": {"reason": "no_held_object"},
+                "success": False,
+                "fail_type": "no_held_object",
+                "msg": "No object currently held",
+            })
             return False, "No object currently held"
 
-        held_id = self.held_object_id  # keep local so we can verify after release
+        held_id = self.held_object_id
+        held_name = self._held_name()
 
-        # Height of object being placed
+        # Held object half-height
         o_min, o_max = p.getAABB(held_id)
-        obj_half_h = 0.5 * (o_max[2] - o_min[2])
+        obj_half_h = 0.5 * float(o_max[2] - o_min[2])
 
-        # -------------------------------------------------
-        # TABLE CASE
-        # -------------------------------------------------
-        if target_name in ("table", "the_table"):
+        is_table = target_name in ("table", "the_table")
+
+        # Choose target XY + target top Z
+        if is_table:
             target_xy = np.array(self.table_drop_xy, dtype=float)
-
-            # Use the REAL table surface Z if available; else fallback from AABB
             if getattr(self, "table_top_z", None) is None:
                 t_min, t_max = p.getAABB(target_id)
                 target_top_z = float(t_max[2])
             else:
                 target_top_z = float(self.table_top_z)
-
-        # -------------------------------------------------
-        # STACK CASE (on another object)
-        # -------------------------------------------------
+            clearance = 0.010
         else:
-            t_min, t_max = p.getAABB(target_id)
-            t_min = np.array(t_min, dtype=float)
-            t_max = np.array(t_max, dtype=float)
+            # ✅ More consistent stacking: XY from base pose, Z from AABB top
+            target_xy, target_top_z = self._stack_target_xy_topz(target_id)
+            target_xy = np.array(target_xy, dtype=float)
 
-            target_xy = 0.5 * (t_min[:2] + t_max[:2])
-            target_top_z = float(t_max[2])
+            # A bit more clearance for stack so we don't clip and "bounce off"
+            clearance = 0.016
 
-        # FINAL desired drop position
         desired_obj_pos = np.array([
             float(target_xy[0]),
             float(target_xy[1]),
-            float(target_top_z + obj_half_h + 0.010)  # clearance
+            float(target_top_z + obj_half_h + clearance),
         ], dtype=float)
 
-        print("[PLACE] desired_obj_pos =", [round(x, 3) for x in desired_obj_pos])
+        print("[PLACE] desired_obj_pos =", [round(float(x), 3) for x in desired_obj_pos])
 
-        # -------------------------------
-        # Approach (higher to avoid scraping table)
-        # -------------------------------
+        # Approach (high)
         approach_pos = desired_obj_pos + np.array([0, 0, 0.14], dtype=float)
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
+            self._log_attempt({
+                "action": "place",
+                "object": held_name,
+                "target": target_name,
+                "features": {"is_table": bool(is_table), "desired": [float(x) for x in desired_obj_pos], "detail": reason},
+                "success": False,
+                "fail_type": "unreachable_approach",
+                "msg": f"Unreachable place approach: {reason}",
+            })
             return False, f"Unreachable place approach: {reason}"
-        self.move_to_position(approach_pos, duration=1.4)
+        self.move_to_position(approach_pos, duration=1.2)
         self.wait(0.05)
 
-        # -------------------------------
         # Pre-place
-        # -------------------------------
         pre_place = desired_obj_pos + np.array([0, 0, 0.06], dtype=float)
         ok, reason = self.is_reachable(pre_place, use_down_orientation=False)
         if not ok:
+            self._log_attempt({
+                "action": "place",
+                "object": held_name,
+                "target": target_name,
+                "features": {"is_table": bool(is_table), "desired": [float(x) for x in desired_obj_pos], "detail": reason},
+                "success": False,
+                "fail_type": "unreachable_pre",
+                "msg": f"Unreachable pre-place pose: {reason}",
+            })
             return False, f"Unreachable pre-place pose: {reason}"
         self.move_to_position(pre_place, duration=0.9)
         self.wait(0.05)
 
-        # -------------------------------
         # Final place (slow)
-        # -------------------------------
         ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
         if not ok:
+            self._log_attempt({
+                "action": "place",
+                "object": held_name,
+                "target": target_name,
+                "features": {"is_table": bool(is_table), "desired": [float(x) for x in desired_obj_pos], "detail": reason},
+                "success": False,
+                "fail_type": "unreachable_final",
+                "msg": f"Unreachable place pose: {reason}",
+            })
             return False, f"Unreachable place pose: {reason}"
         self.move_to_position(desired_obj_pos, duration=0.8)
         self.wait(0.08)
 
         # Release
         self.open_gripper()
-        self.wait(0.15)
+        self.wait(0.12)
 
-        # -------------------------------
-        # Lift straight up before moving sideways (prevents knocking)
-        # -------------------------------
+        # Lift straight up (don’t drag sideways)
         lift_after_release = desired_obj_pos + np.array([0, 0, 0.16], dtype=float)
         ok, _ = self.is_reachable(lift_after_release, use_down_orientation=False)
         if ok:
-            self.move_to_position(lift_after_release, duration=0.9)
-            self.wait(0.05)
+            self.move_to_position(lift_after_release, duration=0.8)
+            self.wait(0.04)
+
+        # ---- Truthful settle verification (LOCATION-BASED ONLY) ----
+        final_pos, final_quat, max_drift, tilt_deg = self._settle_and_measure(held_id)
+        final_pos = np.array(final_pos, dtype=float)
+
+        xy_err = float(np.linalg.norm(final_pos[:2] - desired_obj_pos[:2]))
+
+        # Thresholds: table looser, stack slightly looser than before (stacks are noisy)
+        if is_table:
+            xy_thresh = 0.12
+            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.03)
         else:
-            # fallback retreat
-            self.move_to_position(pre_place, duration=0.6)
-            self.move_to_position(approach_pos, duration=0.8)
+            # If you keep this at 0.06 you'll see more false-fails even when it's "on top"
+            xy_thresh = 0.08
+            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.012)
 
-        # -------------------------------
-        # Verify placement actually happened (basic success check)
-        # -------------------------------
-        placed_pos, _ = p.getBasePositionAndOrientation(held_id)
-        placed_pos = np.array(placed_pos, dtype=float)
+        drift_ok = max_drift <= self.max_xy_drift
 
-        xy_err = float(np.linalg.norm(placed_pos[:2] - desired_obj_pos[:2]))
-        z_ok = placed_pos[2] > (target_top_z + obj_half_h) - 0.03  # loose but useful
+        features = {
+            "desired": [float(x) for x in desired_obj_pos],
+            "final_pos": [float(x) for x in final_pos],
+            "xy_err": float(xy_err),
+            "tilt_deg": float(tilt_deg),          # logged only
+            "max_xy_drift": float(max_drift),
+            "z_ok": bool(z_ok),
+            "drift_ok": bool(drift_ok),
+            "is_table": bool(is_table),
+            "xy_thresh": float(xy_thresh),
+            "target_top_z": float(target_top_z),
+            "obj_half_h": float(obj_half_h),
+            "clearance": float(clearance),
+        }
 
-        if xy_err > 0.18 or not z_ok:
-            # IMPORTANT: do NOT clear held_object_id here.
-            # Let the command-level retry repick if needed.
-            return False, (
-                f"Place unstable: landed at {[round(v,3) for v in placed_pos]} "
-                f"(xy_err={xy_err:.3f})"
-            )
+        if (xy_err > xy_thresh) or (not z_ok) or (not drift_ok):
+            if not z_ok:
+                fail_type = "fell"
+            elif not drift_ok:
+                fail_type = "drifted"
+            else:
+                fail_type = "xy_miss"
 
-        # Only clear on real success
+            self._log_attempt({
+                "action": "place",
+                "object": held_name,
+                "target": target_name,
+                "features": features,
+                "success": False,
+                "fail_type": fail_type,
+                "msg": f"Place failed after settle (xy_err={xy_err:.3f}, drift={max_drift:.3f}, tilt_logged={tilt_deg:.1f})",
+            })
+            return False, f"Place failed after settle: xy_err={xy_err:.3f}, drift={max_drift:.3f}"
+
+        self._log_attempt({
+            "action": "place",
+            "object": held_name,
+            "target": target_name,
+            "features": features,
+            "success": True,
+            "fail_type": None,
+            "msg": f"Successfully placed object on '{target_name}'",
+        })
+
         self.held_object_id = None
         return True, f"Successfully placed object on '{target_name}'"
 
@@ -416,51 +645,127 @@ class RobotController:
     # Command loop
     # -----------------------------
     def execute_command(self, command: str):
+        # Start in a consistent pose for the command (optional).
+        # If you hate this, you can remove it, but it can reduce weird starts.
         self.go_home()
         print(f"\n>>> Executing: '{command}'")
 
-        command = self.parser.normalize_command(command)
-        actions = self.parser.parse(command)
+        norm = self.parser.normalize_command(command)
+        actions = self.parser.parse(norm)
         if actions is None:
+            # Optional command-level log
+            try:
+                self._log_attempt({
+                    "action": "command",
+                    "object": None,
+                    "target": None,
+                    "features": {"command": command, "normalized": norm, "parsed": None},
+                    "success": False,
+                    "fail_type": "parse_failed",
+                    "msg": "Could not understand command",
+                })
+            except Exception:
+                pass
             return False, "Could not understand command"
 
         print(f"Parsed actions: {actions}")
 
+        last_picked_name = None  # so we can repick if place fails
+
         for action, obj, target in actions:
-            tries = 1
-            if action == "pick":
-                tries = 5
-            elif action == "place":
-                tries = 1
+            # Default tries
+            pick_tries = 5
+            place_tries = 3  # you can tune this
 
             success, msg = False, ""
-            for attempt in range(tries):
-                if tries > 1:
-                    print(f" → {action} attempt {attempt+1}/{tries}")
 
-                if action == "pick":
+            if action == "pick":
+                last_picked_name = obj
+                for attempt in range(pick_tries):
+                    if pick_tries > 1:
+                        print(f" → pick attempt {attempt+1}/{pick_tries}")
+
                     success, msg = self.pick_object(obj)
-                elif action == "place":
-                    success, msg = self.place_object(obj)
-                elif action == "open_gripper":
-                    self.open_gripper()
-                    success, msg = True, "Opened gripper"
-                elif action == "close_gripper":
-                    self.close_gripper()
-                    success, msg = True, "Closed gripper"
-                else:
-                    success, msg = False, f"Unknown action: {action}"
+                    if success:
+                        break
 
-                if success:
-                    break
+                    # recovery between pick attempts
+                    self.go_home()
+                    self.wait(0.2)
 
-                # Optional: reset to a known good pose before retrying (helps a lot)
-                self.go_home()
-                self.wait(0.2)
+                if not success:
+                    return False, f"Action '{action}' failed: {msg}"
 
-            if not success:
-                return False, f"Action '{action}' failed: {msg}"
+                print(msg)
+                continue
 
-            print(f"{msg}")
+            if action == "place":
+                # NOTE: your parser puts the target into `obj` for place
+                target_name = obj
+
+                for attempt in range(place_tries):
+                    print(f" → place attempt {attempt+1}/{place_tries}")
+
+                    # Try placing directly from current lifted pose (NO go_home first)
+                    success, msg = self.place_object(target_name)
+                    if success:
+                        break
+
+                    # If place failed, recover + repick + retry place
+                    self.go_home()
+                    self.wait(0.2)
+
+                    # If we know what we picked, repick it (because place failures often drop it)
+                    if last_picked_name is not None:
+                        repick_ok, repick_msg = self.pick_object(last_picked_name)
+                        if not repick_ok:
+                            # Try a couple extra repick attempts from home
+                            repick_ok2 = False
+                            for rp in range(2):
+                                self.go_home()
+                                self.wait(0.15)
+                                repick_ok2, repick_msg = self.pick_object(last_picked_name)
+                                if repick_ok2:
+                                    break
+                            repick_ok = repick_ok2
+
+                        if not repick_ok:
+                            return False, f"Recovery repick failed: {repick_msg}"
+
+                if not success:
+                    return False, f"Action '{action}' failed: {msg}"
+
+                print(msg)
+                continue
+
+            # Simple actions
+            if action == "open_gripper":
+                self.open_gripper()
+                print("Opened gripper")
+                continue
+
+            if action == "close_gripper":
+                self.close_gripper()
+                print("Closed gripper")
+                continue
+
+            return False, f"Unknown action: {action}"
+
+        # End-of-command reset (optional)
         self.go_home()
+
+        # Optional command-level log
+        try:
+            self._log_attempt({
+                "action": "command",
+                "object": None,
+                "target": None,
+                "features": {"command": command, "normalized": norm, "parsed": actions},
+                "success": True,
+                "fail_type": None,
+                "msg": "Command executed successfully",
+            })
+        except Exception:
+            pass
+
         return True, "Command executed successfully"

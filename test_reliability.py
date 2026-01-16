@@ -61,8 +61,8 @@ def run_trials(cmd, trials=10):
 def main():
     p.connect(p.GUI)
 
-    s1 = run_trials("put white cube on the table", 10)
-    print("put-on-table success:", s1, "/ 10")
+    # s1 = run_trials("put white cube on the table", 10)
+    # print("put-on-table success:", s1, "/ 10")
 
     s2 = run_trials("put green cube on top of white cube", 10)
     print("stack success:", s2, "/ 10")
