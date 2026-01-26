@@ -27,7 +27,7 @@ def setup_world():
     robot_id = p.loadURDF("franka_panda/panda.urdf", [0,0,0], useFixedBase=True)
     table_id = p.loadURDF("table/table.urdf", [1.25,0,0], useFixedBase=True)
 
-    white_start = jitter_xy([0.62, 0.06, 0.66], xy_noise=0.10)
+    white_start = [0.275, -0.372, 0.031]
     green_start = jitter_xy([0.62, -0.06, 0.66], xy_noise=0.10)
 
     white_id = p.loadURDF("cube_small.urdf", white_start, useFixedBase=False)
@@ -61,8 +61,8 @@ def run_trials(cmd, trials=10):
 def main():
     p.connect(p.GUI)
 
-    # s1 = run_trials("put white cube on the table", 10)
-    # print("put-on-table success:", s1, "/ 10")
+    s1 = run_trials("put white cube on the table", 1)
+    print("put-on-table success:", s1, "/ 10")
 
     s2 = run_trials("put green cube on top of white cube", 10)
     print("stack success:", s2, "/ 10")

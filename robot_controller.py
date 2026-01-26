@@ -189,9 +189,12 @@ class RobotController:
     # IK helpers
     # -----------------------------
     def _elbow_bias_restpose(self, target_pos):
+        # Improved rest pose to avoid table collisions and improve reachability
         dist = float(np.linalg.norm(np.array(target_pos[:2])))
-        elbow = -2.0 - 0.6 * np.tanh(dist * 2.0)
-        return [0.0, -0.9, 0.8, elbow, 0.0, 2.2, 0.9]
+        # Lift elbow higher for far reaches (like table) to avoid hitting table legs
+        elbow = -1.8 - 0.8 * np.tanh(dist * 1.5)
+        # Adjusted shoulder and wrist for better clearance
+        return [0.0, -0.7, 0.0, elbow, 0.0, 2.0, 0.785]
 
     def _get_joint_limits(self):
         lows, highs, ranges = [], [], []
@@ -221,8 +224,8 @@ class RobotController:
                 upperLimits=highs,
                 jointRanges=ranges,
                 restPoses=rest,
-                maxNumIterations=160,
-                residualThreshold=1e-4,
+                maxNumIterations=300,  # Increased for better convergence
+                residualThreshold=5e-5,  # Tighter tolerance for accuracy
             )
         else:
             sol = p.calculateInverseKinematics(
@@ -233,8 +236,8 @@ class RobotController:
                 upperLimits=highs,
                 jointRanges=ranges,
                 restPoses=rest,
-                maxNumIterations=120,
-                residualThreshold=1e-4,
+                maxNumIterations=250,  # Increased for better convergence
+                residualThreshold=5e-5,  # Tighter tolerance for accuracy
             )
 
         return sol[:7]
@@ -330,8 +333,9 @@ class RobotController:
                 self.arm_joints,
                 p.POSITION_CONTROL,
                 targetPositions=blended,
-                forces=[80] * 7,
-                positionGains=[0.06] * 7
+                forces=[150] * 7,  # Increased for better tracking with held objects
+                positionGains=[0.1] * 7,  # Increased for more precise control
+                velocityGains=[1.0] * 7  # Added velocity damping for stability
             )
             p.stepSimulation()
 
@@ -544,6 +548,43 @@ class RobotController:
             return False, "Grasp failed (object did not lift)"
 
         self.held_object_id = obj_id
+        
+        # COLLISION AVOIDANCE: Lift extra high and move away from table
+        # Detect if we picked from table (high z position) vs floor (low z)
+        picked_from_table = obj_pos[2] > 0.5  # Table is around 0.65m, floor is ~0.025m
+        
+        if picked_from_table:
+            # Picked from table - need to lift high AND move away from table before descending
+            print(f"[PICK] Detected table pickup, executing safe retreat...")
+            
+            # Step 1: Lift very high above table
+            high_above_table = obj_pos + np.array([0, 0, 0.20], dtype=float)
+            ok_high, _ = self.is_reachable(high_above_table, use_down_orientation=False)
+            if ok_high:
+                print(f"[PICK] Lifting high above table: {[round(float(x), 3) for x in high_above_table]}")
+                self.move_to_position(high_above_table, duration=1.2, use_down_orientation=False)
+                self.wait(0.1)
+            
+            # Step 2: Move toward robot base (away from table) while staying high
+            retreat_pos = np.array([
+                max(0.35, obj_pos[0] - 0.25),  # Move closer to robot (reduce x)
+                obj_pos[1],  # Keep same y
+                max(0.70, high_above_table[2])  # Stay high
+            ], dtype=float)
+            ok_retreat, _ = self.is_reachable(retreat_pos, use_down_orientation=False)
+            if ok_retreat:
+                print(f"[PICK] Retreating from table: {[round(float(x), 3) for x in retreat_pos]}")
+                self.move_to_position(retreat_pos, duration=1.5, use_down_orientation=False)
+                self.wait(0.1)
+        else:
+            # Picked from floor - just lift high to clear table
+            extra_high_lift = obj_pos + np.array([0, 0, 0.25], dtype=float)
+            ok_high, _ = self.is_reachable(extra_high_lift, use_down_orientation=False)
+            if ok_high:
+                print(f"[PICK] Lifting extra high to avoid table: {[round(float(x), 3) for x in extra_high_lift]}")
+                self.move_to_position(extra_high_lift, duration=1.5, use_down_orientation=False)
+                self.wait(0.1)
+        
         self._log_attempt({
             "action": "pick",
             "object": object_name,
@@ -636,8 +677,57 @@ class RobotController:
 
         print("[PLACE] desired_obj_pos =", [round(float(x), 3) for x in desired_obj_pos])
 
-        # Approach (high)
-        approach_pos = desired_obj_pos + np.array([0, 0, 0.14], dtype=float)
+        # COLLISION AVOIDANCE: Add safe waypoints based on target location
+        # - Table placement: Arc over table from above
+        # - Floor/low stacking: Retreat from table, then descend
+        current_ee_pos = np.array(p.getLinkState(self.robot_id, self.end_effector_link)[4], dtype=float)
+        target_is_low = desired_obj_pos[2] < 0.4  # Floor or low stack (< 0.4m)
+        
+        if is_table:
+            # Placing on table - arc over from above
+            midpoint_xy = (current_ee_pos[:2] + desired_obj_pos[:2]) / 2.0
+            safe_height = min(0.85, max(0.70, current_ee_pos[2] + 0.10, desired_obj_pos[2] + 0.20))
+            safe_waypoint = np.array([midpoint_xy[0], midpoint_xy[1], safe_height], dtype=float)
+            
+            ok, reason = self.is_reachable(safe_waypoint, use_down_orientation=False)
+            if ok:
+                print(f"[PLACE] Moving to safe waypoint (table): {[round(float(x), 3) for x in safe_waypoint]}")
+                self.move_to_position(safe_waypoint, duration=1.5)
+                self.wait(0.1)
+            else:
+                print(f"[PLACE] Warning: Safe waypoint unreachable ({reason}), proceeding directly")
+                
+        elif target_is_low and current_ee_pos[2] > 0.6:
+            # Placing on floor/low stack from high position (e.g., after picking from table)
+            # Need to retreat from table area before descending
+            print(f"[PLACE] Detected high-to-low placement, executing safe descent...")
+            
+            # Step 1: Move away from table while staying high
+            retreat_waypoint = np.array([
+                max(0.35, desired_obj_pos[0] - 0.15),  # Closer to robot, away from table
+                desired_obj_pos[1],  # Same y as target
+                max(0.70, current_ee_pos[2])  # Stay high
+            ], dtype=float)
+            ok_retreat, _ = self.is_reachable(retreat_waypoint, use_down_orientation=False)
+            if ok_retreat:
+                print(f"[PLACE] Retreating from table area: {[round(float(x), 3) for x in retreat_waypoint]}")
+                self.move_to_position(retreat_waypoint, duration=1.5)
+                self.wait(0.1)
+            
+            # Step 2: Move to position above target (still high, but at target XY)
+            above_target = np.array([
+                desired_obj_pos[0],
+                desired_obj_pos[1],
+                max(0.50, desired_obj_pos[2] + 0.30)  # High above target
+            ], dtype=float)
+            ok_above, _ = self.is_reachable(above_target, use_down_orientation=False)
+            if ok_above:
+                print(f"[PLACE] Moving above target: {[round(float(x), 3) for x in above_target]}")
+                self.move_to_position(above_target, duration=1.5)
+                self.wait(0.1)
+
+        # Approach (high) - increased height to avoid table collisions
+        approach_pos = desired_obj_pos + np.array([0, 0, 0.18], dtype=float)
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
             features = {
@@ -661,8 +751,8 @@ class RobotController:
                 "msg": f"Unreachable place approach: {reason}",
             })
             return False, f"Unreachable place approach: {reason}"
-        self.move_to_position(approach_pos, duration=1.2)
-        self.wait(0.05)
+        self.move_to_position(approach_pos, duration=1.5)  # Slower approach
+        self.wait(0.1)  # Longer settle time
 
         # Pre-place
         pre_place = desired_obj_pos + np.array([0, 0, 0.06], dtype=float)
@@ -689,8 +779,8 @@ class RobotController:
                 "msg": f"Unreachable pre-place pose: {reason}",
             })
             return False, f"Unreachable pre-place pose: {reason}"
-        self.move_to_position(pre_place, duration=0.9)
-        self.wait(0.05)
+        self.move_to_position(pre_place, duration=1.2)  # Slower for precision
+        self.wait(0.08)  # Longer settle
 
         # Final place (slow)
         ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
@@ -716,19 +806,19 @@ class RobotController:
                 "msg": f"Unreachable place pose: {reason}",
             })
             return False, f"Unreachable place pose: {reason}"
-        self.move_to_position(desired_obj_pos, duration=0.8)
-        self.wait(0.08)
+        self.move_to_position(desired_obj_pos, duration=1.2)  # Very slow for accurate placement
+        self.wait(0.15)  # Longer wait for object to settle in gripper
 
         # Release
         self.open_gripper()
-        self.wait(0.12)
+        self.wait(0.2)  # Longer wait for clean release
 
-        # Lift straight up (don’t drag sideways)
+        # Lift straight up slowly (don't drag sideways or disturb placement)
         lift_after_release = desired_obj_pos + np.array([0, 0, 0.16], dtype=float)
         ok, _ = self.is_reachable(lift_after_release, use_down_orientation=False)
         if ok:
-            self.move_to_position(lift_after_release, duration=0.8)
-            self.wait(0.04)
+            self.move_to_position(lift_after_release, duration=1.0)  # Slower lift
+            self.wait(0.08)
 
         # ---- Truthful settle verification (LOCATION-BASED ONLY) ----
         final_pos, final_quat, max_drift, tilt_deg = self._settle_and_measure(held_id)
