@@ -10,9 +10,6 @@ from robot_controller import RobotController
 from perception import PerceptionModule
 from language_parser import CommandParser
 
-import joblib
-
-
 # -----------------------------
 # Config: match simulation.py
 # -----------------------------
@@ -160,20 +157,8 @@ def run_episode(ep: int, seed: int,
         return False
 
     # generate + score candidates for stacking
-    best_cand, meta = ctrl.choose_best_candidate_ml(
-        ctrl.held_object_id, white_id, cands
-    )
+    cands = ctrl.generate_stack_candidates(ctrl.held_object_id, white_id, grid=GRID, step=STEP)
 
-    if best_cand is None:
-        return False
-
-    ok_place, _ = ctrl.place_object(
-        "white_cube",
-        desired_obj_pos=best_cand,
-        candidate_meta=meta
-    )
-
-    return bool(ok_place)
     scored = [(ctrl.score_candidate_heuristic(c), c) for c in cands]
     scored.sort(key=lambda x: x[0], reverse=True)
     valid = [(s, c) for (s, c) in scored if s > -1e8]

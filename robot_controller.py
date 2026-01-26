@@ -5,6 +5,7 @@ from language_parser import CommandParser
 import time
 import json
 import os
+import uuid
 
 
 class RobotController:
@@ -51,17 +52,127 @@ class RobotController:
         self.max_tilt_deg_table = 35.0  # table can be tilted but not insane
         self.max_tilt_deg_stack = 25.0  # stacking should be tighter
 
+        self.run_id = str(uuid.uuid4())[:8]
+        self.episode_id = 0
+        self.step_id = 0
+        self.scene_seed = None
+
+    def set_episode(self, episode_id: int, scene_seed: int):
+        self.episode_id = int(episode_id)
+        self.scene_seed = int(scene_seed)
+        self.step_id = 0
     def _log_attempt(self, row: dict):
         row = dict(row)
         row.setdefault("ts", time.time())
+        row.setdefault("run_id", self.run_id)
+        row.setdefault("episode_id", self.episode_id)
+        row.setdefault("scene_seed", self.scene_seed)
+        row.setdefault("step_id", self.step_id)
+        self.step_id += 1
 
-        # Make sure folder exists if you set log_path like "logs/attempts.jsonl"
-        folder = os.path.dirname(self.log_path)
-        if folder:
-            os.makedirs(folder, exist_ok=True)
+        # Write JSONL
+        try:
+            with open(self.log_path, "a") as f:
+                f.write(json.dumps(row) + "\n")
+        except Exception as e:
+            # Don't crash the robot if logging fails
+            print("[LOGGING ERROR]", e)
 
-        with open(self.log_path, "a") as f:
-            f.write(json.dumps(row) + "\n")
+    def generate_table_candidates(self, held_id, table_id, num=16):
+        t_min, t_max = p.getAABB(table_id)
+        table_top_z = float(t_max[2])
+
+        o_min, o_max = p.getAABB(held_id)
+        obj_half_h = 0.5 * float(o_max[2] - o_min[2])
+
+        # try to keep y near your drop lane; clamp to safe band
+        y0 = float(getattr(self, "table_drop_xy", [0.7, 0.0])[1])
+        y0 = max(-0.25, min(0.25, y0))
+
+        xs = np.linspace(0.82, 0.62, num)  # reachable band
+        cands = []
+        for x in xs:
+            cands.append(np.array([float(x), float(y0), float(table_top_z + obj_half_h + 0.010)], dtype=float))
+        return cands
+
+
+    def generate_stack_candidates(self, held_id, target_id, grid=5, step=0.012):
+        target_pos, _ = p.getBasePositionAndOrientation(target_id)
+        target_xy0 = np.array(target_pos[:2], dtype=float)
+
+        t_min, t_max = p.getAABB(target_id)
+        target_top_z = float(t_max[2])
+
+        o_min, o_max = p.getAABB(held_id)
+        obj_half_h = 0.5 * float(o_max[2] - o_min[2])
+
+        z = target_top_z + obj_half_h + 0.014
+
+        offsets = []
+        mid = grid // 2
+        for i in range(grid):
+            for j in range(grid):
+                dx = (i - mid) * step
+                dy = (j - mid) * step
+                dist = abs(dx) + abs(dy)
+                offsets.append((dist, dx, dy))
+        offsets.sort(key=lambda x: x[0])
+
+        cands = []
+        for _, dx, dy in offsets:
+            cands.append(np.array([target_xy0[0] + dx, target_xy0[1] + dy, z], dtype=float))
+        return cands
+    
+    def score_candidate_heuristic(self, cand_xyz):
+        # reachable approach + reachable final (use your existing reachability function)
+        approach = cand_xyz + np.array([0, 0, 0.14], dtype=float)
+
+        ok1, _ = self.is_reachable(approach, use_down_orientation=False)
+        ok2, _ = self.is_reachable(cand_xyz, use_down_orientation=False)
+        if not (ok1 and ok2):
+            return -1e9
+
+        jt = self._ik(cand_xyz, use_down_orientation=False)
+        err = self._fk_error_for_joints(jt, cand_xyz)  # smaller better
+        return -float(err)
+
+
+    def choose_candidate(self, candidates, explore_p=0.20, top_k=5):
+        """
+        Returns: (chosen_xyz, meta_dict)
+        explore_p: fraction of the time we pick randomly among top_k (for data diversity)
+        """
+        scored = [(self.score_candidate_heuristic(c), c) for c in candidates]
+        scored.sort(key=lambda x: x[0], reverse=True)
+
+        # filter out totally impossible (-1e9)
+        valid = [(s, c) for (s, c) in scored if s > -1e8]
+        if not valid:
+            return None, {"reason": "no_reachable_candidates", "num_candidates": len(candidates)}
+
+        # exploration: pick random among top_k valid sometimes
+        import random
+        k = min(top_k, len(valid))
+        if random.random() < explore_p:
+            idx = random.randrange(k)
+            chosen_score, chosen = valid[idx]
+            chosen_rank = idx
+            explored = True
+        else:
+            chosen_score, chosen = valid[0]
+            chosen_rank = 0
+            explored = False
+
+        meta = {
+            "num_candidates": len(candidates),
+            "num_valid": len(valid),
+            "explored": explored,
+            "chosen_rank": int(chosen_rank),
+            "chosen_score": float(chosen_score),
+            "top_scores": [float(s) for (s, _) in valid[:min(8, len(valid))]],
+            "top_xyz": [c.tolist() for (_, c) in valid[:min(8, len(valid))]],
+        }
+        return chosen, meta
 
     def _held_name(self):
         for name, oid in getattr(self.perception, "object_map", {}).items():
@@ -287,6 +398,23 @@ class RobotController:
         for _ in range(240):
             p.stepSimulation()
 
+    def _stack_target_xy_topz(self, target_id):
+        """
+        More consistent stacking target than AABB center:
+
+        - XY: use the target object's *base position* (true center), not AABB center.
+        - Z: use AABB top (ok for height, much less sensitive than using it for XY).
+        """
+        pos, quat = p.getBasePositionAndOrientation(target_id)
+        pos = np.array(pos, dtype=float)
+
+        t_min, t_max = p.getAABB(target_id)
+        target_top_z = float(t_max[2])
+
+        target_xy = pos[:2]  # <- key change
+        return target_xy, target_top_z
+
+
     # -----------------------------
     # Pick
     # -----------------------------
@@ -322,7 +450,7 @@ class RobotController:
         # Features to log (for ML)
         features = {"obj_pos": [float(x) for x in obj_pos]}
 
-        # Width check
+        # Width check (LOG ONLY — don't early-exit for cubes)
         o_min, o_max = p.getAABB(obj_id)
         dx = float(o_max[0] - o_min[0])
         dy = float(o_max[1] - o_min[1])
@@ -330,20 +458,11 @@ class RobotController:
         features["obj_width"] = obj_width
         features["gripper_max_open"] = float(self.gripper_max_open)
 
-        if obj_width > self.gripper_max_open - 0.002:
-            self._log_attempt({
-                "action": "pick",
-                "object": object_name,
-                "target": None,
-                "features": features,
-                "success": False,
-                "fail_type": "too_wide",
-                "msg": "Object too wide for gripper",
-            })
-            return False, (
-                f"Object too wide for gripper (obj ~{obj_width:.3f}m, "
-                f"gripper max ~{self.gripper_max_open:.3f}m)"
-            )
+        # IMPORTANT:
+        # AABB width can inflate when the cube is tilted / wedged after a failed place.
+        # For dataset collection we do NOT want this to block repicks.
+        # So: log a flag, but keep going.
+        features["width_flag_too_wide"] = bool(obj_width > self.gripper_max_open - 0.002)
 
         print(f"Picking up '{object_name}' at {obj_pos}")
         self.open_gripper()
@@ -436,24 +555,8 @@ class RobotController:
         })
         return True, f"Successfully picked up '{object_name}'"
 
-    def _stack_target_xy_topz(self, target_id):
-        """
-        More consistent stacking target than AABB center:
 
-        - XY: use the target object's *base position* (true center), not AABB center.
-        - Z: use AABB top (ok for height, much less sensitive than using it for XY).
-        """
-        pos, quat = p.getBasePositionAndOrientation(target_id)
-        pos = np.array(pos, dtype=float)
-
-        t_min, t_max = p.getAABB(target_id)
-        target_top_z = float(t_max[2])
-
-        target_xy = pos[:2]  # <- key change
-        return target_xy, target_top_z
-
-
-    def place_object(self, target_name):
+    def place_object(self, target_name, desired_obj_pos=None, candidate_meta=None):
         # IMPORTANT: do NOT go_home here.
         # We assume we are already lifted safely after pick.
 
@@ -491,28 +594,45 @@ class RobotController:
 
         is_table = target_name in ("table", "the_table")
 
-        # Choose target XY + target top Z
-        if is_table:
-            target_xy = np.array(self.table_drop_xy, dtype=float)
-            if getattr(self, "table_top_z", None) is None:
+        # If a desired position is provided (candidate planner / ML), use it.
+        if desired_obj_pos is not None:
+            desired_obj_pos = np.array(desired_obj_pos, dtype=float)
+
+            # We still need target_top_z + clearance for logging thresholds
+            if is_table:
+                if getattr(self, "table_top_z", None) is None:
+                    t_min, t_max = p.getAABB(target_id)
+                    target_top_z = float(t_max[2])
+                else:
+                    target_top_z = float(self.table_top_z)
+                clearance = 0.010
+            else:
+                # for stacking thresholds/logs, derive top_z from target AABB
                 t_min, t_max = p.getAABB(target_id)
                 target_top_z = float(t_max[2])
-            else:
-                target_top_z = float(self.table_top_z)
-            clearance = 0.010
+                clearance = 0.016
+
         else:
-            # ✅ More consistent stacking: XY from base pose, Z from AABB top
-            target_xy, target_top_z = self._stack_target_xy_topz(target_id)
-            target_xy = np.array(target_xy, dtype=float)
+            # Otherwise compute desired position as before
+            if is_table:
+                target_xy = np.array(self.table_drop_xy, dtype=float)
+                if getattr(self, "table_top_z", None) is None:
+                    t_min, t_max = p.getAABB(target_id)
+                    target_top_z = float(t_max[2])
+                else:
+                    target_top_z = float(self.table_top_z)
+                clearance = 0.010
+            else:
+                # ✅ More consistent stacking: XY from base pose, Z from AABB top
+                target_xy, target_top_z = self._stack_target_xy_topz(target_id)
+                target_xy = np.array(target_xy, dtype=float)
+                clearance = 0.016
 
-            # A bit more clearance for stack so we don't clip and "bounce off"
-            clearance = 0.016
-
-        desired_obj_pos = np.array([
-            float(target_xy[0]),
-            float(target_xy[1]),
-            float(target_top_z + obj_half_h + clearance),
-        ], dtype=float)
+            desired_obj_pos = np.array([
+                float(target_xy[0]),
+                float(target_xy[1]),
+                float(target_top_z + obj_half_h + clearance),
+            ], dtype=float)
 
         print("[PLACE] desired_obj_pos =", [round(float(x), 3) for x in desired_obj_pos])
 
@@ -520,11 +640,22 @@ class RobotController:
         approach_pos = desired_obj_pos + np.array([0, 0, 0.14], dtype=float)
         ok, reason = self.is_reachable(approach_pos, use_down_orientation=False)
         if not ok:
+            features = {
+                "is_table": bool(is_table),
+                "desired": [float(x) for x in desired_obj_pos],
+                "detail": reason,
+                "target_top_z": float(target_top_z),
+                "obj_half_h": float(obj_half_h),
+                "clearance": float(clearance),
+            }
+            if candidate_meta is not None:
+                features["candidate_meta"] = candidate_meta
+
             self._log_attempt({
                 "action": "place",
                 "object": held_name,
                 "target": target_name,
-                "features": {"is_table": bool(is_table), "desired": [float(x) for x in desired_obj_pos], "detail": reason},
+                "features": features,
                 "success": False,
                 "fail_type": "unreachable_approach",
                 "msg": f"Unreachable place approach: {reason}",
@@ -537,11 +668,22 @@ class RobotController:
         pre_place = desired_obj_pos + np.array([0, 0, 0.06], dtype=float)
         ok, reason = self.is_reachable(pre_place, use_down_orientation=False)
         if not ok:
+            features = {
+                "is_table": bool(is_table),
+                "desired": [float(x) for x in desired_obj_pos],
+                "detail": reason,
+                "target_top_z": float(target_top_z),
+                "obj_half_h": float(obj_half_h),
+                "clearance": float(clearance),
+            }
+            if candidate_meta is not None:
+                features["candidate_meta"] = candidate_meta
+
             self._log_attempt({
                 "action": "place",
                 "object": held_name,
                 "target": target_name,
-                "features": {"is_table": bool(is_table), "desired": [float(x) for x in desired_obj_pos], "detail": reason},
+                "features": features,
                 "success": False,
                 "fail_type": "unreachable_pre",
                 "msg": f"Unreachable pre-place pose: {reason}",
@@ -553,11 +695,22 @@ class RobotController:
         # Final place (slow)
         ok, reason = self.is_reachable(desired_obj_pos, use_down_orientation=False)
         if not ok:
+            features = {
+                "is_table": bool(is_table),
+                "desired": [float(x) for x in desired_obj_pos],
+                "detail": reason,
+                "target_top_z": float(target_top_z),
+                "obj_half_h": float(obj_half_h),
+                "clearance": float(clearance),
+            }
+            if candidate_meta is not None:
+                features["candidate_meta"] = candidate_meta
+
             self._log_attempt({
                 "action": "place",
                 "object": held_name,
                 "target": target_name,
-                "features": {"is_table": bool(is_table), "desired": [float(x) for x in desired_obj_pos], "detail": reason},
+                "features": features,
                 "success": False,
                 "fail_type": "unreachable_final",
                 "msg": f"Unreachable place pose: {reason}",
@@ -588,7 +741,6 @@ class RobotController:
             xy_thresh = 0.12
             z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.03)
         else:
-            # If you keep this at 0.06 you'll see more false-fails even when it's "on top"
             xy_thresh = 0.08
             z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.012)
 
@@ -608,6 +760,8 @@ class RobotController:
             "obj_half_h": float(obj_half_h),
             "clearance": float(clearance),
         }
+        if candidate_meta is not None:
+            features["candidate_meta"] = candidate_meta
 
         if (xy_err > xy_thresh) or (not z_ok) or (not drift_ok):
             if not z_ok:
