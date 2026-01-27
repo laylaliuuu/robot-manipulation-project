@@ -460,10 +460,17 @@ if __name__ == "__main__":
     # main(n_episodes=10, base_seed=1000, stacking_ratio=0.7, 
     #      top_k=3, explore_extra=2, continue_after_success=True, use_gui=True)
 
-    # Production data collection (100 episodes, headless)
-    main(n_episodes=100, base_seed=1000, stacking_ratio=0.7,
-         top_k=5, explore_extra=4, continue_after_success=True, use_gui=False)
+    # SINGLE-TRY data collection (matches deployment conditions!)
+    # This fixes the train/test mismatch identified in ablation studies
+    print("\n🔧 SINGLE-TRY MODE: Collecting data that matches deployment conditions")
+    print("   - top_k=1: Only try the best candidate (no backup tries)")
+    print("   - explore_extra=0: No random exploration")
+    print("   - This should give ~60% success rate (matching deployment)\n")
     
-    # Large-scale data collection (uncomment for more data)
-    # main(n_episodes=300, base_seed=1000, stacking_ratio=0.7,
+    main(n_episodes=100, base_seed=2000, stacking_ratio=0.7,
+         top_k=1, explore_extra=0, continue_after_success=False, use_gui=False)
+    
+    # Old multi-try mode (for reference - this caused the train/test mismatch)
+    # main(n_episodes=100, base_seed=1000, stacking_ratio=0.7,
     #      top_k=5, explore_extra=4, continue_after_success=True, use_gui=False)
+

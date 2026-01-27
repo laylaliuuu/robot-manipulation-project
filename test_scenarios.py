@@ -17,9 +17,16 @@ def setup_scenario(green_loc_type, white_loc_type):
         p.connect(p.GUI if USE_GUI else p.DIRECT)
     
     # Always set path after reset
-    p.setAdditionalSearchPath(pybullet_data.getDataPath())
+    data_path = pybullet_data.getDataPath()
+    # print(f"DEBUG: pybullet data path: {data_path}")
+    p.setAdditionalSearchPath(data_path)
     p.setGravity(0, 0, -9.81)
-    p.loadURDF("plane.urdf")
+    
+    try:
+        p.loadURDF("plane.urdf")
+    except Exception as e:
+        print(f"Error loading plane.urdf. Path: {data_path}")
+        raise e
     
     robot_id = p.loadURDF("franka_panda/panda.urdf", [0, 0, 0], useFixedBase=True)
     table_id = p.loadURDF("table/table.urdf", [1.25, 0, 0], useFixedBase=True)

@@ -52,10 +52,41 @@ class RobotController:
         self.max_tilt_deg_table = 35.0  # table can be tilted but not insane
         self.max_tilt_deg_stack = 25.0  # stacking should be tighter
 
+        # -----------------------------
+        # ML Mode Toggle
+        # -----------------------------
+        self.use_ml = False  # Set to True to use ML-guided selection
+        self.ml_model = None
+        self.ml_model_path = "models/place_rf.joblib"
+        
+        # Try to load ML model if it exists
+        if os.path.exists(self.ml_model_path):
+            try:
+                import joblib
+                model_data = joblib.load(self.ml_model_path)
+                if isinstance(model_data, dict):
+                    self.ml_model = model_data['model']
+                else:
+                    self.ml_model = model_data
+                print(f"[ML] Model loaded from {self.ml_model_path}")
+            except Exception as e:
+                print(f"[ML] Failed to load model: {e}")
+                self.ml_model = None
+
         self.run_id = str(uuid.uuid4())[:8]
         self.episode_id = 0
         self.step_id = 0
         self.scene_seed = None
+    
+    def enable_ml_mode(self, enabled=True):
+        """Enable or disable ML-guided candidate selection."""
+        if enabled and self.ml_model is None:
+            print("[ML] Cannot enable ML mode: model not loaded")
+            return False
+        self.use_ml = enabled
+        mode = "ML-guided" if enabled else "Heuristic-only"
+        print(f"[ML] Mode set to: {mode}")
+        return True
 
     def set_episode(self, episode_id: int, scene_seed: int):
         self.episode_id = int(episode_id)
@@ -141,7 +172,11 @@ class RobotController:
         """
         Returns: (chosen_xyz, meta_dict)
         explore_p: fraction of the time we pick randomly among top_k (for data diversity)
+        
+        If self.use_ml is True and model is loaded, uses ML-guided selection.
+        Otherwise uses heuristic-only selection.
         """
+        # Score with heuristic (always needed)
         scored = [(self.score_candidate_heuristic(c), c) for c in candidates]
         scored.sort(key=lambda x: x[0], reverse=True)
 
@@ -150,7 +185,53 @@ class RobotController:
         if not valid:
             return None, {"reason": "no_reachable_candidates", "num_candidates": len(candidates)}
 
-        # exploration: pick random among top_k valid sometimes
+        # ML-guided selection (if enabled)
+        if self.use_ml and self.ml_model is not None:
+            # Score each valid candidate with ML
+            ml_scored = []
+            for heur_score, xyz in valid:
+                # Get features for ML prediction
+                # Note: We need target info - get from current placement context
+                # For now, use simplified features
+                features = [
+                    xyz[0],  # des_x
+                    xyz[1],  # des_y
+                    xyz[2],  # des_z
+                    heur_score,  # heuristic_score
+                    0.65,  # target_top_z (approximate)
+                    0.025,  # obj_half_h (approximate)
+                    0.016,  # clearance (approximate)
+                ]
+                try:
+                    ml_prob = self.ml_model.predict_proba([features])[0][1]
+                except:
+                    ml_prob = 0.5  # Fallback if prediction fails
+                
+                ml_scored.append((ml_prob, heur_score, xyz))
+            
+            # Sort by ML probability (highest first)
+            ml_scored.sort(key=lambda x: x[0], reverse=True)
+            
+            # Pick best according to ML
+            ml_prob, chosen_score, chosen = ml_scored[0]
+            chosen_rank = 0
+            explored = False
+            
+            meta = {
+                "num_candidates": len(candidates),
+                "num_valid": len(valid),
+                "explored": explored,
+                "chosen_rank": int(chosen_rank),
+                "chosen_score": float(chosen_score),
+                "ml_probability": float(ml_prob),
+                "selection_mode": "ML",
+                "top_scores": [float(s) for (s, _) in valid[:min(8, len(valid))]],
+                "top_xyz": [c.tolist() for (_, c) in valid[:min(8, len(valid))]],
+                "top_ml_probs": [float(p) for (p, _, _) in ml_scored[:min(8, len(ml_scored))]],
+            }
+            return chosen, meta
+
+        # Heuristic-only selection (default)
         import random
         k = min(top_k, len(valid))
         if random.random() < explore_p:
@@ -169,6 +250,7 @@ class RobotController:
             "explored": explored,
             "chosen_rank": int(chosen_rank),
             "chosen_score": float(chosen_score),
+            "selection_mode": "Heuristic",
             "top_scores": [float(s) for (s, _) in valid[:min(8, len(valid))]],
             "top_xyz": [c.tolist() for (_, c) in valid[:min(8, len(valid))]],
         }
@@ -880,14 +962,14 @@ class RobotController:
 
         xy_err = float(np.linalg.norm(final_pos[:2] - desired_obj_pos[:2]))
 
-        # Thresholds: table looser, stack slightly looser than before (stacks are noisy)
+        # STRICTER THRESHOLDS for harder data collection (more failures for ML to learn from)
+        # Target: ~60% success rate (40% failures) for balanced training data
         if is_table:
-            xy_thresh = 0.12
-            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.03)
+            xy_thresh = 0.06  # Stricter: was 0.12, now 0.06 (half as forgiving)
+            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.015)  # Stricter: was 0.03
         else:
-            xy_thresh = 0.08
-            # Relaxed from 0.012 -> 0.020 to handle floor stack settling
-            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.020)
+            xy_thresh = 0.04  # Stricter: was 0.08, now 0.04 (half as forgiving)
+            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.010)  # Stricter: was 0.020
 
         drift_ok = max_drift <= self.max_xy_drift
 

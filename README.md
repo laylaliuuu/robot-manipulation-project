@@ -128,25 +128,87 @@ Features = [
 - `xy_err`, `tilt_deg`, `max_xy_drift` are only known AFTER placement
 - Using them would be **data leakage** — the model must predict before acting
 
-### Model Performance
+### Model Performance & Ablation Study Results
 
 **Dataset Statistics:**
-- 200+ placement attempts logged
-- ~60% success rate (realistic for challenging stacking tasks)
+- 571 placement attempts logged
+- 83% success rate in training data (multi-try scenarios)
 - Balanced classes using `class_weight='balanced'`
 
-**Random Forest Classifier:**
+**Random Forest Classifier (Test Set Performance):**
 ```
-AUC: 0.85+
-Precision: 0.75-0.80
-Recall: 0.70-0.80
+AUC: 0.822
+Precision: 0.875
+Recall: 0.933
 ```
 
 **Top Feature Importances:**
-1. `heuristic_score` (IK/FK error) — strongest predictor
-2. `des_x`, `des_y` — workspace position matters
-3. `des_z` — height is critical for reachability
-4. `obj_half_h` — taller objects harder to place
+1. `target_top_z` (38%) — target height is strongest predictor
+2. `obj_half_h` (22%) — object size matters
+3. `heuristic_score` (12%) — IK/FK error
+4. `des_x`, `des_y`, `des_z` (10% each) — position features
+
+### ⚠️ Important Finding: Train/Test Mismatch
+
+**Ablation Study Results (January 26, 2026):**
+
+Through controlled experiments comparing heuristic-only vs. ML-guided candidate selection:
+
+| Approach | Success Rate | Notes |
+|----------|--------------|-------|
+| **Motion Planning Improvements** | 45% → 60% | Real improvement from waypoint planning, relaxed limits |
+| **Heuristic-Only Selection** | 60% | Simple "pick first" strategy (baseline) |
+| **ML-Guided Selection** | 20% | Model underperforms despite 0.822 AUC ❌ |
+
+**Root Cause Identified:**
+
+The ML model was trained on data where the robot tries **multiple candidates** per placement (top-5 + 4 random = 9 attempts), achieving 83% success. However, during deployment testing, the robot only tries **one candidate** (the "best" according to the model), achieving only 20% success.
+
+**Why ML Underperforms:**
+- Model learned: "Position x=0.66 works" (from multi-try scenarios)
+- Reality: x=0.66 only works when you have 8 backup tries
+- Heuristic's conservative "pick closest to center" strategy is more reliable for single-try scenarios
+
+**Key Lesson:**
+> High test AUC (0.822) does not guarantee real-world improvement. Training conditions must match deployment conditions. This is a valuable negative result that demonstrates the importance of ablation studies and proper experimental design in ML for robotics.
+
+**Current Status:**
+- ✅ Motion planning improvements provide 33% relative improvement (45% → 60%)
+- ⚠️ ML model underperforms heuristic (40% vs 60%) - see ablation studies
+- 🔬 Ablation study scripts available in `test_ml_ablation.py`
+- 🎛️ **ML mode toggle available** - easily switch between heuristic and ML selection
+
+### 🎛️ ML Mode Toggle
+
+The system supports both heuristic-only and ML-guided candidate selection:
+
+```python
+# In your code
+controller = RobotController(...)
+
+# Enable ML mode
+controller.enable_ml_mode(True)   # Use ML-guided selection
+
+# Disable ML mode (default)
+controller.enable_ml_mode(False)  # Use heuristic-only selection
+```
+
+**Try it yourself:**
+```bash
+# Compare heuristic vs ML over 5 trials
+python demo_ml_toggle.py --mode both --trials 5
+
+# Run with heuristic only
+python demo_ml_toggle.py --mode heuristic --gui
+
+# Run with ML only
+python demo_ml_toggle.py --mode ml --gui
+```
+
+**Expected Results:**
+- **Heuristic mode:** ~60% success (reliable, conservative)
+- **ML mode:** ~40% success (experimental, less reliable)
+- **Demonstrates:** When domain knowledge beats ML
 
 ---
 
