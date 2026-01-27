@@ -306,7 +306,7 @@ class RobotController:
         # Workspace guardrails (tune later)
         if r_xy < 0.12 or r_xy > 0.95:
             return False, f"Out of XY workspace (r={r_xy:.3f})"
-        if z < 0.02 or z > 0.90:
+        if z < 0.02 or z > 1.15:
             return False, f"Out of Z workspace (z={z:.3f})"
 
         jt = self._ik(target_pos, use_down_orientation)
@@ -572,6 +572,15 @@ class RobotController:
                 max(0.70, high_above_table[2])  # Stay high
             ], dtype=float)
             ok_retreat, _ = self.is_reachable(retreat_pos, use_down_orientation=False)
+            if not ok_retreat:
+                # Fallback: try a less aggressive retreat
+                retreat_pos = np.array([
+                    max(0.35, obj_pos[0] - 0.15),
+                    obj_pos[1],
+                    max(0.70, high_above_table[2])
+                ], dtype=float)
+                ok_retreat, _ = self.is_reachable(retreat_pos, use_down_orientation=False)
+
             if ok_retreat:
                 print(f"[PICK] Retreating from table: {[round(float(x), 3) for x in retreat_pos]}")
                 self.move_to_position(retreat_pos, duration=1.5, use_down_orientation=False)
@@ -682,8 +691,40 @@ class RobotController:
         # - Floor/low stacking: Retreat from table, then descend
         current_ee_pos = np.array(p.getLinkState(self.robot_id, self.end_effector_link)[4], dtype=float)
         target_is_low = desired_obj_pos[2] < 0.4  # Floor or low stack (< 0.4m)
-        
-        if is_table:
+        target_is_high = desired_obj_pos[2] > 0.5 # Table or stack on table (> 0.5m)
+        start_is_low = current_ee_pos[2] < 0.4    # Starting from floor?
+
+        if start_is_low and target_is_high:
+            # ---------------------------------------------------------
+            # Low -> High Strategy (Floor to Table)
+            # ---------------------------------------------------------
+            # We are likely on the floor. If we arc or move linear, we hit the table edge.
+            # solution: Lift vertically to a safe height (e.g. > table height) at CURRENT XY first.
+            print(f"[PLACE] Detected Low-to-High transition. Lifting vertically first...")
+            
+            # Aim for plenty of clearance above table
+            # LOWERED SAFE Z: 0.85 -> 0.75 to be less aggressive.
+            # Table is approx 0.65m. 0.75m clears it by 10cm.
+            safe_z = max(0.75, desired_obj_pos[2] + 0.05)
+            
+            # Waypoint: Current XY, Safe Z
+            lift_waypoint = np.array([current_ee_pos[0], current_ee_pos[1], safe_z], dtype=float)
+            
+            ok, reason = self.is_reachable(lift_waypoint, use_down_orientation=False)
+            if not ok:
+                # Fallback: maybe 0.75 is still too high? Try 0.70
+                lift_waypoint[2] = 0.70
+                ok, reason = self.is_reachable(lift_waypoint, use_down_orientation=False)
+            
+            if ok:
+                print(f"[PLACE] Lifting to safe height: {[round(float(x), 3) for x in lift_waypoint]}")
+                # INCREASED DURATION: 1.5 -> 2.0 (slightly faster than 3.0 but smoother than 1.5)
+                self.move_to_position(lift_waypoint, duration=2.0)
+                self.wait(0.1)
+            else:
+                print(f"[PLACE] Warning: Vertical lift unreachable ({reason}). trying standard path...")
+
+        elif is_table:
             # Placing on table - arc over from above
             midpoint_xy = (current_ee_pos[:2] + desired_obj_pos[:2]) / 2.0
             safe_height = min(0.85, max(0.70, current_ee_pos[2] + 0.10, desired_obj_pos[2] + 0.20))
@@ -695,7 +736,15 @@ class RobotController:
                 self.move_to_position(safe_waypoint, duration=1.5)
                 self.wait(0.1)
             else:
-                print(f"[PLACE] Warning: Safe waypoint unreachable ({reason}), proceeding directly")
+                # Fallback: try higher but less far out
+                safe_waypoint[2] += 0.10
+                ok, reason = self.is_reachable(safe_waypoint, use_down_orientation=False)
+                if ok:
+                    print(f"[PLACE] Moving to high safe waypoint: {[round(float(x), 3) for x in safe_waypoint]}")
+                    self.move_to_position(safe_waypoint, duration=1.5)
+                    self.wait(0.1)
+                else:
+                    print(f"[PLACE] Warning: All safe waypoints unreachable ({reason}), proceeding directly")
                 
         elif target_is_low and current_ee_pos[2] > 0.6:
             # Placing on floor/low stack from high position (e.g., after picking from table)
@@ -709,6 +758,11 @@ class RobotController:
                 max(0.70, current_ee_pos[2])  # Stay high
             ], dtype=float)
             ok_retreat, _ = self.is_reachable(retreat_waypoint, use_down_orientation=False)
+            if not ok_retreat:
+                # Fallback: less aggressive retreat
+                retreat_waypoint[0] = max(0.35, desired_obj_pos[0] - 0.10)
+                ok_retreat, _ = self.is_reachable(retreat_waypoint, use_down_orientation=False)
+
             if ok_retreat:
                 print(f"[PLACE] Retreating from table area: {[round(float(x), 3) for x in retreat_waypoint]}")
                 self.move_to_position(retreat_waypoint, duration=1.5)
@@ -832,7 +886,8 @@ class RobotController:
             z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.03)
         else:
             xy_thresh = 0.08
-            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.012)
+            # Relaxed from 0.012 -> 0.020 to handle floor stack settling
+            z_ok = final_pos[2] > (target_top_z + obj_half_h - 0.020)
 
         drift_ok = max_drift <= self.max_xy_drift
 
@@ -927,7 +982,7 @@ class RobotController:
                 last_picked_name = obj
                 for attempt in range(pick_tries):
                     if pick_tries > 1:
-                        print(f" → pick attempt {attempt+1}/{pick_tries}")
+                        print(f" -- pick attempt {attempt+1}/{pick_tries}")
 
                     success, msg = self.pick_object(obj)
                     if success:
@@ -948,7 +1003,7 @@ class RobotController:
                 target_name = obj
 
                 for attempt in range(place_tries):
-                    print(f" → place attempt {attempt+1}/{place_tries}")
+                    print(f" -- place attempt {attempt+1}/{place_tries}")
 
                     # Try placing directly from current lifted pose (NO go_home first)
                     success, msg = self.place_object(target_name)

@@ -1,0 +1,3100 @@
+pybullet build time: Jan 26 2026 00:34:56
+======================================================================
+🤖 Self-Supervised Data Collection for Reachability Prediction
+======================================================================
+Episodes:          100
+Stacking ratio:    70.0%
+Top-K candidates:  5
+Explore extra:     4
+Continue after ✓:  True
+Log file:          attempts_runs/attempts_20260126_003535.jsonl
+======================================================================
+Picking up 'green_cube' at [ 0.74154809 -0.00498641  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.742, -0.005, 0.85]
+[PICK] Retreating from table: [0.492, -0.005, 0.85]
+[EP 0] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.667, -0.096, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.54171285 -0.07312656  0.65381712]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.542, -0.073, 0.854]
+[PICK] Retreating from table: [0.35, -0.073, 0.854]
+[PLACE] desired_obj_pos = [0.667, -0.084, 0.719]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.69506119 -0.08395798  0.64999054]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.695, -0.084, 0.85]
+[PICK] Retreating from table: [0.445, -0.084, 0.85]
+[PLACE] desired_obj_pos = [0.679, -0.12, 0.719]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.68531363 -0.11503555  0.64998593]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.685, -0.115, 0.85]
+[PICK] Retreating from table: [0.435, -0.115, 0.85]
+[PLACE] desired_obj_pos = [0.679, -0.108, 0.719]
+  [Attempt 4/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.68406365 -0.10216687  0.64998948]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.684, -0.102, 0.85]
+[PICK] Retreating from table: [0.434, -0.102, 0.85]
+[PLACE] desired_obj_pos = [0.703, -0.12, 0.719]
+  [Attempt 5/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.70890614 -0.11468437  0.65140809]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.709, -0.115, 0.851]
+[PICK] Retreating from table: [0.459, -0.115, 0.851]
+[PLACE] desired_obj_pos = [0.691, -0.084, 0.719]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.69562056 -0.07825895  0.64998818]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.696, -0.078, 0.85]
+[PICK] Retreating from table: [0.446, -0.078, 0.85]
+[PLACE] desired_obj_pos = [0.715, -0.084, 0.719]
+  [Attempt 7/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.71908862 -0.07062576  0.65332206]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.719, -0.071, 0.853]
+[PICK] Retreating from table: [0.469, -0.071, 0.853]
+[PLACE] desired_obj_pos = [0.679, -0.096, 0.719]
+  [Attempt 8/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.69068896 -0.08346577  0.64998732]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.691, -0.083, 0.85]
+[PICK] Retreating from table: [0.441, -0.083, 0.85]
+[PLACE] desired_obj_pos = [0.691, -0.132, 0.719]
+  [Attempt 9/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.61330653 -0.01666678  0.65026299]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.613, -0.017, 0.85]
+[PICK] Retreating from table: [0.363, -0.017, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.67]
+[PLACE] Moving to safe waypoint (table): [0.499, -0.008, 0.85]
+[EP 1] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.65184464 0.02885426 0.65039946]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.652, 0.029, 0.85]
+[PICK] Retreating from table: [0.402, 0.029, 0.85]
+[PLACE] desired_obj_pos = [0.62, 0.0, 0.663]
+[PLACE] Moving to safe waypoint (table): [0.526, 0.016, 0.85]
+[EP 2] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.5828679  0.02707249 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.583, 0.027, 0.85]
+[PICK] Retreating from table: [0.35, 0.027, 0.85]
+[EP 3] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.67, -0.03, 0.722]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42872572 -0.01581688  0.60176184]
+Picking up 'green_cube' at [0.44276159 0.00342186 0.02499038]
+[PICK] Lifting extra high to avoid table: [0.443, 0.003, 0.275]
+[PLACE] desired_obj_pos = [0.682, -0.018, 0.722]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42256805 -0.02044774  0.5801193 ]
+Picking up 'green_cube' at [0.43781573 0.02391764 0.02498802]
+[PICK] Lifting extra high to avoid table: [0.438, 0.024, 0.275]
+[PLACE] desired_obj_pos = [0.658, 0.006, 0.722]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42264494 -0.01311351  0.5800525 ]
+Picking up 'green_cube' at [ 0.4377272  -0.01281194  0.02499047]
+[PICK] Lifting extra high to avoid table: [0.438, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.658, -0.006, 0.722]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42260709 -0.01427207  0.58008658]
+Picking up 'green_cube' at [ 0.43820829 -0.0151264   0.02499095]
+[PICK] Lifting extra high to avoid table: [0.438, -0.015, 0.275]
+[PLACE] desired_obj_pos = [0.658, -0.018, 0.722]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42252873 -0.01961031  0.58008824]
+Picking up 'green_cube' at [0.43761568 0.01965921 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.438, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.67, 0.006, 0.722]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42273101 -0.02020601  0.58015536]
+Picking up 'green_cube' at [0.4409705  0.02653853 0.02499094]
+[PICK] Lifting extra high to avoid table: [0.441, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.694, -0.018, 0.722]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42195276 -0.01815339  0.58001635]
+Picking up 'green_cube' at [0.4425208  0.02607073 0.02499   ]
+[PICK] Lifting extra high to avoid table: [0.443, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.694, 0.006, 0.722]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42257539 -0.01878761  0.58012059]
+Picking up 'green_cube' at [0.44038784 0.01987542 0.02499092]
+[PICK] Lifting extra high to avoid table: [0.44, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.706, -0.018, 0.722]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.70690505 0.10189981 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.707, 0.102, 0.85]
+[PICK] Retreating from table: [0.457, 0.102, 0.85]
+[EP 4] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.563, 0.1, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [0.5560855  0.10127406 0.69985025]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.556, 0.101, 0.9]
+[PICK] Retreating from table: [0.35, 0.101, 0.9]
+[PLACE] desired_obj_pos = [0.587, 0.1, 0.716]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.5907467  0.08670791 0.69997829]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.591, 0.087, 0.9]
+[PICK] Retreating from table: [0.35, 0.087, 0.9]
+[PLACE] desired_obj_pos = [0.563, 0.112, 0.716]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.56409226 0.09772066 0.70006278]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.575, 0.076, 0.716]
+  [Attempt 4/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.57509747 0.06170272 0.70093903]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.599, 0.088, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.6059341  0.06408372 0.69781473]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.606, 0.064, 0.898]
+[PICK] Retreating from table: [0.356, 0.064, 0.898]
+[PLACE] desired_obj_pos = [0.599, 0.1, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.59748613 0.09314629 0.70700215]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.599, 0.076, 0.716]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.59977858 0.06606484 0.69793824]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.6, 0.066, 0.898]
+[PICK] Retreating from table: [0.35, 0.066, 0.898]
+[PLACE] desired_obj_pos = [0.611, 0.124, 0.716]
+  [Attempt 8/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61346419 0.12008439 0.71358419]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.611, 0.1, 0.716]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.65998145 0.09603585 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.66, 0.096, 0.85]
+[PICK] Retreating from table: [0.41, 0.096, 0.85]
+[EP 5] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.692, -0.144, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.75423518 -0.05579142  0.66466057]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.754, -0.056, 0.865]
+[PICK] Retreating from table: [0.504, -0.056, 0.865]
+[PLACE] desired_obj_pos = [0.68, -0.12, 0.715]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.70672056 -0.07224219  0.65750263]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.707, -0.072, 0.858]
+[PICK] Retreating from table: [0.457, -0.072, 0.858]
+[PLACE] desired_obj_pos = [0.668, -0.132, 0.715]
+  [Attempt 3/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.67390765 -0.12612346  0.70828339]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.704, -0.12, 0.715]
+  [Attempt 4/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.70976689 -0.0982386   0.70557162]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.68, -0.132, 0.715]
+  [Attempt 5/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.68185886 -0.11962258  0.70881127]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.692, -0.096, 0.715]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.69142754 -0.08066523  0.65756432]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.691, -0.081, 0.858]
+[PICK] Retreating from table: [0.441, -0.081, 0.858]
+[PLACE] desired_obj_pos = [0.68, -0.096, 0.715]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.68509839 -0.08040088  0.65584296]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.685, -0.08, 0.856]
+[PICK] Retreating from table: [0.435, -0.08, 0.856]
+[PLACE] desired_obj_pos = [0.716, -0.096, 0.715]
+  [Attempt 8/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [ 0.73222219 -0.09004153  0.65723245]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.732, -0.09, 0.857]
+[PICK] Retreating from table: [0.482, -0.09, 0.857]
+[PLACE] desired_obj_pos = [0.716, -0.108, 0.715]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.68923075 0.10705953 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.689, 0.107, 0.85]
+[PICK] Retreating from table: [0.439, 0.107, 0.85]
+[EP 6] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.694, -0.053, 0.714]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.40805464 -0.05899503  0.02499074]
+[PICK] Lifting extra high to avoid table: [0.408, -0.059, 0.275]
+[PLACE] desired_obj_pos = [0.682, -0.065, 0.714]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.66214697 -0.0626283   0.02499028]
+Picking up 'green_cube' at [ 0.66214697 -0.0626283   0.02499028]
+Picking up 'green_cube' at [ 0.66214697 -0.0626283   0.02499028]
+  [EP 6] Failed to repick, stopping attempts
+Picking up 'green_cube' at [0.58103851 0.06038506 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.581, 0.06, 0.85]
+[PICK] Retreating from table: [0.35, 0.06, 0.85]
+[EP 7] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.649, 0.107, 0.722]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42913942 -0.02081561  0.60231383]
+Picking up 'green_cube' at [0.44177906 0.0380478  0.02498719]
+[PICK] Lifting extra high to avoid table: [0.442, 0.038, 0.275]
+[PLACE] desired_obj_pos = [0.649, 0.083, 0.722]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42253214 -0.01980934  0.58011575]
+Picking up 'green_cube' at [0.43755905 0.02029058 0.02499027]
+[PICK] Lifting extra high to avoid table: [0.438, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.661, 0.095, 0.722]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42261044 -0.01450692  0.58000594]
+Picking up 'green_cube' at [ 0.43798771 -0.01376853  0.02498983]
+[PICK] Lifting extra high to avoid table: [0.438, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.673, 0.071, 0.722]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42258644 -0.01980693  0.58012022]
+Picking up 'green_cube' at [0.43955395 0.02547917 0.02498693]
+[PICK] Lifting extra high to avoid table: [0.44, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.661, 0.071, 0.722]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42258597 -0.01898553  0.5801229 ]
+Picking up 'green_cube' at [0.43744994 0.01491712 0.02498798]
+[PICK] Lifting extra high to avoid table: [0.437, 0.015, 0.275]
+[PLACE] desired_obj_pos = [0.649, 0.071, 0.722]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42308316 -0.01939165  0.58012392]
+Picking up 'green_cube' at [0.44373073 0.00478535 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.444, 0.005, 0.275]
+[PLACE] desired_obj_pos = [0.685, 0.107, 0.722]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.4234013  -0.01251508  0.58027651]
+Picking up 'green_cube' at [ 0.44017042 -0.0065834   0.02499033]
+[PICK] Lifting extra high to avoid table: [0.44, -0.007, 0.275]
+[PLACE] desired_obj_pos = [0.673, 0.095, 0.722]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42281543 -0.01779355  0.58024492]
+Picking up 'green_cube' at [0.44579893 0.0265401  0.02498742]
+[PICK] Lifting extra high to avoid table: [0.446, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.697, 0.083, 0.722]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.62333472 0.03260192 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.623, 0.033, 0.85]
+[PICK] Retreating from table: [0.373, 0.033, 0.85]
+[PLACE] desired_obj_pos = [0.647, 0.0, 0.664]
+[PLACE] Moving to safe waypoint (table): [0.524, 0.018, 0.85]
+[EP 8] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.63116852 -0.06343431  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.631, -0.063, 0.85]
+[PICK] Retreating from table: [0.381, -0.063, 0.85]
+[EP 9] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.666, -0.093, 0.721]
+  [Attempt 1/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42287087 -0.00672975  0.58560049]
+Picking up 'green_cube' at [0.42964802 0.0134246  0.02498951]
+[PICK] Lifting extra high to avoid table: [0.43, 0.013, 0.275]
+[PLACE] desired_obj_pos = [0.678, -0.081, 0.721]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42254391 -0.01609762  0.58010448]
+Picking up 'green_cube' at [0.44701215 0.02599964 0.02498792]
+[PICK] Lifting extra high to avoid table: [0.447, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.678, -0.129, 0.721]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42286428 -0.01358349  0.58027853]
+Picking up 'green_cube' at [ 0.44574909 -0.00066691  0.0249908 ]
+[PICK] Lifting extra high to avoid table: [0.446, -0.001, 0.275]
+[PLACE] desired_obj_pos = [0.678, -0.117, 0.721]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42253407 -0.01335412  0.58009351]
+Picking up 'green_cube' at [ 0.44195702 -0.01059036  0.02498522]
+[PICK] Lifting extra high to avoid table: [0.442, -0.011, 0.275]
+[PLACE] desired_obj_pos = [0.666, -0.129, 0.721]
+  [Attempt 5/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42267974 -0.01948975  0.58016936]
+Picking up 'green_cube' at [0.44109385 0.02555341 0.02498945]
+[PICK] Lifting extra high to avoid table: [0.441, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.714, -0.105, 0.721]
+  [Attempt 6/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [ 0.4225545  -0.01933867  0.58010488]
+Picking up 'green_cube' at [0.43854045 0.0191372  0.02498962]
+[PICK] Lifting extra high to avoid table: [0.439, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.69, -0.093, 0.721]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42260591 -0.01953314  0.58012949]
+Picking up 'green_cube' at [0.44147237 0.02120659 0.02498815]
+[PICK] Lifting extra high to avoid table: [0.441, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.69, -0.129, 0.721]
+  [Attempt 8/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42247681 -0.01776449  0.58006378]
+Picking up 'green_cube' at [0.44379174 0.02430844 0.02499039]
+[PICK] Lifting extra high to avoid table: [0.444, 0.024, 0.275]
+[PLACE] desired_obj_pos = [0.702, -0.129, 0.721]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+
+[10/100] Progress Report:
+  Overall success:  7/10 (70.0%)
+  Stacking success: 4/7 (57.1%)
+  Table success:    3/3 (100.0%)
+  Rate: 0.4 ep/s | ETA: 212s
+Picking up 'green_cube' at [ 0.59236    -0.08627336  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.592, -0.086, 0.85]
+[PICK] Retreating from table: [0.35, -0.086, 0.85]
+[EP 10] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.644, -0.078, 0.73]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.43129998 0.00108803 0.61081576]
+Picking up 'green_cube' at [ 0.4460633  -0.0160132   0.02499048]
+[PICK] Lifting extra high to avoid table: [0.446, -0.016, 0.275]
+[PLACE] desired_obj_pos = [0.656, -0.066, 0.73]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42254521 -0.01979165  0.58009852]
+Picking up 'green_cube' at [0.43823243 0.02190135 0.0249856 ]
+[PICK] Lifting extra high to avoid table: [0.438, 0.022, 0.275]
+[PLACE] desired_obj_pos = [0.656, -0.114, 0.73]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42254102 -0.01344501  0.58010818]
+Picking up 'green_cube' at [ 0.43767314 -0.01404163  0.02499037]
+[PICK] Lifting extra high to avoid table: [0.438, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.632, -0.114, 0.73]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42240754 -0.01509855  0.57971031]
+Picking up 'green_cube' at [ 0.43863606 -0.01217398  0.02499095]
+[PICK] Lifting extra high to avoid table: [0.439, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.632, -0.09, 0.73]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42271815 -0.01949189  0.58019027]
+Picking up 'green_cube' at [0.44122025 0.02559322 0.02499094]
+[PICK] Lifting extra high to avoid table: [0.441, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.632, -0.066, 0.73]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42253013 -0.019316    0.58009099]
+Picking up 'green_cube' at [0.4384102  0.01885633 0.02498548]
+[PICK] Lifting extra high to avoid table: [0.438, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.68, -0.066, 0.73]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42265872 -0.02039063  0.58013511]
+Picking up 'green_cube' at [0.44165753 0.02640242 0.02498765]
+[PICK] Lifting extra high to avoid table: [0.442, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.644, -0.114, 0.73]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42251176 -0.01784555  0.58008596]
+Picking up 'green_cube' at [0.44427567 0.02603677 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.444, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.68, -0.09, 0.73]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.68650706 -0.10858883  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.687, -0.109, 0.85]
+[PICK] Retreating from table: [0.437, -0.109, 0.85]
+[EP 11] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.667, -0.044, 0.717]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.52755178 -0.02748846  0.64998794]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.528, -0.027, 0.85]
+[PICK] Retreating from table: [0.35, -0.027, 0.85]
+[PLACE] desired_obj_pos = [0.691, -0.044, 0.717]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.70281462 -0.04028438  0.65913342]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.703, -0.04, 0.859]
+[PICK] Retreating from table: [0.453, -0.04, 0.859]
+[PLACE] desired_obj_pos = [0.679, -0.056, 0.717]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.67781382 -0.06318359  0.65908091]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.678, -0.063, 0.859]
+[PICK] Retreating from table: [0.428, -0.063, 0.859]
+[PLACE] desired_obj_pos = [0.679, -0.008, 0.717]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.67798797 -0.00829498  0.65658817]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.678, -0.008, 0.857]
+[PICK] Retreating from table: [0.428, -0.008, 0.857]
+[PLACE] desired_obj_pos = [0.715, -0.008, 0.717]
+  [Attempt 5/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.71645023 -0.00490285  0.64998561]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.716, -0.005, 0.85]
+[PICK] Retreating from table: [0.466, -0.005, 0.85]
+[PLACE] desired_obj_pos = [0.691, -0.02, 0.717]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.69332075 -0.02712081  0.6499881 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.693, -0.027, 0.85]
+[PICK] Retreating from table: [0.443, -0.027, 0.85]
+[PLACE] desired_obj_pos = [0.667, -0.056, 0.717]
+  [Attempt 7/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.67185738 -0.05706125  0.64998757]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.672, -0.057, 0.85]
+[PICK] Retreating from table: [0.422, -0.057, 0.85]
+[PLACE] desired_obj_pos = [0.715, -0.044, 0.717]
+  [Attempt 8/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [ 0.72044378 -0.04390651  0.64998685]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.72, -0.044, 0.85]
+[PICK] Retreating from table: [0.47, -0.044, 0.85]
+[PLACE] desired_obj_pos = [0.691, -0.056, 0.717]
+  [Attempt 9/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.63114497 0.08323992 0.65034604]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.631, 0.083, 0.85]
+[PICK] Retreating from table: [0.381, 0.083, 0.85]
+[EP 12] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.535, 0.077, 0.733]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.3622541  -0.0725686   0.04284641]
+[PICK] Lifting extra high to avoid table: [0.362, -0.073, 0.293]
+[PLACE] desired_obj_pos = [0.535, 0.101, 0.733]
+  [Attempt 2/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.42330208 0.00338629 0.57981779]
+Picking up 'green_cube' at [ 0.41108363 -0.00318272  0.02498883]
+[PICK] Lifting extra high to avoid table: [0.411, -0.003, 0.275]
+[PLACE] desired_obj_pos = [0.547, 0.077, 0.733]
+  [Attempt 3/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42255758 -0.00938556  0.58009711]
+Picking up 'green_cube' at [ 0.43933416 -0.01015834  0.02498673]
+[PICK] Lifting extra high to avoid table: [0.439, -0.01, 0.275]
+[PLACE] desired_obj_pos = [0.559, 0.089, 0.733]
+  [Attempt 4/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42263151 -0.01141969  0.58011865]
+Picking up 'green_cube' at [ 0.43655027 -0.01133313  0.02499098]
+[PICK] Lifting extra high to avoid table: [0.437, -0.011, 0.275]
+[PLACE] desired_obj_pos = [0.523, 0.053, 0.733]
+  [Attempt 5/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42269498 -0.01254761  0.5801987 ]
+Picking up 'green_cube' at [ 0.43964603 -0.01115222  0.02499096]
+[PICK] Lifting extra high to avoid table: [0.44, -0.011, 0.275]
+[PLACE] desired_obj_pos = [0.535, 0.053, 0.733]
+  [Attempt 6/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42255462 -0.01308897  0.58017012]
+Picking up 'green_cube' at [ 0.43845398 -0.01162975  0.02498707]
+[PICK] Lifting extra high to avoid table: [0.438, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.523, 0.089, 0.733]
+  [Attempt 7/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42280511 -0.0135779   0.58018255]
+Picking up 'green_cube' at [ 0.43744741 -0.01324946  0.02498746]
+[PICK] Lifting extra high to avoid table: [0.437, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.535, 0.089, 0.733]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42267133 -0.01537885  0.58006874]
+Picking up 'green_cube' at [ 0.44006248 -0.00914477  0.0249903 ]
+[PICK] Lifting extra high to avoid table: [0.44, -0.009, 0.275]
+[PLACE] desired_obj_pos = [0.559, 0.065, 0.733]
+  [Attempt 9/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.62487785 0.10063317 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.625, 0.101, 0.85]
+[PICK] Retreating from table: [0.375, 0.101, 0.85]
+[EP 13] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.651, -0.101, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.46327128 0.04108292 0.0249898 ]
+[PICK] Lifting extra high to avoid table: [0.463, 0.041, 0.275]
+[PLACE] desired_obj_pos = [0.651, -0.149, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.67458937 -0.16918603  0.02498723]
+Picking up 'green_cube' at [ 0.67458937 -0.16918603  0.02498723]
+Picking up 'green_cube' at [ 0.67458937 -0.16918603  0.02498723]
+  [EP 13] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.63624072 -0.11453837  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.636, -0.115, 0.85]
+[PICK] Retreating from table: [0.386, -0.115, 0.85]
+[PLACE] desired_obj_pos = [0.66, 0.0, 0.663]
+[PLACE] Moving to safe waypoint (table): [0.536, -0.061, 0.85]
+[EP 14] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.68500363 0.04153795 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.685, 0.042, 0.85]
+[PICK] Retreating from table: [0.435, 0.042, 0.85]
+[EP 15] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.663, -0.101, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.46320721 -0.07990934  0.0249879 ]
+[PICK] Lifting extra high to avoid table: [0.463, -0.08, 0.275]
+[PLACE] desired_obj_pos = [0.675, -0.077, 0.715]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.69635413 -0.10473599  0.02498841]
+[PICK] Lifting extra high to avoid table: [0.696, -0.105, 0.275]
+[PLACE] desired_obj_pos = [0.663, -0.089, 0.715]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.75720821 -0.09864549  0.02498989]
+[PICK] Lifting extra high to avoid table: [0.757, -0.099, 0.275]
+[PLACE] desired_obj_pos = [0.675, -0.125, 0.715]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.76974818 -0.1333716   0.02498598]
+[PICK] Lifting extra high to avoid table: [0.77, -0.133, 0.275]
+[PLACE] desired_obj_pos = [0.687, -0.077, 0.715]
+  [Attempt 5/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.78526673 -0.10138857  0.02498945]
+[PICK] Lifting extra high to avoid table: [0.785, -0.101, 0.275]
+[PLACE] desired_obj_pos = [0.711, -0.077, 0.715]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.81646467 -0.09888897  0.02499065]
+[PICK] Lifting extra high to avoid table: [0.816, -0.099, 0.275]
+[PLACE] desired_obj_pos = [0.699, -0.113, 0.715]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.83339271 -0.14341984  0.02499045]
+[PICK] Lifting extra high to avoid table: [0.833, -0.143, 0.275]
+[PLACE] desired_obj_pos = [0.711, -0.113, 0.715]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.80054931 -0.10732955  0.02499092]
+[PICK] Lifting extra high to avoid table: [0.801, -0.107, 0.275]
+[PLACE] desired_obj_pos = [0.699, -0.101, 0.715]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.69896364 0.04969403 0.65029182]
+[EP 16] Failed to pick green cube
+Picking up 'green_cube' at [0.66041249 0.04453599 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.66, 0.045, 0.85]
+[PICK] Retreating from table: [0.41, 0.045, 0.85]
+[EP 17] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.611, 0.094, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61179136 0.0930038  0.70128746]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.575, 0.13, 0.716]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.57266265 0.1169577  0.69996893]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.573, 0.117, 0.9]
+[PICK] Retreating from table: [0.35, 0.117, 0.9]
+[PLACE] desired_obj_pos = [0.611, 0.118, 0.716]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61467928 0.10514904 0.70212119]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.623, 0.094, 0.716]
+  [Attempt 4/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.62783488 0.07954517 0.69924302]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.628, 0.08, 0.899]
+[PICK] Retreating from table: [0.378, 0.08, 0.899]
+[PLACE] desired_obj_pos = [0.599, 0.094, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.59980666 0.0767459  0.69985509]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.6, 0.077, 0.9]
+[PICK] Retreating from table: [0.35, 0.077, 0.9]
+[PLACE] desired_obj_pos = [0.587, 0.118, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.5900036  0.10442646 0.70052819]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.623, 0.142, 0.716]
+  [Attempt 7/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.62551929 0.12834554 0.70254916]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.587, 0.142, 0.716]
+  [Attempt 8/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.5895529  0.12757792 0.70111468]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.599, 0.142, 0.716]
+  [Attempt 9/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.70778271 -0.00575367  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.708, -0.006, 0.85]
+[PICK] Retreating from table: [0.458, -0.006, 0.85]
+[EP 18] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.582, 0.101, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [0.57836632 0.09891828 0.70019987]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.606, 0.101, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.60704463 0.09101534 0.69883632]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.607, 0.091, 0.899]
+[PICK] Retreating from table: [0.357, 0.091, 0.899]
+[PLACE] desired_obj_pos = [0.582, 0.113, 0.716]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.58247215 0.09853805 0.70082514]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.618, 0.149, 0.716]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.62319227 0.15396264 0.69950361]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.623, 0.154, 0.9]
+[PICK] Retreating from table: [0.373, 0.154, 0.9]
+[PLACE] desired_obj_pos = [0.57, 0.137, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.5658603  0.11916312 0.69996845]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.566, 0.119, 0.9]
+[PICK] Retreating from table: [0.35, 0.119, 0.9]
+[PLACE] desired_obj_pos = [0.582, 0.137, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.58491625 0.11650517 0.70106926]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.618, 0.113, 0.716]
+  [Attempt 7/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.61719412 0.10502218 0.70060565]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.57, 0.113, 0.716]
+  [Attempt 8/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.56486266 0.09929757 0.69983757]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.565, 0.099, 0.9]
+[PICK] Retreating from table: [0.35, 0.099, 0.9]
+[PLACE] desired_obj_pos = [0.606, 0.125, 0.716]
+  [Attempt 9/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.58098672 0.10116379 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.581, 0.101, 0.85]
+[PICK] Retreating from table: [0.35, 0.101, 0.85]
+[EP 19] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.611, -0.083, 0.723]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.4300535  -0.02050013  0.60635916]
+Picking up 'green_cube' at [0.45148391 0.02698669 0.02499027]
+[PICK] Lifting extra high to avoid table: [0.451, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.635, -0.107, 0.723]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42219846 -0.01452197  0.58006562]
+Picking up 'green_cube' at [0.44817506 0.02614018 0.02498701]
+[PICK] Lifting extra high to avoid table: [0.448, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.635, -0.083, 0.723]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.4225197  -0.01022619  0.58009621]
+Picking up 'green_cube' at [ 0.44542634 -0.02172402  0.02498781]
+[PICK] Lifting extra high to avoid table: [0.445, -0.022, 0.275]
+[PLACE] desired_obj_pos = [0.611, -0.119, 0.723]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42205877 -0.01866159  0.58003213]
+Picking up 'green_cube' at [0.44165827 0.02573999 0.02499049]
+[PICK] Lifting extra high to avoid table: [0.442, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.647, -0.083, 0.723]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42298159 -0.01350152  0.58024023]
+Picking up 'green_cube' at [ 0.4386138  -0.01860476  0.0249884 ]
+[PICK] Lifting extra high to avoid table: [0.439, -0.019, 0.275]
+[PLACE] desired_obj_pos = [0.611, -0.107, 0.723]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42260708 -0.01984614  0.58013181]
+Picking up 'green_cube' at [0.43948845 0.02543053 0.02498945]
+[PICK] Lifting extra high to avoid table: [0.439, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.635, -0.119, 0.723]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42257414 -0.01887634  0.5801163 ]
+Picking up 'green_cube' at [0.43723312 0.01382493 0.0249881 ]
+[PICK] Lifting extra high to avoid table: [0.437, 0.014, 0.275]
+[PLACE] desired_obj_pos = [0.647, -0.095, 0.723]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42280384 -0.02000399  0.58013409]
+Picking up 'green_cube' at [0.44047316 0.02573331 0.02498995]
+[PICK] Lifting extra high to avoid table: [0.44, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.647, -0.107, 0.723]
+  [Attempt 9/9] ✗ Failed (score=-0.000043)
+
+[20/100] Progress Report:
+  Overall success:  13/20 (65.0%)
+  Stacking success: 9/16 (56.2%)
+  Table success:    4/4 (100.0%)
+  Rate: 0.4 ep/s | ETA: 187s
+Picking up 'green_cube' at [ 0.69707322 -0.04670209  0.6502246 ]
+[EP 20] Failed to pick green cube
+Picking up 'green_cube' at [ 0.70215636 -0.07767202  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.702, -0.078, 0.85]
+[PICK] Retreating from table: [0.452, -0.078, 0.85]
+[EP 21] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.675, 0.104, 0.72]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.4013611  -0.07075902  0.02499083]
+[PICK] Lifting extra high to avoid table: [0.401, -0.071, 0.275]
+[PLACE] desired_obj_pos = [0.675, 0.092, 0.72]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.62799447 -0.01547925  0.02499095]
+Picking up 'green_cube' at [ 0.62799447 -0.01547925  0.02499095]
+Picking up 'green_cube' at [ 0.62799447 -0.01547925  0.02499095]
+  [EP 21] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.63502468 -0.08635641  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.635, -0.086, 0.85]
+[PICK] Retreating from table: [0.385, -0.086, 0.85]
+[EP 22] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.579, 0.135, 0.715]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.5523261  0.1547745  0.66110774]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.552, 0.155, 0.861]
+[PICK] Retreating from table: [0.35, 0.155, 0.861]
+[PLACE] desired_obj_pos = [0.603, 0.135, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.47518746 -0.02214766  0.02499091]
+[PICK] Lifting extra high to avoid table: [0.475, -0.022, 0.275]
+[PLACE] desired_obj_pos = [0.591, 0.147, 0.715]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.63114134 0.14808948 0.02499011]
+Picking up 'green_cube' at [0.63114134 0.14808948 0.02499011]
+Picking up 'green_cube' at [0.63114134 0.14808948 0.02499011]
+  [EP 22] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.66651865 -0.12518876  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.667, -0.125, 0.85]
+[PICK] Retreating from table: [0.417, -0.125, 0.85]
+[EP 23] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.711, 0.012, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.71831356 0.00401247 0.70535124]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.711, 0.048, 0.719]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.67326555 0.02021514 0.65581751]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.673, 0.02, 0.856]
+[PICK] Retreating from table: [0.423, 0.02, 0.856]
+[PLACE] desired_obj_pos = [0.723, 0.036, 0.719]
+  [Attempt 3/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.72546429 0.03093301 0.69996905]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.725, 0.031, 0.9]
+[PICK] Retreating from table: [0.475, 0.031, 0.9]
+[PLACE] desired_obj_pos = [0.711, 0.024, 0.719]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.6830096  0.0152559  0.66328733]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.683, 0.015, 0.863]
+[PICK] Retreating from table: [0.433, 0.015, 0.863]
+[PLACE] desired_obj_pos = [0.723, 0.06, 0.719]
+  [Attempt 5/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.72766473 0.05891175 0.7085445 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.747, 0.048, 0.719]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.74930676 0.04234851 0.70490431]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.711, 0.036, 0.719]
+  [Attempt 7/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.70464738 0.02264691 0.70391024]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.759, 0.036, 0.719]
+  [Attempt 8/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.76305634 0.02328194 0.70091499]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.735, 0.06, 0.719]
+  [Attempt 9/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.66819655 0.04427156 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.668, 0.044, 0.85]
+[PICK] Retreating from table: [0.418, 0.044, 0.85]
+[EP 24] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.702, 0.127, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.73621677 0.07304805 0.66761672]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.736, 0.073, 0.868]
+[PICK] Retreating from table: [0.486, 0.073, 0.868]
+[PLACE] desired_obj_pos = [0.714, 0.115, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.68272848 0.0638852  0.66371572]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.683, 0.064, 0.864]
+[PICK] Retreating from table: [0.433, 0.064, 0.864]
+[PLACE] desired_obj_pos = [0.69, 0.151, 0.715]
+  [Attempt 3/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.69136367 0.15226711 0.66181846]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.691, 0.152, 0.862]
+[PICK] Retreating from table: [0.441, 0.152, 0.862]
+[PLACE] desired_obj_pos = [0.678, 0.127, 0.715]
+  [Attempt 4/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.67746131 0.12820979 0.66174584]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.677, 0.128, 0.862]
+[PICK] Retreating from table: [0.427, 0.128, 0.862]
+[PLACE] desired_obj_pos = [0.678, 0.139, 0.715]
+  [Attempt 5/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.67773737 0.14096865 0.66029041]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.678, 0.141, 0.86]
+[PICK] Retreating from table: [0.428, 0.141, 0.86]
+[PLACE] desired_obj_pos = [0.678, 0.151, 0.715]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.68034951 0.15223143 0.66544625]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.68, 0.152, 0.865]
+[PICK] Retreating from table: [0.43, 0.152, 0.865]
+[PLACE] desired_obj_pos = [0.69, 0.115, 0.715]
+  [Attempt 7/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.69164717 0.11467735 0.66569096]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.692, 0.115, 0.866]
+[PICK] Retreating from table: [0.442, 0.115, 0.866]
+[PLACE] desired_obj_pos = [0.666, 0.163, 0.715]
+  [Attempt 8/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.66702508 0.16175612 0.66690409]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.667, 0.162, 0.867]
+[PICK] Retreating from table: [0.417, 0.162, 0.867]
+[PLACE] desired_obj_pos = [0.702, 0.115, 0.715]
+  [Attempt 9/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [ 0.63423671 -0.0081207   0.65010898]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.634, -0.008, 0.85]
+[PICK] Retreating from table: [0.384, -0.008, 0.85]
+[PLACE] desired_obj_pos = [0.62, 0.0, 0.674]
+[PLACE] Moving to safe waypoint (table): [0.517, -0.004, 0.85]
+[EP 25] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.74248647 -0.08775818  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.742, -0.088, 0.85]
+[PICK] Retreating from table: [0.492, -0.088, 0.85]
+[EP 26] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.616, 0.071, 0.718]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.51369826 0.05030231 0.65023748]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.514, 0.05, 0.85]
+[PICK] Retreating from table: [0.35, 0.05, 0.85]
+[PLACE] desired_obj_pos = [0.64, 0.083, 0.718]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.64146387 0.08821138 0.71513479]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.616, 0.083, 0.718]
+  [Attempt 3/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.60865795 0.06894575 0.70527501]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.664, 0.095, 0.718]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.6689711  0.08062986 0.70763495]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.616, 0.119, 0.718]
+  [Attempt 5/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.61727592 0.10964756 0.71339934]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.616, 0.107, 0.718]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.60326646 0.09458784 0.70235128]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.664, 0.107, 0.718]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.67515864 0.07773023 0.69827714]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.675, 0.078, 0.898]
+[PICK] Retreating from table: [0.425, 0.078, 0.898]
+[PLACE] desired_obj_pos = [0.64, 0.119, 0.718]
+  [Attempt 8/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.6451688  0.10793416 0.71030453]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.652, 0.071, 0.718]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.73809204 -0.11877506  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.738, -0.119, 0.85]
+[PICK] Retreating from table: [0.488, -0.119, 0.85]
+[EP 27] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.587, 0.041, 0.717]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [ 0.39141314 -0.01112856  0.02499095]
+[PICK] Lifting extra high to avoid table: [0.391, -0.011, 0.275]
+[PLACE] desired_obj_pos = [0.575, 0.005, 0.717]
+  [Attempt 2/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.58134888 -0.02434694  0.02498957]
+Picking up 'green_cube' at [ 0.58134888 -0.02434694  0.02498957]
+Picking up 'green_cube' at [ 0.58134888 -0.02434694  0.02498957]
+  [EP 27] Failed to repick, stopping attempts
+Picking up 'green_cube' at [0.64505158 0.02922053 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.645, 0.029, 0.85]
+[PICK] Retreating from table: [0.395, 0.029, 0.85]
+[EP 28] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.691, -0.083, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.44307266 -0.01263989  0.02498808]
+[PICK] Lifting extra high to avoid table: [0.443, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.679, -0.131, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.72030165 -0.16032218  0.02498926]
+[PICK] Lifting extra high to avoid table: [0.72, -0.16, 0.275]
+[PLACE] desired_obj_pos = [0.679, -0.119, 0.716]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.77899516 -0.12788422  0.02498543]
+[PICK] Lifting extra high to avoid table: [0.779, -0.128, 0.275]
+[PLACE] desired_obj_pos = [0.679, -0.107, 0.716]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.77322517 -0.13191623  0.02498506]
+[PICK] Lifting extra high to avoid table: [0.773, -0.132, 0.275]
+[PLACE] desired_obj_pos = [0.715, -0.131, 0.716]
+  [Attempt 5/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.81516857 -0.16108888  0.02499053]
+[PICK] Lifting extra high to avoid table: [0.815, -0.161, 0.275]
+[PLACE] desired_obj_pos = [0.715, -0.107, 0.716]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.87173059 -0.12066954  0.02499088]
+[PICK] Lifting extra high to avoid table: [0.872, -0.121, 0.275]
+[PLACE] desired_obj_pos = [0.715, -0.119, 0.716]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.80201067 -0.1174051   0.02499098]
+[PICK] Lifting extra high to avoid table: [0.802, -0.117, 0.275]
+[PLACE] desired_obj_pos = [0.703, -0.107, 0.716]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.82467989 -0.10812299  0.02499097]
+[PICK] Lifting extra high to avoid table: [0.825, -0.108, 0.275]
+[PLACE] desired_obj_pos = [0.703, -0.083, 0.716]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.68008141 0.11198132 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.68, 0.112, 0.85]
+[PICK] Retreating from table: [0.43, 0.112, 0.85]
+[EP 29] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.575, -0.049, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [ 0.48727464 -0.05583828  0.02498667]
+Picking up 'green_cube' at [ 0.48727464 -0.05583828  0.02498667]
+Picking up 'green_cube' at [ 0.48727464 -0.05583828  0.02498667]
+  [EP 29] Failed to repick, stopping attempts
+
+[30/100] Progress Report:
+  Overall success:  22/30 (73.3%)
+  Stacking success: 17/25 (68.0%)
+  Table success:    5/5 (100.0%)
+  Rate: 0.4 ep/s | ETA: 156s
+Picking up 'green_cube' at [0.61787229 0.03259147 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.618, 0.033, 0.85]
+[PICK] Retreating from table: [0.368, 0.033, 0.85]
+[EP 30] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.645, -0.005, 0.722]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.50301998 0.03436263 0.6529507 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.503, 0.034, 0.853]
+[PICK] Retreating from table: [0.35, 0.034, 0.853]
+[PLACE] desired_obj_pos = [0.645, -0.017, 0.722]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42368624 -0.00715266  0.5815884 ]
+Picking up 'green_cube' at [ 0.42338633 -0.0265089   0.03529652]
+[PICK] Lifting extra high to avoid table: [0.423, -0.027, 0.285]
+[PLACE] desired_obj_pos = [0.633, -0.005, 0.722]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42253934 -0.01964618  0.58009641]
+Picking up 'green_cube' at [0.41529227 0.02037947 0.02499049]
+[PICK] Lifting extra high to avoid table: [0.415, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.633, -0.017, 0.722]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42228458 -0.01993083  0.58008273]
+Picking up 'green_cube' at [0.43856092 0.02483283 0.02498964]
+[PICK] Lifting extra high to avoid table: [0.439, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.669, -0.029, 0.722]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42306666 -0.01347623  0.58003168]
+Picking up 'green_cube' at [ 0.43936493 -0.02376081  0.02499093]
+[PICK] Lifting extra high to avoid table: [0.439, -0.024, 0.275]
+[PLACE] desired_obj_pos = [0.657, -0.005, 0.722]
+  [Attempt 6/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.4223844  -0.01924632  0.58016377]
+Picking up 'green_cube' at [0.44132445 0.02556453 0.02499094]
+[PICK] Lifting extra high to avoid table: [0.441, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.657, -0.029, 0.722]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42257341 -0.01933884  0.58011452]
+Picking up 'green_cube' at [0.43868044 0.01938597 0.02498434]
+[PICK] Lifting extra high to avoid table: [0.439, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.681, -0.053, 0.722]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42265101 -0.02023616  0.5801396 ]
+Picking up 'green_cube' at [0.44177494 0.02518999 0.02498927]
+[PICK] Lifting extra high to avoid table: [0.442, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.681, -0.041, 0.722]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.6352192  -0.02289567  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.635, -0.023, 0.85]
+[PICK] Retreating from table: [0.385, -0.023, 0.85]
+[PLACE] desired_obj_pos = [0.673, 0.0, 0.663]
+[PLACE] Moving to safe waypoint (table): [0.544, -0.012, 0.85]
+[EP 31] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.62313171 0.0317579  0.65031645]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.623, 0.032, 0.85]
+[PICK] Retreating from table: [0.373, 0.032, 0.85]
+[PLACE] desired_obj_pos = [0.647, 0.0, 0.664]
+[PLACE] Moving to safe waypoint (table): [0.523, 0.017, 0.85]
+[EP 32] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.69756237 0.02480929 0.65032831]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.698, 0.025, 0.85]
+[PICK] Retreating from table: [0.448, 0.025, 0.85]
+[EP 33] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.616, 0.031, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [0.61792027 0.02969747 0.70212537]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.652, 0.019, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.65100784 0.0021205  0.70003713]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.64, -0.005, 0.715]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.63620679 -0.02659974  0.69509898]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.636, -0.027, 0.895]
+[PICK] Retreating from table: [0.386, -0.027, 0.895]
+[PLACE] desired_obj_pos = [0.64, 0.007, 0.715]
+  [Attempt 4/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 6.34593952e-01 -6.73105113e-06  7.04854554e-01]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.616, 0.043, 0.715]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.56625565 0.03797253 0.65300072]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.566, 0.038, 0.853]
+[PICK] Retreating from table: [0.35, 0.038, 0.853]
+[PLACE] desired_obj_pos = [0.652, -0.005, 0.715]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.66334941 -0.04378135  0.66543686]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.663, -0.044, 0.865]
+[PICK] Retreating from table: [0.413, -0.044, 0.865]
+[PLACE] desired_obj_pos = [0.652, 0.031, 0.715]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.68256935 0.05084115 0.65349294]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.683, 0.051, 0.853]
+[PICK] Retreating from table: [0.433, 0.051, 0.853]
+[PLACE] desired_obj_pos = [0.616, -0.005, 0.715]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.60485945 -0.03989071  0.65486412]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.605, -0.04, 0.855]
+[PICK] Retreating from table: [0.355, -0.04, 0.855]
+[PLACE] desired_obj_pos = [0.664, -0.005, 0.715]
+  [Attempt 9/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.69922137 -0.06930618  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.699, -0.069, 0.85]
+[PICK] Retreating from table: [0.449, -0.069, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.668]
+[PLACE] Moving to safe waypoint (table): [0.561, -0.038, 0.85]
+[EP 34] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.6661272  -0.00857555  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.666, -0.009, 0.85]
+[PICK] Retreating from table: [0.416, -0.009, 0.85]
+[PLACE] desired_obj_pos = [0.647, 0.0, 0.662]
+[PLACE] Moving to safe waypoint (table): [0.548, -0.005, 0.85]
+[EP 35] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.67123568 0.02223492 0.65035304]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.671, 0.022, 0.85]
+[PICK] Retreating from table: [0.421, 0.022, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.674]
+[PLACE] Moving to safe waypoint (table): [0.542, 0.012, 0.85]
+[EP 36] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.60738829 0.09646228 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.607, 0.096, 0.85]
+[PICK] Retreating from table: [0.357, 0.096, 0.85]
+[EP 37] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.657, 0.057, 0.723]
+  [Attempt 1/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.49686212 -0.12029386  0.02498643]
+Picking up 'green_cube' at [ 0.49686212 -0.12029386  0.02498643]
+[PICK] Lifting extra high to avoid table: [0.497, -0.12, 0.275]
+[PLACE] desired_obj_pos = [0.681, 0.057, 0.723]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42386164 -0.00677604  0.5807477 ]
+Picking up 'green_cube' at [ 0.43953579 -0.00801035  0.02498859]
+[PICK] Lifting extra high to avoid table: [0.44, -0.008, 0.275]
+[PLACE] desired_obj_pos = [0.669, 0.093, 0.723]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.4215729  -0.01256287  0.57983802]
+Picking up 'green_cube' at [0.44682819 0.02536091 0.02498844]
+[PICK] Lifting extra high to avoid table: [0.447, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.669, 0.069, 0.723]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42263222 -0.01471771  0.58015275]
+Picking up 'green_cube' at [0.44598344 0.01017933 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.446, 0.01, 0.275]
+[PLACE] desired_obj_pos = [0.705, 0.045, 0.723]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42284537 -0.0181868   0.58026288]
+Picking up 'green_cube' at [0.44505716 0.02620734 0.02499035]
+[PICK] Lifting extra high to avoid table: [0.445, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.669, 0.081, 0.723]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42301308 -0.01233682  0.58020189]
+Picking up 'green_cube' at [ 0.43950272 -0.02282414  0.02498751]
+[PICK] Lifting extra high to avoid table: [0.44, -0.023, 0.275]
+[PLACE] desired_obj_pos = [0.693, 0.093, 0.723]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42220968 -0.01901821  0.58008402]
+Picking up 'green_cube' at [0.44124367 0.02549904 0.0249904 ]
+[PICK] Lifting extra high to avoid table: [0.441, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.669, 0.045, 0.723]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42277667 -0.01498602  0.58020268]
+Picking up 'green_cube' at [ 0.4385607  -0.00894563  0.02498841]
+[PICK] Lifting extra high to avoid table: [0.439, -0.009, 0.275]
+[PLACE] desired_obj_pos = [0.693, 0.045, 0.723]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.70415684 0.06255188 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.704, 0.063, 0.85]
+[PICK] Retreating from table: [0.454, 0.063, 0.85]
+[EP 38] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.697, 0.142, 0.724]
+  [Attempt 1/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.44407241 -0.01971054  0.58239836]
+Picking up 'green_cube' at [ 0.45984423 -0.00343132  0.02499041]
+[PICK] Lifting extra high to avoid table: [0.46, -0.003, 0.275]
+[PLACE] desired_obj_pos = [0.709, 0.13, 0.724]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.4222084  -0.01423982  0.58007442]
+Picking up 'green_cube' at [0.44865298 0.02625513 0.02499   ]
+[PICK] Lifting extra high to avoid table: [0.449, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.697, 0.166, 0.724]
+  [Attempt 3/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42249714 -0.00867162  0.58040057]
+Picking up 'green_cube' at [ 0.44522271 -0.0263463   0.02499057]
+[PICK] Lifting extra high to avoid table: [0.445, -0.026, 0.275]
+[PLACE] desired_obj_pos = [0.721, 0.118, 0.724]
+  [Attempt 4/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42222246 -0.019288    0.58007534]
+Picking up 'green_cube' at [0.44041102 0.02563035 0.02498644]
+[PICK] Lifting extra high to avoid table: [0.44, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.709, 0.166, 0.724]
+  [Attempt 5/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42253202 -0.01930431  0.58009313]
+Picking up 'green_cube' at [0.43841499 0.01876981 0.02499091]
+[PICK] Lifting extra high to avoid table: [0.438, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.745, 0.166, 0.724]
+  [Attempt 6/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [ 0.42233599 -0.01501847  0.57977841]
+Picking up 'green_cube' at [ 0.43653365 -0.01220909  0.02498621]
+[PICK] Lifting extra high to avoid table: [0.437, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.709, 0.118, 0.724]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42238156 -0.01926107  0.58015286]
+Picking up 'green_cube' at [0.44132936 0.02572659 0.02499094]
+[PICK] Lifting extra high to avoid table: [0.441, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.745, 0.118, 0.724]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42253551 -0.01927586  0.58009395]
+Picking up 'green_cube' at [0.43846407 0.01864711 0.02498925]
+[PICK] Lifting extra high to avoid table: [0.438, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.733, 0.166, 0.724]
+  [Attempt 9/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [0.71705694 0.11533194 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.717, 0.115, 0.85]
+[PICK] Retreating from table: [0.467, 0.115, 0.85]
+[EP 39] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.633, 0.08, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.66586725 0.0217562  0.64998784]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.666, 0.022, 0.85]
+[PICK] Retreating from table: [0.416, 0.022, 0.85]
+[PLACE] desired_obj_pos = [0.669, 0.08, 0.719]
+  [Attempt 2/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.68079651 0.06811849 0.70028172]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.645, 0.068, 0.719]
+  [Attempt 3/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.64502097 0.05126678 0.69998761]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.645, 0.051, 0.9]
+[PICK] Retreating from table: [0.395, 0.051, 0.9]
+[PLACE] desired_obj_pos = [0.669, 0.056, 0.719]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.67190548 0.04155403 0.69996168]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.672, 0.042, 0.9]
+[PICK] Retreating from table: [0.422, 0.042, 0.9]
+[PLACE] desired_obj_pos = [0.645, 0.092, 0.719]
+  [Attempt 5/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.64518978 0.07797726 0.70019418]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.633, 0.056, 0.719]
+  [Attempt 6/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.63413102 0.04034173 0.6999764 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.634, 0.04, 0.9]
+[PICK] Retreating from table: [0.384, 0.04, 0.9]
+[PLACE] desired_obj_pos = [0.681, 0.08, 0.719]
+  [Attempt 7/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.68300897 0.06549359 0.70267577]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.633, 0.068, 0.719]
+  [Attempt 8/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.63442297 0.05026423 0.70022828]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.681, 0.056, 0.719]
+  [Attempt 9/9] ✓ Success (score=-0.000044)
+
+[40/100] Progress Report:
+  Overall success:  29/40 (72.5%)
+  Stacking success: 19/30 (63.3%)
+  Table success:    10/10 (100.0%)
+  Rate: 0.5 ep/s | ETA: 125s
+Picking up 'green_cube' at [0.72910844 0.06031644 0.64998991]
+[EP 40] Failed to pick green cube
+Picking up 'green_cube' at [0.62968783 0.1342887  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.63, 0.134, 0.85]
+[PICK] Retreating from table: [0.38, 0.134, 0.85]
+[EP 41] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.584, -0.006, 0.725]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.4283511  -0.00719918  0.58862021]
+Picking up 'green_cube' at [0.44925407 0.05065156 0.02499027]
+[PICK] Lifting extra high to avoid table: [0.449, 0.051, 0.275]
+[PLACE] desired_obj_pos = [0.584, 0.042, 0.725]
+  [Attempt 2/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42269319 -0.006258    0.58015436]
+Picking up 'green_cube' at [0.44039093 0.00492182 0.02498897]
+[PICK] Lifting extra high to avoid table: [0.44, 0.005, 0.275]
+[PLACE] desired_obj_pos = [0.572, 0.018, 0.725]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42266225 -0.01088531  0.58013944]
+Picking up 'green_cube' at [0.44038508 0.04445567 0.02498506]
+[PICK] Lifting extra high to avoid table: [0.44, 0.044, 0.275]
+[PLACE] desired_obj_pos = [0.572, 0.03, 0.725]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42315691 -0.0052727   0.5802049 ]
+Picking up 'green_cube' at [ 0.43932517 -0.00618584  0.02499091]
+[PICK] Lifting extra high to avoid table: [0.439, -0.006, 0.275]
+[PLACE] desired_obj_pos = [0.572, 0.006, 0.725]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42586604 -0.01206033  0.58298843]
+Picking up 'green_cube' at [0.43108048 0.03724443 0.0430264 ]
+[PICK] Lifting extra high to avoid table: [0.431, 0.037, 0.293]
+[PLACE] desired_obj_pos = [0.608, 0.042, 0.725]
+  [Attempt 6/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42124657 -0.02113034  0.57951319]
+Picking up 'green_cube' at [0.40769334 0.01783145 0.02499098]
+[PICK] Lifting extra high to avoid table: [0.408, 0.018, 0.275]
+[PLACE] desired_obj_pos = [0.608, -0.006, 0.725]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42236226 -0.01739265  0.58030036]
+Picking up 'green_cube' at [0.44561306 0.02669045 0.02498756]
+[PICK] Lifting extra high to avoid table: [0.446, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.596, 0.018, 0.725]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42298542 -0.01147516  0.5801715 ]
+Picking up 'green_cube' at [ 0.43953134 -0.02752657  0.02498779]
+[PICK] Lifting extra high to avoid table: [0.44, -0.028, 0.275]
+[PLACE] desired_obj_pos = [0.596, 0.042, 0.725]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.71949214 -0.09477784  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.719, -0.095, 0.85]
+[PICK] Retreating from table: [0.469, -0.095, 0.85]
+[EP 42] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.61, -0.087, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [ 0.51481853 -0.07503644  0.65503541]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.515, -0.075, 0.855]
+[PICK] Retreating from table: [0.35, -0.075, 0.855]
+[PLACE] desired_obj_pos = [0.622, -0.123, 0.719]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.63802063 -0.11900726  0.65251127]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.638, -0.119, 0.853]
+[PICK] Retreating from table: [0.388, -0.119, 0.853]
+[PLACE] desired_obj_pos = [0.646, -0.111, 0.719]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.65168813 -0.09760145  0.65452579]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.652, -0.098, 0.855]
+[PICK] Retreating from table: [0.402, -0.098, 0.855]
+[PLACE] desired_obj_pos = [0.622, -0.075, 0.719]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.62297607 -0.08810631  0.65588904]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.623, -0.088, 0.856]
+[PICK] Retreating from table: [0.373, -0.088, 0.856]
+[PLACE] desired_obj_pos = [0.646, -0.075, 0.719]
+  [Attempt 5/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.64957963 -0.08756526  0.65682104]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.65, -0.088, 0.857]
+[PICK] Retreating from table: [0.4, -0.088, 0.857]
+[PLACE] desired_obj_pos = [0.61, -0.123, 0.719]
+  [Attempt 6/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.61061281 -0.13506157  0.65683255]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.611, -0.135, 0.857]
+[PICK] Retreating from table: [0.361, -0.135, 0.857]
+[PLACE] desired_obj_pos = [0.634, -0.075, 0.719]
+  [Attempt 7/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.63523307 -0.08353393  0.65830066]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.635, -0.084, 0.858]
+[PICK] Retreating from table: [0.385, -0.084, 0.858]
+[PLACE] desired_obj_pos = [0.61, -0.099, 0.719]
+  [Attempt 8/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.61130619 -0.1068195   0.66120966]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.611, -0.107, 0.861]
+[PICK] Retreating from table: [0.361, -0.107, 0.861]
+[PLACE] desired_obj_pos = [0.658, -0.075, 0.719]
+  [Attempt 9/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.58601956 0.12260788 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.586, 0.123, 0.85]
+[PICK] Retreating from table: [0.35, 0.123, 0.85]
+[EP 43] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.65, 0.128, 0.723]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.43153153 -0.01575982  0.6113496 ]
+Picking up 'green_cube' at [ 0.44484914 -0.00107394  0.02499027]
+[PICK] Lifting extra high to avoid table: [0.445, -0.001, 0.275]
+[PLACE] desired_obj_pos = [0.674, 0.14, 0.723]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42263493 -0.0124938   0.58014188]
+Picking up 'green_cube' at [ 0.43891594 -0.02537481  0.02498798]
+[PICK] Lifting extra high to avoid table: [0.439, -0.025, 0.275]
+[PLACE] desired_obj_pos = [0.662, 0.116, 0.723]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42262006 -0.01999398  0.58014256]
+Picking up 'green_cube' at [0.43922329 0.02517798 0.02498773]
+[PICK] Lifting extra high to avoid table: [0.439, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.674, 0.152, 0.723]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42381714 -0.01338492  0.58025131]
+Picking up 'green_cube' at [ 0.43976076 -0.01175486  0.02499045]
+[PICK] Lifting extra high to avoid table: [0.44, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.686, 0.128, 0.723]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42253378 -0.01925421  0.58008946]
+Picking up 'green_cube' at [0.43721771 0.01597463 0.02499076]
+[PICK] Lifting extra high to avoid table: [0.437, 0.016, 0.275]
+[PLACE] desired_obj_pos = [0.698, 0.128, 0.723]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42275294 -0.01998085  0.58009346]
+Picking up 'green_cube' at [0.44019985 0.02582627 0.02499096]
+[PICK] Lifting extra high to avoid table: [0.44, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.698, 0.116, 0.723]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42255403 -0.01846643  0.58010575]
+Picking up 'green_cube' at [0.44359108 0.02736943 0.02499047]
+[PICK] Lifting extra high to avoid table: [0.444, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.662, 0.128, 0.723]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42297028 -0.00936659  0.58018258]
+Picking up 'green_cube' at [ 0.43945747 -0.02957508  0.02499033]
+[PICK] Lifting extra high to avoid table: [0.439, -0.03, 0.275]
+[PLACE] desired_obj_pos = [0.662, 0.14, 0.723]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.69493183 0.03416601 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.695, 0.034, 0.85]
+[PICK] Retreating from table: [0.445, 0.034, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.662]
+[PLACE] Moving to safe waypoint (table): [0.559, 0.019, 0.85]
+[EP 44] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.66026913 0.07274686 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.66, 0.073, 0.85]
+[PICK] Retreating from table: [0.41, 0.073, 0.85]
+[PLACE] desired_obj_pos = [0.62, 0.0, 0.664]
+[PLACE] Moving to safe waypoint (table): [0.531, 0.039, 0.85]
+[EP 45] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.62104911 0.11201274 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.621, 0.112, 0.85]
+[PICK] Retreating from table: [0.371, 0.112, 0.85]
+[PLACE] desired_obj_pos = [0.62, 0.0, 0.664]
+[PLACE] Moving to safe waypoint (table): [0.508, 0.06, 0.85]
+[EP 46] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.72192797 -0.02674501  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.722, -0.027, 0.85]
+[PICK] Retreating from table: [0.472, -0.027, 0.85]
+[EP 47] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.692, 0.093, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.49219845 -0.0432858   0.04253132]
+Picking up 'green_cube' at [ 0.49219845 -0.0432858   0.04253137]
+Picking up 'green_cube' at [ 0.49219845 -0.0432858   0.04253137]
+  [EP 47] Failed to repick, stopping attempts
+Picking up 'green_cube' at [0.63113967 0.09305114 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.631, 0.093, 0.85]
+[PICK] Retreating from table: [0.381, 0.093, 0.85]
+[EP 48] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.7, 0.037, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.71647617 0.03551188 0.69929588]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.716, 0.036, 0.899]
+[PICK] Retreating from table: [0.466, 0.036, 0.899]
+[PLACE] desired_obj_pos = [0.664, 0.001, 0.716]
+  [Attempt 2/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.65926952 -0.01446916  0.69986804]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.659, -0.014, 0.9]
+[PICK] Retreating from table: [0.409, -0.014, 0.9]
+[PLACE] desired_obj_pos = [0.664, 0.013, 0.716]
+  [Attempt 3/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.66442567 -0.00107592  0.70049736]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.688, 0.001, 0.716]
+  [Attempt 4/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.68998282 -0.0141587   0.69980056]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.69, -0.014, 0.9]
+[PICK] Retreating from table: [0.44, -0.014, 0.9]
+[PLACE] desired_obj_pos = [0.664, -0.011, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.66293515 -0.02401404  0.69768344]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.663, -0.024, 0.898]
+[PICK] Retreating from table: [0.413, -0.024, 0.898]
+[PLACE] desired_obj_pos = [0.688, 0.013, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.69869881 0.01041147 0.70083086]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.688, 0.025, 0.716]
+  [Attempt 7/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.68640947 0.00970678 0.70117856]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.7, 0.025, 0.716]
+  [Attempt 8/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.70046821 0.01160929 0.70023218]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.676, 0.013, 0.716]
+  [Attempt 9/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.64843719 -0.04218352  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.648, -0.042, 0.85]
+[PICK] Retreating from table: [0.398, -0.042, 0.85]
+[EP 49] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.684, 0.085, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.47752731 0.0253579  0.02497662]
+[PICK] Lifting extra high to avoid table: [0.478, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.708, 0.073, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.79651185 0.05965663 0.02499045]
+[PICK] Lifting extra high to avoid table: [0.797, 0.06, 0.275]
+[PLACE] desired_obj_pos = [0.72, 0.085, 0.716]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.82626744 0.08997509 0.02498654]
+[PICK] Lifting extra high to avoid table: [0.826, 0.09, 0.275]
+[PLACE] desired_obj_pos = [0.696, 0.109, 0.716]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.90792526 0.13613536 0.02499055]
+[PICK] Lifting extra high to avoid table: [0.908, 0.136, 0.275]
+[PLACE] desired_obj_pos = [0.696, 0.121, 0.716]
+  [Attempt 5/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.80995657 0.15091921 0.02498894]
+[PICK] Lifting extra high to avoid table: [0.81, 0.151, 0.275]
+[PLACE] desired_obj_pos = [0.708, 0.121, 0.716]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.84822997 0.14575166 0.02498965]
+[PICK] Lifting extra high to avoid table: [0.848, 0.146, 0.275]
+[PLACE] desired_obj_pos = [0.708, 0.085, 0.716]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.8000918  0.09962836 0.02499043]
+[PICK] Lifting extra high to avoid table: [0.8, 0.1, 0.275]
+[PLACE] desired_obj_pos = [0.732, 0.109, 0.716]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.86211751 0.14011874 0.02499026]
+[PICK] Lifting extra high to avoid table: [0.862, 0.14, 0.275]
+[PLACE] desired_obj_pos = [0.72, 0.073, 0.716]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+
+[50/100] Progress Report:
+  Overall success:  36/50 (72.0%)
+  Stacking success: 23/37 (62.2%)
+  Table success:    13/13 (100.0%)
+  Rate: 0.5 ep/s | ETA: 101s
+Picking up 'green_cube' at [ 0.59321915 -0.05534978  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.593, -0.055, 0.85]
+[PICK] Retreating from table: [0.35, -0.055, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.669]
+[PLACE] Moving to safe waypoint (table): [0.492, -0.028, 0.85]
+[EP 50] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.61422749 -0.00287079  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.614, -0.003, 0.85]
+[PICK] Retreating from table: [0.364, -0.003, 0.85]
+[EP 51] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.642, -0.094, 0.721]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.53470607 -0.06652096  0.6527027 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.535, -0.067, 0.853]
+[PICK] Retreating from table: [0.35, -0.067, 0.853]
+[PLACE] desired_obj_pos = [0.642, -0.118, 0.721]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42021855 -0.00108701  0.58273648]
+Picking up 'green_cube' at [ 0.42515888 -0.01296506  0.02499074]
+[PICK] Lifting extra high to avoid table: [0.425, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.666, -0.094, 0.721]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42266764 -0.01020431  0.58012638]
+Picking up 'green_cube' at [ 0.43918095 -0.0112678   0.02498697]
+[PICK] Lifting extra high to avoid table: [0.439, -0.011, 0.275]
+[PLACE] desired_obj_pos = [0.666, -0.13, 0.721]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42234304 -0.01205111  0.58007645]
+Picking up 'green_cube' at [ 0.43595652 -0.0122708   0.02498671]
+[PICK] Lifting extra high to avoid table: [0.436, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.654, -0.13, 0.721]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42223126 -0.01259878  0.58014027]
+Picking up 'green_cube' at [ 0.43706244 -0.01262227  0.02499094]
+[PICK] Lifting extra high to avoid table: [0.437, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.678, -0.13, 0.721]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42227383 -0.01305647  0.58010616]
+Picking up 'green_cube' at [ 0.4372297  -0.01238185  0.02498504]
+[PICK] Lifting extra high to avoid table: [0.437, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.654, -0.142, 0.721]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42238936 -0.01363118  0.58009382]
+Picking up 'green_cube' at [ 0.43714394 -0.01298529  0.02499093]
+[PICK] Lifting extra high to avoid table: [0.437, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.678, -0.142, 0.721]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42248722 -0.01392804  0.58012193]
+Picking up 'green_cube' at [ 0.437083   -0.01327199  0.0249896 ]
+[PICK] Lifting extra high to avoid table: [0.437, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.678, -0.118, 0.721]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.68983237 -0.09357623  0.64998991]
+[EP 52] Failed to pick green cube
+Picking up 'green_cube' at [ 0.69015975 -0.0276232   0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.69, -0.028, 0.85]
+[PICK] Retreating from table: [0.44, -0.028, 0.85]
+[PLACE] desired_obj_pos = [0.66, 0.0, 0.666]
+[PLACE] Moving to safe waypoint (table): [0.569, -0.015, 0.85]
+[EP 53] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.70592927 -0.11053316  0.65022536]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.706, -0.111, 0.85]
+[PICK] Retreating from table: [0.456, -0.111, 0.85]
+[PLACE] desired_obj_pos = [0.66, 0.0, 0.664]
+[PLACE] Moving to safe waypoint (table): [0.578, -0.061, 0.85]
+[EP 54] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.72696417 0.13667766 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.727, 0.137, 0.85]
+[PICK] Retreating from table: [0.477, 0.137, 0.85]
+[EP 55] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.629, -0.135, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.6206208  -0.14001645  0.70192007]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.617, -0.123, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.61976274 -0.10496938  0.70098942]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.665, -0.123, 0.716]
+  [Attempt 3/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.66949178 -0.10918019  0.70462431]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.665, -0.111, 0.716]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.66546686 -0.08947265  0.70678383]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.653, -0.123, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.66418472 -0.12272795  0.69998578]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.664, -0.123, 0.9]
+[PICK] Retreating from table: [0.414, -0.123, 0.9]
+[PLACE] desired_obj_pos = [0.629, -0.123, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.62743293 -0.12529962  0.70012177]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.653, -0.111, 0.716]
+  [Attempt 7/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.65511207 -0.10026649  0.70005342]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.629, -0.099, 0.716]
+  [Attempt 8/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.62367923 -0.09731986  0.70013915]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.665, -0.087, 0.716]
+  [Attempt 9/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.61477437 0.03273265 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.615, 0.033, 0.85]
+[PICK] Retreating from table: [0.365, 0.033, 0.85]
+[EP 56] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.621, -0.087, 0.722]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.47815435 0.03383748 0.02498909]
+[PICK] Lifting extra high to avoid table: [0.478, 0.034, 0.275]
+[PLACE] desired_obj_pos = [0.621, -0.051, 0.722]
+  [Attempt 2/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42273816 -0.01565176  0.5802191 ]
+Picking up 'green_cube' at [ 0.44069138 -0.00105561  0.02498812]
+[PICK] Lifting extra high to avoid table: [0.441, -0.001, 0.275]
+[PLACE] desired_obj_pos = [0.633, -0.099, 0.722]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42262251 -0.0121319   0.58013444]
+Picking up 'green_cube' at [ 0.43890671 -0.02683504  0.02499095]
+[PICK] Lifting extra high to avoid table: [0.439, -0.027, 0.275]
+[PLACE] desired_obj_pos = [0.645, -0.099, 0.722]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42262028 -0.02000799  0.58014237]
+Picking up 'green_cube' at [0.43918798 0.02519583 0.02498791]
+[PICK] Lifting extra high to avoid table: [0.439, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.657, -0.063, 0.722]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42260739 -0.02047343  0.58012573]
+Picking up 'green_cube' at [0.44083462 0.03038808 0.0249901 ]
+[PICK] Lifting extra high to avoid table: [0.441, 0.03, 0.275]
+[PLACE] desired_obj_pos = [0.657, -0.075, 0.722]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42254356 -0.01487936  0.58010361]
+Picking up 'green_cube' at [ 4.42264921e-01 -2.31121604e-04  2.49899081e-02]
+[PICK] Lifting extra high to avoid table: [0.442, -0.0, 0.275]
+[PLACE] desired_obj_pos = [0.669, -0.075, 0.722]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42277809 -0.01101499  0.58022146]
+Picking up 'green_cube' at [ 0.4420408  -0.02896139  0.02499093]
+[PICK] Lifting extra high to avoid table: [0.442, -0.029, 0.275]
+[PLACE] desired_obj_pos = [0.669, -0.099, 0.722]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42240412 -0.01969416  0.5801251 ]
+Picking up 'green_cube' at [0.43963595 0.0253346  0.02498764]
+[PICK] Lifting extra high to avoid table: [0.44, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.633, -0.051, 0.722]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.61350831 0.13456383 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.614, 0.135, 0.85]
+[PICK] Retreating from table: [0.364, 0.135, 0.85]
+[EP 57] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.619, 0.073, 0.727]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42242429 -0.00363923  0.58573949]
+Picking up 'green_cube' at [0.42508074 0.0099699  0.0249882 ]
+[PICK] Lifting extra high to avoid table: [0.425, 0.01, 0.275]
+[PLACE] desired_obj_pos = [0.631, 0.073, 0.727]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42247519 -0.0073955   0.58025275]
+Picking up 'green_cube' at [ 0.43989437 -0.00789576  0.02498904]
+[PICK] Lifting extra high to avoid table: [0.44, -0.008, 0.275]
+[PLACE] desired_obj_pos = [0.643, 0.061, 0.727]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.422007   -0.00945289  0.57980035]
+Picking up 'green_cube' at [ 0.4386216  -0.01039108  0.02498936]
+[PICK] Lifting extra high to avoid table: [0.439, -0.01, 0.275]
+[PLACE] desired_obj_pos = [0.655, 0.097, 0.727]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42262267 -0.01121147  0.58012366]
+Picking up 'green_cube' at [ 0.43678922 -0.01087329  0.02498831]
+[PICK] Lifting extra high to avoid table: [0.437, -0.011, 0.275]
+[PLACE] desired_obj_pos = [0.655, 0.073, 0.727]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42198124 -0.0115826   0.58010012]
+Picking up 'green_cube' at [ 0.43682068 -0.01367359  0.02499098]
+[PICK] Lifting extra high to avoid table: [0.437, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.655, 0.085, 0.727]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42235146 -0.0123779   0.58009008]
+Picking up 'green_cube' at [ 0.43596512 -0.01267556  0.02499077]
+[PICK] Lifting extra high to avoid table: [0.436, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.667, 0.049, 0.727]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.4225169  -0.01312301  0.58012455]
+Picking up 'green_cube' at [ 0.43803335 -0.01415398  0.02498767]
+[PICK] Lifting extra high to avoid table: [0.438, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.655, 0.049, 0.727]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.4223862 -0.0135471  0.5800976]
+Picking up 'green_cube' at [ 0.43749301 -0.01305034  0.02498975]
+[PICK] Lifting extra high to avoid table: [0.437, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.667, 0.097, 0.727]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.74713719 0.04891719 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.747, 0.049, 0.85]
+[PICK] Retreating from table: [0.497, 0.049, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.665]
+[PLACE] Moving to safe waypoint (table): [0.598, 0.028, 0.85]
+[EP 58] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.62374926 -0.07584645  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.624, -0.076, 0.85]
+[PICK] Retreating from table: [0.374, -0.076, 0.85]
+[EP 59] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.616, 0.111, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61681186 0.11256963 0.70478357]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.616, 0.087, 0.719]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.6160752  0.07614698 0.69945659]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.616, 0.076, 0.899]
+[PICK] Retreating from table: [0.366, 0.076, 0.899]
+[PLACE] desired_obj_pos = [0.64, 0.087, 0.719]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.64712948 0.07200114 0.69748375]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.647, 0.072, 0.897]
+[PICK] Retreating from table: [0.397, 0.072, 0.897]
+[PLACE] desired_obj_pos = [0.64, 0.111, 0.719]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.64035233 0.10676252 0.70632524]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.652, 0.099, 0.719]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.66368306 0.04590747 0.65694517]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.664, 0.046, 0.857]
+[PICK] Retreating from table: [0.414, 0.046, 0.857]
+[PLACE] desired_obj_pos = [0.652, 0.111, 0.719]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.66107352 0.10243297 0.71247305]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.628, 0.111, 0.719]
+  [Attempt 7/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.62589804 0.08917208 0.70510154]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.664, 0.087, 0.719]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.69069435 0.04850754 0.64998796]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.691, 0.049, 0.85]
+[PICK] Retreating from table: [0.441, 0.049, 0.85]
+[PLACE] desired_obj_pos = [0.628, 0.099, 0.719]
+  [Attempt 9/9] ✗ Failed (score=-0.000043)
+
+[60/100] Progress Report:
+  Overall success:  42/60 (70.0%)
+  Stacking success: 25/43 (58.1%)
+  Table success:    17/17 (100.0%)
+  Rate: 0.5 ep/s | ETA: 78s
+Picking up 'green_cube' at [0.66566805 0.06887645 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.666, 0.069, 0.85]
+[PICK] Retreating from table: [0.416, 0.069, 0.85]
+[EP 60] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.652, -0.146, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.63725435 -0.14865393  0.69817441]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.637, -0.149, 0.898]
+[PICK] Retreating from table: [0.387, -0.149, 0.898]
+[PLACE] desired_obj_pos = [0.652, -0.158, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.57863067 -0.08906393  0.64999237]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.579, -0.089, 0.85]
+[PICK] Retreating from table: [0.35, -0.089, 0.85]
+[PLACE] desired_obj_pos = [0.652, -0.134, 0.715]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.70638856 -0.14179347  0.69966759]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.706, -0.142, 0.9]
+[PICK] Retreating from table: [0.456, -0.142, 0.9]
+[PLACE] desired_obj_pos = [0.676, -0.134, 0.715]
+  [Attempt 4/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.67564022 -0.1202902   0.70013223]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.676, -0.122, 0.715]
+  [Attempt 5/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.67492909 -0.11469495  0.70024352]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.7, -0.146, 0.715]
+  [Attempt 6/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.53731886 0.01435655 0.02499095]
+Picking up 'green_cube' at [0.53731886 0.01435655 0.02499095]
+[PICK] Lifting extra high to avoid table: [0.537, 0.014, 0.275]
+[PLACE] desired_obj_pos = [0.7, -0.134, 0.715]
+  [Attempt 7/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.80782724 -0.12971283  0.03491567]
+[PICK] Lifting extra high to avoid table: [0.808, -0.13, 0.285]
+[PLACE] desired_obj_pos = [0.688, -0.11, 0.715]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.79489887 -0.13801895  0.02499052]
+[PICK] Lifting extra high to avoid table: [0.795, -0.138, 0.275]
+[PLACE] desired_obj_pos = [0.664, -0.158, 0.715]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.65672856 -0.06956699  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.657, -0.07, 0.85]
+[PICK] Retreating from table: [0.407, -0.07, 0.85]
+[EP 61] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.639, -0.163, 0.724]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42458471 -0.00732208  0.58644602]
+Picking up 'green_cube' at [0.44715559 0.04286699 0.02498833]
+[PICK] Lifting extra high to avoid table: [0.447, 0.043, 0.275]
+[PLACE] desired_obj_pos = [0.639, -0.151, 0.724]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42171123 -0.01586163  0.5800198 ]
+Picking up 'green_cube' at [0.4450823  0.02564796 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.445, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.651, -0.151, 0.724]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42251295 -0.01818292  0.58008625]
+Picking up 'green_cube' at [0.44375051 0.02649928 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.444, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.651, -0.163, 0.724]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42261217 -0.01873388  0.58013789]
+Picking up 'green_cube' at [0.44297378 0.01928785 0.02499098]
+[PICK] Lifting extra high to avoid table: [0.443, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.639, -0.139, 0.724]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42238127 -0.0195929   0.58011995]
+Picking up 'green_cube' at [0.43975332 0.02567193 0.02498699]
+[PICK] Lifting extra high to avoid table: [0.44, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.651, -0.127, 0.724]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42256726 -0.0190064   0.58011291]
+Picking up 'green_cube' at [0.43764486 0.01537416 0.02498616]
+[PICK] Lifting extra high to avoid table: [0.438, 0.015, 0.275]
+[PLACE] desired_obj_pos = [0.675, -0.139, 0.724]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.4225406  -0.01376692  0.58013094]
+Picking up 'green_cube' at [ 0.43745676 -0.01350068  0.02499034]
+[PICK] Lifting extra high to avoid table: [0.437, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.663, -0.127, 0.724]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42253761 -0.01381719  0.58009728]
+Picking up 'green_cube' at [ 0.43708315 -0.01375448  0.02499039]
+[PICK] Lifting extra high to avoid table: [0.437, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.627, -0.115, 0.724]
+  [Attempt 9/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.68193542 0.11746993 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.682, 0.117, 0.85]
+[PICK] Retreating from table: [0.432, 0.117, 0.85]
+[EP 62] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.657, -0.024, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.43710952 -0.05147346  0.03533407]
+[PICK] Lifting extra high to avoid table: [0.437, -0.051, 0.285]
+[PLACE] desired_obj_pos = [0.669, -0.012, 0.715]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.64851827 -0.0573278   0.02498806]
+Picking up 'green_cube' at [ 0.64851827 -0.0573278   0.02498806]
+Picking up 'green_cube' at [ 0.64851827 -0.0573278   0.02498806]
+  [EP 62] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.62777426 -0.10876909  0.65021111]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.628, -0.109, 0.85]
+[PICK] Retreating from table: [0.378, -0.109, 0.85]
+[EP 63] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.61, -0.058, 0.727]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.52370186 -0.09919022  0.66554751]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.524, -0.099, 0.866]
+[PICK] Retreating from table: [0.35, -0.099, 0.866]
+[PLACE] desired_obj_pos = [0.634, -0.058, 0.727]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.42539117 0.00063688 0.58904659]
+Picking up 'green_cube' at [ 0.42453932 -0.0071196   0.03513062]
+[PICK] Lifting extra high to avoid table: [0.425, -0.007, 0.285]
+[PLACE] desired_obj_pos = [0.646, -0.034, 0.727]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42233461 -0.01091917  0.57991744]
+Picking up 'green_cube' at [ 0.4171212  -0.01404884  0.02499096]
+[PICK] Lifting extra high to avoid table: [0.417, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.622, -0.07, 0.727]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42268457 -0.01210522  0.58016628]
+Picking up 'green_cube' at [ 0.43762424 -0.01185994  0.02499095]
+[PICK] Lifting extra high to avoid table: [0.438, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.61, -0.07, 0.727]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42218351 -0.01253705  0.58012283]
+Picking up 'green_cube' at [ 0.43683405 -0.01249126  0.02499041]
+[PICK] Lifting extra high to avoid table: [0.437, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.634, -0.082, 0.727]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42257386 -0.01322964  0.58011848]
+Picking up 'green_cube' at [ 0.43803992 -0.01272936  0.02499093]
+[PICK] Lifting extra high to avoid table: [0.438, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.646, -0.082, 0.727]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42262777 -0.01367249  0.58011383]
+Picking up 'green_cube' at [ 0.43759748 -0.0132412   0.02498912]
+[PICK] Lifting extra high to avoid table: [0.438, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.61, -0.046, 0.727]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42224254 -0.01443304  0.57970481]
+Picking up 'green_cube' at [ 0.43752817 -0.01223187  0.02498991]
+[PICK] Lifting extra high to avoid table: [0.438, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.622, -0.082, 0.727]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.71019682 0.07974714 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.71, 0.08, 0.85]
+[PICK] Retreating from table: [0.46, 0.08, 0.85]
+[EP 64] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.621, 0.115, 0.734]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [-0.07653801 -0.17899452  0.03509398]
+[PICK] Lifting extra high to avoid table: [-0.077, -0.179, 0.285]
+[PLACE] desired_obj_pos = [0.621, 0.079, 0.734]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [-0.78121788 -0.41323631  0.02499087]
+[PICK] Lifting extra high to avoid table: [-0.781, -0.413, 0.275]
+[PLACE] desired_obj_pos = [0.633, 0.115, 0.734]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [-0.60881969 -0.41153149  0.03390882]
+[PICK] Lifting extra high to avoid table: [-0.609, -0.412, 0.284]
+[PLACE] desired_obj_pos = [0.633, 0.079, 0.734]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.43979519 -0.01824912  0.58851563]
+Picking up 'green_cube' at [ 0.46003073 -0.00823983  0.02498826]
+[PICK] Lifting extra high to avoid table: [0.46, -0.008, 0.275]
+[PLACE] desired_obj_pos = [0.669, 0.115, 0.734]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42265743 -0.01167886  0.58013212]
+Picking up 'green_cube' at [0.44427569 0.03271763 0.02499056]
+[PICK] Lifting extra high to avoid table: [0.444, 0.033, 0.275]
+[PLACE] desired_obj_pos = [0.669, 0.079, 0.734]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42282806 -0.01342988  0.58026086]
+Picking up 'green_cube' at [0.45040324 0.02708353 0.02498597]
+[PICK] Lifting extra high to avoid table: [0.45, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.645, 0.115, 0.734]
+  [Attempt 7/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42297287 -0.00322694  0.58033894]
+Picking up 'green_cube' at [ 0.43981721 -0.02397779  0.02499039]
+[PICK] Lifting extra high to avoid table: [0.44, -0.024, 0.275]
+[PLACE] desired_obj_pos = [0.633, 0.103, 0.734]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42283551 -0.01568608  0.58026434]
+Picking up 'green_cube' at [0.44875039 0.02687031 0.02499084]
+[PICK] Lifting extra high to avoid table: [0.449, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.645, 0.091, 0.734]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.70886329 0.07457379 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.709, 0.075, 0.85]
+[PICK] Retreating from table: [0.459, 0.075, 0.85]
+[EP 65] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.561, 0.025, 0.716]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.53304845 0.03405082 0.66202738]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.533, 0.034, 0.862]
+[PICK] Retreating from table: [0.35, 0.034, 0.862]
+[PLACE] desired_obj_pos = [0.573, -0.011, 0.716]
+  [Attempt 2/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [ 0.59218782 -0.01287708  0.72381325]
+Picking up 'green_cube' at [ 0.40794632 -0.00179507  0.57765743]
+Picking up 'green_cube' at [0.39255285 0.01417451 0.04284506]
+[PICK] Lifting extra high to avoid table: [0.393, 0.014, 0.293]
+[PLACE] desired_obj_pos = [0.585, -0.023, 0.716]
+  [Attempt 3/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.60682547 0.00857578 0.02499038]
+Picking up 'green_cube' at [0.60682547 0.00857578 0.02499038]
+Picking up 'green_cube' at [0.60682547 0.00857578 0.02499038]
+  [EP 65] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.63528745 -0.01337506  0.65022015]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.635, -0.013, 0.85]
+[PICK] Retreating from table: [0.385, -0.013, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.671]
+[PLACE] Moving to safe waypoint (table): [0.524, -0.007, 0.85]
+[EP 66] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.59080486 -0.01987055  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.591, -0.02, 0.85]
+[PICK] Retreating from table: [0.35, -0.02, 0.85]
+[PLACE] desired_obj_pos = [0.62, 0.0, 0.668]
+[PLACE] Moving to safe waypoint (table): [0.485, -0.01, 0.85]
+[EP 67] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.67007812 -0.13030829  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.67, -0.13, 0.85]
+[PICK] Retreating from table: [0.42, -0.13, 0.85]
+[EP 68] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.711, 0.107, 0.717]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.54443067 0.04808776 0.6627628 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.544, 0.048, 0.863]
+[PICK] Retreating from table: [0.35, 0.048, 0.863]
+[PLACE] desired_obj_pos = [0.723, 0.107, 0.717]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.73182472 0.10659678 0.66792076]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.732, 0.107, 0.868]
+[PICK] Retreating from table: [0.482, 0.107, 0.868]
+[PLACE] desired_obj_pos = [0.723, 0.131, 0.717]
+  [Attempt 3/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.72369225 0.12370704 0.668153  ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.724, 0.124, 0.868]
+[PICK] Retreating from table: [0.474, 0.124, 0.868]
+[PLACE] desired_obj_pos = [0.711, 0.143, 0.717]
+  [Attempt 4/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.71152967 0.13576308 0.66818904]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.712, 0.136, 0.868]
+[PICK] Retreating from table: [0.462, 0.136, 0.868]
+[PLACE] desired_obj_pos = [0.711, 0.119, 0.717]
+  [Attempt 5/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.71179291 0.11118181 0.66751676]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.712, 0.111, 0.868]
+[PICK] Retreating from table: [0.462, 0.111, 0.868]
+[PLACE] desired_obj_pos = [0.735, 0.107, 0.717]
+  [Attempt 6/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.73678425 0.10103792 0.66676677]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.737, 0.101, 0.867]
+[PICK] Retreating from table: [0.487, 0.101, 0.867]
+[PLACE] desired_obj_pos = [0.759, 0.095, 0.717]
+  [Attempt 7/9] ✓ Success (score=-0.000047)
+Picking up 'green_cube' at [0.76051736 0.08995944 0.66621733]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.761, 0.09, 0.866]
+[PICK] Retreating from table: [0.511, 0.09, 0.866]
+[PLACE] desired_obj_pos = [0.747, 0.131, 0.717]
+  [Attempt 8/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.74830122 0.12741398 0.6661927 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.748, 0.127, 0.866]
+[PICK] Retreating from table: [0.498, 0.127, 0.866]
+[PLACE] desired_obj_pos = [0.747, 0.095, 0.717]
+  [Attempt 9/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [ 0.58959704 -0.09845062  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.59, -0.098, 0.85]
+[PICK] Retreating from table: [0.35, -0.098, 0.85]
+[EP 69] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.605, 0.055, 0.723]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [0.43040347 0.00195472 0.61119327]
+Picking up 'green_cube' at [ 0.43033061 -0.01474658  0.03436671]
+[PICK] Lifting extra high to avoid table: [0.43, -0.015, 0.284]
+[PLACE] desired_obj_pos = [0.617, 0.043, 0.723]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.4225521  -0.01945826  0.58010179]
+Picking up 'green_cube' at [0.40635614 0.01756353 0.02498907]
+[PICK] Lifting extra high to avoid table: [0.406, 0.018, 0.275]
+[PLACE] desired_obj_pos = [0.641, 0.019, 0.723]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42252877 -0.01972436  0.58008777]
+Picking up 'green_cube' at [0.43792051 0.02093532 0.02498618]
+[PICK] Lifting extra high to avoid table: [0.438, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.653, 0.007, 0.723]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42224714 -0.01476118  0.57982107]
+Picking up 'green_cube' at [ 0.43655751 -0.01274492  0.02499032]
+[PICK] Lifting extra high to avoid table: [0.437, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.629, 0.007, 0.723]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42240902 -0.01940688  0.58013619]
+Picking up 'green_cube' at [0.44004204 0.02469024 0.02498623]
+[PICK] Lifting extra high to avoid table: [0.44, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.629, 0.031, 0.723]
+  [Attempt 6/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42269006 -0.01548387  0.58016132]
+Picking up 'green_cube' at [ 0.43868588 -0.00951326  0.02498953]
+[PICK] Lifting extra high to avoid table: [0.439, -0.01, 0.275]
+[PLACE] desired_obj_pos = [0.641, 0.031, 0.723]
+  [Attempt 7/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42263471 -0.01919101  0.58014338]
+Picking up 'green_cube' at [0.43881733 0.0188647  0.02498833]
+[PICK] Lifting extra high to avoid table: [0.439, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.641, 0.043, 0.723]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42257443 -0.01949001  0.58011273]
+Picking up 'green_cube' at [0.44136042 0.02077346 0.02498971]
+[PICK] Lifting extra high to avoid table: [0.441, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.653, 0.055, 0.723]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+
+[70/100] Progress Report:
+  Overall success:  48/70 (68.6%)
+  Stacking success: 29/51 (56.9%)
+  Table success:    19/19 (100.0%)
+  Rate: 0.5 ep/s | ETA: 60s
+Picking up 'green_cube' at [0.6146227  0.06862892 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.615, 0.069, 0.85]
+[PICK] Retreating from table: [0.365, 0.069, 0.85]
+[PLACE] desired_obj_pos = [0.66, 0.0, 0.67]
+[PLACE] Moving to safe waypoint (table): [0.513, 0.035, 0.85]
+[EP 70] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.70272665 0.11165167 0.65025122]
+[EP 71] Failed to pick green cube
+Picking up 'green_cube' at [ 0.69387624 -0.10758437  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.694, -0.108, 0.85]
+[PICK] Retreating from table: [0.444, -0.108, 0.85]
+[EP 72] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.681, 0.065, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.43765465 0.00271306 0.02499009]
+[PICK] Lifting extra high to avoid table: [0.438, 0.003, 0.275]
+[PLACE] desired_obj_pos = [0.681, 0.101, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.62640841 0.05349067 0.02499095]
+Picking up 'green_cube' at [0.62640841 0.05349067 0.02499095]
+Picking up 'green_cube' at [0.62640841 0.05349067 0.02499095]
+  [EP 72] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.67957261 -0.04977012  0.65034604]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.68, -0.05, 0.85]
+[PICK] Retreating from table: [0.43, -0.05, 0.85]
+[PLACE] desired_obj_pos = [0.647, 0.0, 0.663]
+[PLACE] Moving to safe waypoint (table): [0.556, -0.027, 0.85]
+[EP 73] ✓ Table placement succeeded
+Picking up 'green_cube' at [0.62432294 0.02899004 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.624, 0.029, 0.85]
+[PICK] Retreating from table: [0.374, 0.029, 0.85]
+[EP 74] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.661, 0.019, 0.717]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.66485155 0.02034269 0.70256082]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.661, -0.017, 0.717]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.66913118 -0.06192461  0.6499906 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.669, -0.062, 0.85]
+[PICK] Retreating from table: [0.419, -0.062, 0.85]
+[PLACE] desired_obj_pos = [0.673, 0.019, 0.717]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.68695226 0.03610015 0.70010836]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.673, -0.017, 0.717]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [ 0.6703061  -0.03220204  0.70169182]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.661, -0.029, 0.717]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.65922789 -0.04975348  0.65004094]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.659, -0.05, 0.85]
+[PICK] Retreating from table: [0.409, -0.05, 0.85]
+[PLACE] desired_obj_pos = [0.661, -0.005, 0.717]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.65446114 -0.03960135  0.65986893]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.654, -0.04, 0.86]
+[PICK] Retreating from table: [0.404, -0.04, 0.86]
+[PLACE] desired_obj_pos = [0.685, 0.007, 0.717]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.71186438 -0.04735955  0.66398087]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.712, -0.047, 0.864]
+[PICK] Retreating from table: [0.462, -0.047, 0.864]
+[PLACE] desired_obj_pos = [0.673, -0.005, 0.717]
+  [Attempt 8/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.67369472 -0.02618942  0.65539117]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.674, -0.026, 0.855]
+[PICK] Retreating from table: [0.424, -0.026, 0.855]
+[PLACE] desired_obj_pos = [0.661, 0.007, 0.717]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.63981484 0.02184123 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.64, 0.022, 0.85]
+[PICK] Retreating from table: [0.39, 0.022, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.663]
+[PLACE] Moving to safe waypoint (table): [0.526, 0.012, 0.85]
+[EP 75] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.58838093 -0.0024566   0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.588, -0.002, 0.85]
+[PICK] Retreating from table: [0.35, -0.002, 0.85]
+[EP 76] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.718, 0.099, 0.721]
+  [Attempt 1/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42950103 -0.01956875  0.60470494]
+Picking up 'green_cube' at [0.44501985 0.03006191 0.02499045]
+[PICK] Lifting extra high to avoid table: [0.445, 0.03, 0.275]
+[PLACE] desired_obj_pos = [0.73, 0.123, 0.721]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.4226096  -0.01365915  0.58013316]
+Picking up 'green_cube' at [ 0.43755789 -0.0195314   0.02499093]
+[PICK] Lifting extra high to avoid table: [0.438, -0.02, 0.275]
+[PLACE] desired_obj_pos = [0.718, 0.111, 0.721]
+  [Attempt 3/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42253825 -0.01964189  0.58009121]
+Picking up 'green_cube' at [0.43768922 0.0200055  0.02499025]
+[PICK] Lifting extra high to avoid table: [0.438, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.742, 0.099, 0.721]
+  [Attempt 4/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42273797 -0.01983455  0.58015894]
+Picking up 'green_cube' at [0.44082095 0.0241826  0.02498939]
+[PICK] Lifting extra high to avoid table: [0.441, 0.024, 0.275]
+[PLACE] desired_obj_pos = [0.73, 0.099, 0.721]
+  [Attempt 5/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42252708 -0.01811546  0.58009263]
+Picking up 'green_cube' at [0.44366727 0.02538607 0.02498834]
+[PICK] Lifting extra high to avoid table: [0.444, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.73, 0.135, 0.721]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42300555 -0.01285494  0.58019094]
+Picking up 'green_cube' at [ 0.43926611 -0.01917584  0.0249879 ]
+[PICK] Lifting extra high to avoid table: [0.439, -0.019, 0.275]
+[PLACE] desired_obj_pos = [0.766, 0.099, 0.721]
+  [Attempt 7/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [ 0.42216068 -0.01889668  0.58006731]
+Picking up 'green_cube' at [0.44142912 0.02563026 0.02499035]
+[PICK] Lifting extra high to avoid table: [0.441, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.718, 0.123, 0.721]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42253514 -0.01933289  0.58009426]
+Picking up 'green_cube' at [0.43908854 0.02074163 0.02498956]
+[PICK] Lifting extra high to avoid table: [0.439, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.754, 0.147, 0.721]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.71499429 0.00895087 0.65029641]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.715, 0.009, 0.85]
+[PICK] Retreating from table: [0.465, 0.009, 0.85]
+[EP 77] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.65, -0.027, 0.721]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.13457885 0.05301991 0.02499056]
+Picking up 'green_cube' at [0.13457885 0.05301991 0.02499056]
+Picking up 'green_cube' at [0.13457885 0.05301991 0.02499056]
+  [EP 77] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.71414313 -0.07716158  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.714, -0.077, 0.85]
+[PICK] Retreating from table: [0.464, -0.077, 0.85]
+[EP 78] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.598, 0.087, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [0.48794357 0.04203112 0.02498913]
+Picking up 'green_cube' at [0.48794248 0.0420309  0.02499038]
+Picking up 'green_cube' at [0.48794248 0.0420309  0.02499038]
+  [EP 78] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.65091728 -0.12856874  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.651, -0.129, 0.85]
+[PICK] Retreating from table: [0.401, -0.129, 0.85]
+[EP 79] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.616, 0.057, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.53159428 0.06740592 0.64998546]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.532, 0.067, 0.85]
+[PICK] Retreating from table: [0.35, 0.067, 0.85]
+[PLACE] desired_obj_pos = [0.652, 0.009, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.65359149 -0.0039358   0.70956149]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.616, 0.009, 0.715]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.62441138 -0.03287109  0.65755211]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.624, -0.033, 0.858]
+[PICK] Retreating from table: [0.374, -0.033, 0.858]
+[PLACE] desired_obj_pos = [0.64, 0.045, 0.715]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.64403632 0.03545409 0.6591559 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.644, 0.035, 0.859]
+[PICK] Retreating from table: [0.394, 0.035, 0.859]
+[PLACE] desired_obj_pos = [0.628, 0.057, 0.715]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.62808676 0.05142921 0.66262362]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.628, 0.051, 0.863]
+[PICK] Retreating from table: [0.378, 0.051, 0.863]
+[PLACE] desired_obj_pos = [0.64, 0.021, 0.715]
+  [Attempt 6/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.64255359 0.01442539 0.66375485]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.643, 0.014, 0.864]
+[PICK] Retreating from table: [0.393, 0.014, 0.864]
+[PLACE] desired_obj_pos = [0.652, 0.033, 0.715]
+  [Attempt 7/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.65495555 0.02527653 0.66474063]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.655, 0.025, 0.865]
+[PICK] Retreating from table: [0.405, 0.025, 0.865]
+[PLACE] desired_obj_pos = [0.664, 0.057, 0.715]
+  [Attempt 8/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.66499746 0.05412393 0.66426656]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.665, 0.054, 0.864]
+[PICK] Retreating from table: [0.415, 0.054, 0.864]
+[PLACE] desired_obj_pos = [0.628, 0.009, 0.715]
+  [Attempt 9/9] ✓ Success (score=-0.000043)
+
+[80/100] Progress Report:
+  Overall success:  55/80 (68.8%)
+  Stacking success: 33/58 (56.9%)
+  Table success:    22/22 (100.0%)
+  Rate: 0.5 ep/s | ETA: 39s
+Picking up 'green_cube' at [ 0.73258907 -0.0237648   0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.733, -0.024, 0.85]
+[PICK] Retreating from table: [0.483, -0.024, 0.85]
+[EP 80] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.635, 0.039, 0.728]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.41229266 -0.00479016  0.57958867]
+Picking up 'green_cube' at [0.41764466 0.0006369  0.02499043]
+[PICK] Lifting extra high to avoid table: [0.418, 0.001, 0.275]
+[PLACE] desired_obj_pos = [0.623, 0.027, 0.728]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42269731 -0.01094238  0.58015853]
+Picking up 'green_cube' at [0.4411219  0.04232873 0.02498991]
+[PICK] Lifting extra high to avoid table: [0.441, 0.042, 0.275]
+[PLACE] desired_obj_pos = [0.659, 0.027, 0.728]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42270127 -0.01106203  0.58015041]
+Picking up 'green_cube' at [0.44056823 0.04173732 0.02498771]
+[PICK] Lifting extra high to avoid table: [0.441, 0.042, 0.275]
+[PLACE] desired_obj_pos = [0.647, 0.003, 0.728]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42298926 -0.00506149  0.58011032]
+Picking up 'green_cube' at [ 0.43879045 -0.00582409  0.02499004]
+[PICK] Lifting extra high to avoid table: [0.439, -0.006, 0.275]
+[PLACE] desired_obj_pos = [0.647, -0.009, 0.728]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42393089 -0.00742987  0.58093229]
+Picking up 'green_cube' at [0.44511196 0.0027727  0.02499088]
+[PICK] Lifting extra high to avoid table: [0.445, 0.003, 0.275]
+[PLACE] desired_obj_pos = [0.671, 0.027, 0.728]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42179882 -0.00608136  0.57992724]
+Picking up 'green_cube' at [ 0.43609506 -0.00607454  0.02499044]
+[PICK] Lifting extra high to avoid table: [0.436, -0.006, 0.275]
+[PLACE] desired_obj_pos = [0.659, -0.009, 0.728]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42258747 -0.00910847  0.58002032]
+Picking up 'green_cube' at [ 0.43739609 -0.00944824  0.02499065]
+[PICK] Lifting extra high to avoid table: [0.437, -0.009, 0.275]
+[PLACE] desired_obj_pos = [0.635, -0.009, 0.728]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42263339 -0.01018753  0.5801093 ]
+Picking up 'green_cube' at [ 0.43925458 -0.01176381  0.02499092]
+[PICK] Lifting extra high to avoid table: [0.439, -0.012, 0.275]
+[PLACE] desired_obj_pos = [0.659, 0.015, 0.728]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.72488865 -0.08763504  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.725, -0.088, 0.85]
+[PICK] Retreating from table: [0.475, -0.088, 0.85]
+[PLACE] desired_obj_pos = [0.633, 0.0, 0.665]
+[PLACE] Moving to safe waypoint (table): [0.579, -0.049, 0.85]
+[EP 81] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 0.68211397 -0.09923193  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.682, -0.099, 0.85]
+[PICK] Retreating from table: [0.432, -0.099, 0.85]
+[EP 82] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.64, 0.036, 0.715]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [0.59779649 0.02032836 0.64998549]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.598, 0.02, 0.85]
+[PICK] Retreating from table: [0.35, 0.02, 0.85]
+[PLACE] desired_obj_pos = [0.652, 0.048, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.67228506 0.03891129 0.71062348]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.676, 0.024, 0.715]
+  [Attempt 3/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.67484189 0.01429931 0.71068355]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.664, 0.048, 0.715]
+  [Attempt 4/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.65618288 0.03511242 0.70858102]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.64, 0.048, 0.715]
+  [Attempt 5/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.64037161 0.03456595 0.70159054]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.652, 0.036, 0.715]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.6490697  0.02380558 0.70411355]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.64, 0.024, 0.715]
+  [Attempt 7/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.63503266 0.00750527 0.70055549]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.676, 0.0, 0.715]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.68222767 -0.03778402  0.65006696]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.682, -0.038, 0.85]
+[PICK] Retreating from table: [0.432, -0.038, 0.85]
+[PLACE] desired_obj_pos = [0.676, 0.048, 0.715]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.64461326 0.0272727  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.645, 0.027, 0.85]
+[PICK] Retreating from table: [0.395, 0.027, 0.85]
+[EP 83] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.623, 0.084, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.62857507 0.08557161 0.70158655]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.611, 0.108, 0.716]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61197628 0.10007642 0.70252338]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.611, 0.084, 0.716]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61302946 0.07289561 0.69916724]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.613, 0.073, 0.899]
+[PICK] Retreating from table: [0.363, 0.073, 0.899]
+[PLACE] desired_obj_pos = [0.635, 0.084, 0.716]
+  [Attempt 4/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.63827648 0.07262511 0.69978637]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.638, 0.073, 0.9]
+[PICK] Retreating from table: [0.388, 0.073, 0.9]
+[PLACE] desired_obj_pos = [0.611, 0.132, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61122062 0.12481218 0.69996508]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.611, 0.125, 0.9]
+[PICK] Retreating from table: [0.361, 0.125, 0.9]
+[PLACE] desired_obj_pos = [0.599, 0.12, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.60318444 0.10966293 0.70407035]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.623, 0.12, 0.716]
+  [Attempt 7/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.62720249 0.10622083 0.70425924]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.599, 0.096, 0.716]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.59727831 0.05369303 0.657824  ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.597, 0.054, 0.858]
+[PICK] Retreating from table: [0.35, 0.054, 0.858]
+[PLACE] desired_obj_pos = [0.635, 0.096, 0.716]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.68166479 -0.03672307  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.682, -0.037, 0.85]
+[PICK] Retreating from table: [0.432, -0.037, 0.85]
+[EP 84] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.6, 0.031, 0.718]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [0.59689504 0.02797228 0.70030019]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.612, 0.019, 0.718]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61355676 0.00479583 0.69887647]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.614, 0.005, 0.899]
+[PICK] Retreating from table: [0.364, 0.005, 0.899]
+[PLACE] desired_obj_pos = [0.588, 0.055, 0.718]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.58781562 0.04482241 0.70001552]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.624, 0.055, 0.718]
+  [Attempt 4/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.62917753 0.03759538 0.69996732]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.629, 0.038, 0.9]
+[PICK] Retreating from table: [0.379, 0.038, 0.9]
+[PLACE] desired_obj_pos = [0.576, 0.019, 0.718]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.5755471  0.00308002 0.69990054]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.576, 0.003, 0.9]
+[PICK] Retreating from table: [0.35, 0.003, 0.9]
+[PLACE] desired_obj_pos = [0.624, 0.031, 0.718]
+  [Attempt 6/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.6287364  0.00984386 0.69895855]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.629, 0.01, 0.899]
+[PICK] Retreating from table: [0.379, 0.01, 0.899]
+[PLACE] desired_obj_pos = [0.6, 0.019, 0.718]
+  [Attempt 7/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.60107896 0.01498826 0.70053564]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.588, 0.067, 0.718]
+  [Attempt 8/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.58706587 0.06434334 0.70041639]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.612, 0.031, 0.718]
+  [Attempt 9/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.58629214 0.00337604 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.586, 0.003, 0.85]
+[PICK] Retreating from table: [0.35, 0.003, 0.85]
+[EP 85] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.626, 0.01, 0.727]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42959116 -0.02081594  0.60393744]
+Picking up 'green_cube' at [0.44493815 0.03833558 0.0249884 ]
+[PICK] Lifting extra high to avoid table: [0.445, 0.038, 0.275]
+[PLACE] desired_obj_pos = [0.638, 0.034, 0.727]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42269503 -0.00938106  0.58018099]
+Picking up 'green_cube' at [ 0.43767148 -0.03064717  0.02498812]
+[PICK] Lifting extra high to avoid table: [0.438, -0.031, 0.275]
+[PLACE] desired_obj_pos = [0.65, 0.022, 0.727]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42253644 -0.01962717  0.58009603]
+Picking up 'green_cube' at [0.4376126  0.0197722  0.02498954]
+[PICK] Lifting extra high to avoid table: [0.438, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.626, 0.022, 0.727]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42274086 -0.01991168  0.58015926]
+Picking up 'green_cube' at [0.44088702 0.02476236 0.02499097]
+[PICK] Lifting extra high to avoid table: [0.441, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.65, 0.034, 0.727]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42256349 -0.01818394  0.58011729]
+Picking up 'green_cube' at [0.44380891 0.02569453 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.444, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.674, 0.01, 0.727]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42275967 -0.00999842  0.58021687]
+Picking up 'green_cube' at [ 0.43947347 -0.02910262  0.02499032]
+[PICK] Lifting extra high to avoid table: [0.439, -0.029, 0.275]
+[PLACE] desired_obj_pos = [0.65, 0.046, 0.727]
+  [Attempt 7/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42272939 -0.0192098   0.58020332]
+Picking up 'green_cube' at [0.44209528 0.02571581 0.02499092]
+[PICK] Lifting extra high to avoid table: [0.442, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.638, 0.046, 0.727]
+  [Attempt 8/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42255481 -0.01895481  0.58010561]
+Picking up 'green_cube' at [0.43899097 0.01789676 0.02498999]
+[PICK] Lifting extra high to avoid table: [0.439, 0.018, 0.275]
+[PLACE] desired_obj_pos = [0.626, 0.034, 0.727]
+  [Attempt 9/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.70902708 -0.06930459  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.709, -0.069, 0.85]
+[PICK] Retreating from table: [0.459, -0.069, 0.85]
+[EP 86] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.707, 0.106, 0.72]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.44931415 -0.00505746  0.03531579]
+[PICK] Lifting extra high to avoid table: [0.449, -0.005, 0.285]
+[PLACE] desired_obj_pos = [0.707, 0.142, 0.72]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.80612601 0.15558748 0.04278239]
+[PICK] Lifting extra high to avoid table: [0.806, 0.156, 0.293]
+[PLACE] desired_obj_pos = [0.683, 0.118, 0.72]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.7852344  0.13308092 0.02499083]
+[PICK] Lifting extra high to avoid table: [0.785, 0.133, 0.275]
+[PLACE] desired_obj_pos = [0.695, 0.106, 0.72]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.80618724 0.13160665 0.02498933]
+[PICK] Lifting extra high to avoid table: [0.806, 0.132, 0.275]
+[PLACE] desired_obj_pos = [0.683, 0.106, 0.72]
+  [Attempt 5/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.81548619 0.13161982 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.815, 0.132, 0.275]
+[PLACE] desired_obj_pos = [0.707, 0.094, 0.72]
+  [Attempt 6/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [0.8550235  0.10937923 0.02499037]
+[PICK] Lifting extra high to avoid table: [0.855, 0.109, 0.275]
+[PLACE] desired_obj_pos = [0.719, 0.118, 0.72]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.80365661 0.12407862 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.804, 0.124, 0.275]
+[PLACE] desired_obj_pos = [0.707, 0.118, 0.72]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.84267514 0.150806   0.02498911]
+[PICK] Lifting extra high to avoid table: [0.843, 0.151, 0.275]
+[PLACE] desired_obj_pos = [0.731, 0.106, 0.72]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.71379917 -0.11695569  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.714, -0.117, 0.85]
+[PICK] Retreating from table: [0.464, -0.117, 0.85]
+[PLACE] desired_obj_pos = [0.62, 0.0, 0.663]
+[PLACE] Moving to safe waypoint (table): [0.564, -0.065, 0.85]
+[EP 87] ✓ Table placement succeeded
+Picking up 'green_cube' at [ 7.26642813e-01 -2.75412217e-04  6.49989907e-01]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.727, -0.0, 0.85]
+[PICK] Retreating from table: [0.477, -0.0, 0.85]
+[EP 88] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.626, 0.054, 0.719]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.61918295 0.00085398 0.7065058 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.65, 0.018, 0.719]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.64900246 0.00858393 0.70884987]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.638, 0.042, 0.719]
+  [Attempt 3/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.63617697 0.02981893 0.70784096]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.626, 0.018, 0.719]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.6227137  0.00145187 0.70195743]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.65, 0.03, 0.719]
+  [Attempt 5/9] ✓ Success (score=-0.000043)
+Picking up 'green_cube' at [0.64420514 0.02088197 0.70701455]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.662, 0.042, 0.719]
+  [Attempt 6/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.65855882 0.02861    0.70832205]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.674, 0.042, 0.719]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.68472659 0.0215933  0.69942943]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.685, 0.022, 0.899]
+[PICK] Retreating from table: [0.435, 0.022, 0.899]
+[PLACE] desired_obj_pos = [0.638, 0.018, 0.719]
+  [Attempt 8/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.62938882 -0.00982678  0.64998457]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.629, -0.01, 0.85]
+[PICK] Retreating from table: [0.379, -0.01, 0.85]
+[PLACE] desired_obj_pos = [0.662, 0.066, 0.719]
+  [Attempt 9/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.63580337 0.11035889 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.636, 0.11, 0.85]
+[PICK] Retreating from table: [0.386, 0.11, 0.85]
+[EP 89] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.656, -0.042, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.34691137 0.0472276  0.02498799]
+[PICK] Lifting extra high to avoid table: [0.347, 0.047, 0.275]
+[PLACE] desired_obj_pos = [0.68, -0.03, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.59217932 0.0273625  0.02499092]
+Picking up 'green_cube' at [0.59217932 0.0273625  0.02499092]
+Picking up 'green_cube' at [0.59217932 0.0273625  0.02499092]
+  [EP 89] Failed to repick, stopping attempts
+
+[90/100] Progress Report:
+  Overall success:  63/90 (70.0%)
+  Stacking success: 39/66 (59.1%)
+  Table success:    24/24 (100.0%)
+  Rate: 0.5 ep/s | ETA: 20s
+Picking up 'green_cube' at [0.62957615 0.04566065 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.63, 0.046, 0.85]
+[PICK] Retreating from table: [0.38, 0.046, 0.85]
+[EP 90] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.583, -0.148, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000041)
+Picking up 'green_cube' at [ 0.57890847 -0.15265249  0.70070566]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.607, -0.148, 0.716]
+  [Attempt 2/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.61183927 -0.13180171  0.70012451]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.595, -0.16, 0.716]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.58785969 -0.17813886  0.69537822]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.588, -0.178, 0.895]
+[PICK] Retreating from table: [0.35, -0.178, 0.895]
+[PLACE] desired_obj_pos = [0.619, -0.136, 0.716]
+  [Attempt 4/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.62274606 -0.12024249  0.70273373]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.607, -0.112, 0.716]
+  [Attempt 5/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [ 0.60630822 -0.11522525  0.69997571]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.606, -0.115, 0.9]
+[PICK] Retreating from table: [0.356, -0.115, 0.9]
+[PLACE] desired_obj_pos = [0.607, -0.124, 0.716]
+  [Attempt 6/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.60760609 -0.13483006  0.71146051]
+[PICK] Detected table pickup, executing safe retreat...
+[PLACE] desired_obj_pos = [0.631, -0.148, 0.716]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.6401063  -0.16085848  0.69936288]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.64, -0.161, 0.899]
+[PICK] Retreating from table: [0.39, -0.161, 0.899]
+[PLACE] desired_obj_pos = [0.583, -0.124, 0.716]
+  [Attempt 8/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [ 0.57529229 -0.13168011  0.69997976]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.575, -0.132, 0.9]
+[PICK] Retreating from table: [0.35, -0.132, 0.9]
+[PLACE] desired_obj_pos = [0.619, -0.16, 0.716]
+  [Attempt 9/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.59412282 -0.12596837  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.594, -0.126, 0.85]
+[PICK] Retreating from table: [0.35, -0.126, 0.85]
+[EP 91] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.612, -0.014, 0.724]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.43188817 -0.01249893  0.61675642]
+Picking up 'green_cube' at [ 0.43199758 -0.01604786  0.03428115]
+[PICK] Lifting extra high to avoid table: [0.432, -0.016, 0.284]
+[PLACE] desired_obj_pos = [0.612, -0.002, 0.724]
+  [Attempt 2/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42254345 -0.01942255  0.58009561]
+Picking up 'green_cube' at [0.40577027 0.01675833 0.02499026]
+[PICK] Lifting extra high to avoid table: [0.406, 0.017, 0.275]
+[PLACE] desired_obj_pos = [0.612, -0.026, 0.724]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42269185 -0.01543653  0.58015109]
+Picking up 'green_cube' at [ 0.43839005 -0.00969387  0.02498988]
+[PICK] Lifting extra high to avoid table: [0.438, -0.01, 0.275]
+[PLACE] desired_obj_pos = [0.612, 0.01, 0.724]
+  [Attempt 4/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42253608 -0.01935024  0.58008884]
+Picking up 'green_cube' at [0.43865337 0.01951977 0.02499095]
+[PICK] Lifting extra high to avoid table: [0.439, 0.02, 0.275]
+[PLACE] desired_obj_pos = [0.636, -0.002, 0.724]
+  [Attempt 5/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42255026 -0.01947267  0.58009906]
+Picking up 'green_cube' at [0.4413206  0.02074894 0.02498843]
+[PICK] Lifting extra high to avoid table: [0.441, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.624, 0.022, 0.724]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42246002 -0.01798582  0.58005482]
+Picking up 'green_cube' at [0.44368523 0.02542975 0.02499001]
+[PICK] Lifting extra high to avoid table: [0.444, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.66, -0.002, 0.724]
+  [Attempt 7/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42259673 -0.01867309  0.58012996]
+Picking up 'green_cube' at [0.44293882 0.0191361  0.02499098]
+[PICK] Lifting extra high to avoid table: [0.443, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.636, -0.014, 0.724]
+  [Attempt 8/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42268007 -0.01959619  0.58017355]
+Picking up 'green_cube' at [0.44044613 0.02590066 0.02498941]
+[PICK] Lifting extra high to avoid table: [0.44, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.636, -0.026, 0.724]
+  [Attempt 9/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.59403473 -0.09668639  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.594, -0.097, 0.85]
+[PICK] Retreating from table: [0.35, -0.097, 0.85]
+[EP 92] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.589, 0.056, 0.723]
+  [Attempt 1/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.43183471 -0.00445727  0.61377607]
+Picking up 'green_cube' at [ 0.44690212 -0.02128851  0.02499037]
+[PICK] Lifting extra high to avoid table: [0.447, -0.021, 0.275]
+[PLACE] desired_obj_pos = [0.601, 0.056, 0.723]
+  [Attempt 2/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42257473 -0.01971898  0.58011436]
+Picking up 'green_cube' at [0.43806588 0.02104967 0.02498515]
+[PICK] Lifting extra high to avoid table: [0.438, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.613, 0.044, 0.723]
+  [Attempt 3/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42271092 -0.02009449  0.58014584]
+Picking up 'green_cube' at [0.44111997 0.02524052 0.02499091]
+[PICK] Lifting extra high to avoid table: [0.441, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.577, 0.056, 0.723]
+  [Attempt 4/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42248634 -0.01808099  0.58007136]
+Picking up 'green_cube' at [0.44374749 0.02591367 0.02499036]
+[PICK] Lifting extra high to avoid table: [0.444, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.625, 0.068, 0.723]
+  [Attempt 5/9] ✗ Failed (score=-0.000041)
+Picking up 'green_cube' at [ 0.42229286 -0.01907537  0.58012521]
+Picking up 'green_cube' at [0.44149342 0.02584043 0.02498741]
+[PICK] Lifting extra high to avoid table: [0.441, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.613, 0.056, 0.723]
+  [Attempt 6/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42262347 -0.01907119  0.58014237]
+Picking up 'green_cube' at [0.43910913 0.01863923 0.02499082]
+[PICK] Lifting extra high to avoid table: [0.439, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.589, 0.068, 0.723]
+  [Attempt 7/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42259233 -0.01563521  0.58011783]
+Picking up 'green_cube' at [ 0.43919136 -0.00753735  0.02498821]
+[PICK] Lifting extra high to avoid table: [0.439, -0.008, 0.275]
+[PLACE] desired_obj_pos = [0.589, 0.044, 0.723]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42247291 -0.01872938  0.58005782]
+Picking up 'green_cube' at [0.44198871 0.0175142  0.0249901 ]
+[PICK] Lifting extra high to avoid table: [0.442, 0.018, 0.275]
+[PLACE] desired_obj_pos = [0.577, 0.032, 0.723]
+  [Attempt 9/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.61762602 0.13061096 0.65033965]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.618, 0.131, 0.85]
+[PICK] Retreating from table: [0.368, 0.131, 0.85]
+[EP 93] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.663, 0.073, 0.732]
+  [Attempt 1/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [0.74703781 0.01699889 0.6597098 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.747, 0.017, 0.86]
+[PICK] Retreating from table: [0.497, 0.017, 0.86]
+[PLACE] desired_obj_pos = [0.663, 0.097, 0.732]
+  [Attempt 2/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.40653986 -0.0060799   0.58138764]
+Picking up 'green_cube' at [ 0.42291138 -0.01303876  0.02498699]
+[PICK] Lifting extra high to avoid table: [0.423, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.687, 0.073, 0.732]
+  [Attempt 3/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42250169 -0.01978871  0.58007486]
+Picking up 'green_cube' at [0.43933511 0.02530493 0.02498835]
+[PICK] Lifting extra high to avoid table: [0.439, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.675, 0.085, 0.732]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42250878 -0.02048381  0.58010423]
+Picking up 'green_cube' at [0.43768432 0.02480832 0.02498834]
+[PICK] Lifting extra high to avoid table: [0.438, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.699, 0.073, 0.732]
+  [Attempt 5/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42289501 -0.01412889  0.58024527]
+Picking up 'green_cube' at [ 0.43834137 -0.01269098  0.02498594]
+[PICK] Lifting extra high to avoid table: [0.438, -0.013, 0.275]
+[PLACE] desired_obj_pos = [0.675, 0.097, 0.732]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.42256261 -0.01369162  0.58011056]
+Picking up 'green_cube' at [ 0.43734501 -0.01571588  0.02499035]
+[PICK] Lifting extra high to avoid table: [0.437, -0.016, 0.275]
+[PLACE] desired_obj_pos = [0.711, 0.073, 0.732]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42255136 -0.02036409  0.58012036]
+Picking up 'green_cube' at [0.43798101 0.02421528 0.02499095]
+[PICK] Lifting extra high to avoid table: [0.438, 0.024, 0.275]
+[PLACE] desired_obj_pos = [0.711, 0.121, 0.732]
+  [Attempt 8/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.4227966  -0.01998685  0.58013988]
+Picking up 'green_cube' at [0.44059218 0.02538962 0.02499094]
+[PICK] Lifting extra high to avoid table: [0.441, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.699, 0.097, 0.732]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [ 0.68247603 -0.02357123  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.682, -0.024, 0.85]
+[PICK] Retreating from table: [0.432, -0.024, 0.85]
+[EP 94] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.695, 0.146, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.54995608 0.09088432 0.66164284]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.55, 0.091, 0.862]
+[PICK] Retreating from table: [0.35, 0.091, 0.862]
+[PLACE] desired_obj_pos = [0.707, 0.11, 0.715]
+  [Attempt 2/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [0.72524579 0.06028157 0.66030853]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.725, 0.06, 0.86]
+[PICK] Retreating from table: [0.475, 0.06, 0.86]
+[PLACE] desired_obj_pos = [0.707, 0.146, 0.715]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.72056591 0.14733119 0.66027026]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.721, 0.147, 0.86]
+[PICK] Retreating from table: [0.471, 0.147, 0.86]
+[PLACE] desired_obj_pos = [0.707, 0.122, 0.715]
+  [Attempt 4/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.71028431 0.12062537 0.66015282]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.71, 0.121, 0.86]
+[PICK] Retreating from table: [0.46, 0.121, 0.86]
+[PLACE] desired_obj_pos = [0.719, 0.158, 0.715]
+  [Attempt 5/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.72356995 0.15851268 0.6639316 ]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.724, 0.159, 0.864]
+[PICK] Retreating from table: [0.474, 0.159, 0.864]
+[PLACE] desired_obj_pos = [0.743, 0.134, 0.715]
+  [Attempt 6/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.75295889 0.13488474 0.66295094]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.753, 0.135, 0.863]
+[PICK] Retreating from table: [0.503, 0.135, 0.863]
+[PLACE] desired_obj_pos = [0.695, 0.122, 0.715]
+  [Attempt 7/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.69739083 0.12128371 0.66221667]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.697, 0.121, 0.862]
+[PICK] Retreating from table: [0.447, 0.121, 0.862]
+[PLACE] desired_obj_pos = [0.707, 0.158, 0.715]
+  [Attempt 8/9] ✓ Success (score=-0.000046)
+Picking up 'green_cube' at [0.71113681 0.15747118 0.66397855]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.711, 0.157, 0.864]
+[PICK] Retreating from table: [0.461, 0.157, 0.864]
+[PLACE] desired_obj_pos = [0.731, 0.158, 0.715]
+  [Attempt 9/9] ✓ Success (score=-0.000045)
+Picking up 'green_cube' at [0.65895175 0.01208734 0.65024421]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.659, 0.012, 0.85]
+[PICK] Retreating from table: [0.409, 0.012, 0.85]
+[EP 95] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.658, -0.047, 0.732]
+  [Attempt 1/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42313075 -0.002501    0.58079766]
+Picking up 'green_cube' at [ 0.4252905  -0.01484597  0.02498753]
+[PICK] Lifting extra high to avoid table: [0.425, -0.015, 0.275]
+[PLACE] desired_obj_pos = [0.658, -0.083, 0.732]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.422894   -0.00330948  0.58021133]
+Picking up 'green_cube' at [ 0.43820976 -0.01392802  0.02499077]
+[PICK] Lifting extra high to avoid table: [0.438, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.694, -0.071, 0.732]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42269991 -0.01320038  0.58018798]
+Picking up 'green_cube' at [0.44995394 0.02674294 0.02499096]
+[PICK] Lifting extra high to avoid table: [0.45, 0.027, 0.275]
+[PLACE] desired_obj_pos = [0.67, -0.071, 0.732]
+  [Attempt 4/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42298452 -0.00412758  0.58034622]
+Picking up 'green_cube' at [ 0.44037711 -0.02497902  0.02498768]
+[PICK] Lifting extra high to avoid table: [0.44, -0.025, 0.275]
+[PLACE] desired_obj_pos = [0.658, -0.059, 0.732]
+  [Attempt 5/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.4228657  -0.01677479  0.58028214]
+Picking up 'green_cube' at [0.44749045 0.02631868 0.02498989]
+[PICK] Lifting extra high to avoid table: [0.447, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.67, -0.059, 0.732]
+  [Attempt 6/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42252167 -0.01374715  0.58009826]
+Picking up 'green_cube' at [ 0.44327842 -0.00445812  0.02499093]
+[PICK] Lifting extra high to avoid table: [0.443, -0.004, 0.275]
+[PLACE] desired_obj_pos = [0.694, -0.095, 0.732]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42231842 -0.01873146  0.5801325 ]
+Picking up 'green_cube' at [0.44267756 0.0192365  0.02499082]
+[PICK] Lifting extra high to avoid table: [0.443, 0.019, 0.275]
+[PLACE] desired_obj_pos = [0.706, -0.095, 0.732]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42265456 -0.0197647   0.58015816]
+Picking up 'green_cube' at [0.4399438  0.02552888 0.02498744]
+[PICK] Lifting extra high to avoid table: [0.44, 0.026, 0.275]
+[PLACE] desired_obj_pos = [0.694, -0.059, 0.732]
+  [Attempt 9/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.71218678 -0.01586408  0.64998991]
+[EP 96] Failed to pick green cube
+Picking up 'green_cube' at [0.61686165 0.06840726 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.617, 0.068, 0.85]
+[PICK] Retreating from table: [0.367, 0.068, 0.85]
+[EP 97] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.716, 0.095, 0.716]
+  [Attempt 1/9] ✓ Success (score=-0.000044)
+Picking up 'green_cube' at [ 0.44309278 -0.00951934  0.0249903 ]
+[PICK] Lifting extra high to avoid table: [0.443, -0.01, 0.275]
+[PLACE] desired_obj_pos = [0.716, 0.107, 0.716]
+  [Attempt 2/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.80821229 0.13418522 0.02498814]
+[PICK] Lifting extra high to avoid table: [0.808, 0.134, 0.275]
+[PLACE] desired_obj_pos = [0.716, 0.083, 0.716]
+  [Attempt 3/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [0.84494317 0.08098315 0.02499044]
+[PICK] Lifting extra high to avoid table: [0.845, 0.081, 0.275]
+[PLACE] desired_obj_pos = [0.728, 0.083, 0.716]
+  [Attempt 4/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.82047747 0.08049528 0.0249904 ]
+[PICK] Lifting extra high to avoid table: [0.82, 0.08, 0.275]
+[PLACE] desired_obj_pos = [0.728, 0.095, 0.716]
+  [Attempt 5/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.87058935 0.10464453 0.02498763]
+[PICK] Lifting extra high to avoid table: [0.871, 0.105, 0.275]
+[PLACE] desired_obj_pos = [0.716, 0.131, 0.716]
+  [Attempt 6/9] ✗ Failed (score=-0.000046)
+Picking up 'green_cube' at [0.80364714 0.15895064 0.02498514]
+[PICK] Lifting extra high to avoid table: [0.804, 0.159, 0.275]
+[PLACE] desired_obj_pos = [0.752, 0.107, 0.716]
+  [Attempt 7/9] ✗ Failed (score=-0.000047)
+Picking up 'green_cube' at [0.92498363 0.11147045 0.03533244]
+[PICK] Lifting extra high to avoid table: [0.925, 0.111, 0.285]
+[PLACE] desired_obj_pos = [0.74, 0.131, 0.716]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [0.95595624 0.14689572 0.03478325]
+Picking up 'green_cube' at [0.95595624 0.14689572 0.03478325]
+Picking up 'green_cube' at [0.95595624 0.14689572 0.03478325]
+  [EP 97] Failed to repick, stopping attempts
+Picking up 'green_cube' at [0.69174206 0.02662738 0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.692, 0.027, 0.85]
+[PICK] Retreating from table: [0.442, 0.027, 0.85]
+[EP 98] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.65, -0.041, 0.715]
+  [Attempt 1/9] ✓ Success (score=-0.000042)
+Picking up 'green_cube' at [0.42475735 0.02289919 0.04300001]
+[PICK] Lifting extra high to avoid table: [0.425, 0.023, 0.293]
+[PLACE] desired_obj_pos = [0.662, -0.041, 0.715]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.65770961 -0.03069414  0.02498825]
+Picking up 'green_cube' at [ 0.65770961 -0.03069414  0.02498825]
+Picking up 'green_cube' at [ 0.65770961 -0.03069414  0.02498825]
+  [EP 98] Failed to repick, stopping attempts
+Picking up 'green_cube' at [ 0.64593676 -0.05174195  0.64998991]
+[PICK] Detected table pickup, executing safe retreat...
+[PICK] Lifting high above table: [0.646, -0.052, 0.85]
+[PICK] Retreating from table: [0.396, -0.052, 0.85]
+[EP 99] Attempting 9 placements (top-5 + 4 random)
+[PLACE] desired_obj_pos = [0.647, 0.001, 0.723]
+  [Attempt 1/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42425718 -0.00785279  0.58692234]
+Picking up 'green_cube' at [0.44753055 0.04265457 0.02498792]
+[PICK] Lifting extra high to avoid table: [0.448, 0.043, 0.275]
+[PLACE] desired_obj_pos = [0.647, -0.011, 0.723]
+  [Attempt 2/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42162168 -0.0158963   0.57997559]
+Picking up 'green_cube' at [0.4447319  0.02545941 0.02499096]
+[PICK] Lifting extra high to avoid table: [0.445, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.647, 0.013, 0.723]
+  [Attempt 3/9] ✗ Failed (score=-0.000042)
+Picking up 'green_cube' at [ 0.42282792 -0.01789773  0.58025913]
+Picking up 'green_cube' at [0.44487396 0.02333733 0.02498652]
+[PICK] Lifting extra high to avoid table: [0.445, 0.023, 0.275]
+[PLACE] desired_obj_pos = [0.647, 0.025, 0.723]
+  [Attempt 4/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42232094 -0.01906032  0.58013369]
+Picking up 'green_cube' at [0.44144262 0.02525213 0.02499093]
+[PICK] Lifting extra high to avoid table: [0.441, 0.025, 0.275]
+[PLACE] desired_obj_pos = [0.659, 0.037, 0.723]
+  [Attempt 5/9] ✗ Failed (score=-0.000043)
+Picking up 'green_cube' at [ 0.42255772 -0.01951235  0.58010637]
+Picking up 'green_cube' at [0.4388862  0.02100484 0.02499098]
+[PICK] Lifting extra high to avoid table: [0.439, 0.021, 0.275]
+[PLACE] desired_obj_pos = [0.635, 0.013, 0.723]
+  [Attempt 6/9] ✗ Failed (score=-0.000044)
+Picking up 'green_cube' at [ 0.42268128 -0.01385825  0.58014471]
+Picking up 'green_cube' at [ 0.43784294 -0.01482484  0.02499035]
+[PICK] Lifting extra high to avoid table: [0.438, -0.015, 0.275]
+[PLACE] desired_obj_pos = [0.683, -0.011, 0.723]
+  [Attempt 7/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42253738 -0.01945643  0.58009221]
+Picking up 'green_cube' at [0.43723246 0.01800449 0.02498715]
+[PICK] Lifting extra high to avoid table: [0.437, 0.018, 0.275]
+[PLACE] desired_obj_pos = [0.659, -0.011, 0.723]
+  [Attempt 8/9] ✗ Failed (score=-0.000045)
+Picking up 'green_cube' at [ 0.42267047 -0.01374569  0.58013099]
+Picking up 'green_cube' at [ 0.43786557 -0.01363874  0.02499041]
+[PICK] Lifting extra high to avoid table: [0.438, -0.014, 0.275]
+[PLACE] desired_obj_pos = [0.659, 0.025, 0.723]
+  [Attempt 9/9] ✗ Failed (score=-0.000046)
+
+[100/100] Progress Report:
+  Overall success:  67/100 (67.0%)
+  Stacking success: 43/76 (56.6%)
+  Table success:    24/24 (100.0%)
+  Rate: 0.5 ep/s | ETA: 0s
+
+======================================================================
+✅ Data Collection Complete!
+======================================================================
+Total episodes:    100
+Total successes:   67/100 (67.0%)
+Stacking:          43/76 (56.6%)
+Table placement:   24/24 (100.0%)
+Time elapsed:      204.5s (2.05s per episode)
+Dataset saved to:  attempts_runs/attempts_20260126_003535.jsonl
+======================================================================
+
+🎓 Next step: Run `python train_place_model.py` to train the ML model!
