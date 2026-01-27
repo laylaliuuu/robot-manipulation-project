@@ -293,13 +293,13 @@ def main():
         print("INTERPRETATION")
         print("=" * 60)
         if improvement > 0.05:  # >5 percentage points
-            print("✅ ML provides meaningful improvement over heuristic-only")
+            print(" ML provides meaningful improvement over heuristic-only")
         elif improvement > 0:
-            print("⚠️  ML provides small improvement (may not be statistically significant)")
+            print("  ML provides small improvement (may not be statistically significant)")
         elif improvement < 0:
-            print("❌ ML performs worse than heuristic-only (possible overfitting)")
+            print(" ML performs worse than heuristic-only (possible overfitting)")
         else:
-            print("➖ ML and heuristic perform equally")
+            print(" ML and heuristic perform equally")
     else:
         print("\nSkipping ML test (model not found)")
     

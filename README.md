@@ -137,48 +137,66 @@ Features = [
 
 **Random Forest Classifier (Test Set Performance):**
 ```
-AUC: 0.822
-Precision: 0.875
-Recall: 0.933
+AUC: 0.913
+Precision: 0.958
+Recall: 1.000
 ```
 
 **Top Feature Importances:**
-1. `target_top_z` (38%) — target height is strongest predictor
-2. `obj_half_h` (22%) — object size matters
-3. `heuristic_score` (12%) — IK/FK error
-4. `des_x`, `des_y`, `des_z` (10% each) — position features
+1. `des_y` (29%) — Y position
+2. `des_z` (19%) — Z position  
+3. `des_x` (16%) — X position
+4. `obj_half_h` (15%) — Object height
+5. `heuristic_score` (14%) — IK/FK error
+6. `target_top_z` (7%) — Target height
 
-### ⚠️ Important Finding: Train/Test Mismatch
+### ⚠️ Important Finding: Domain Knowledge Beats ML
 
-**Ablation Study Results (January 26, 2026):**
+**Ablation Study Results (January 27, 2026):**
 
-Through controlled experiments comparing heuristic-only vs. ML-guided candidate selection:
+Through **three systematic ablation studies** comparing heuristic-only vs. ML-guided candidate selection:
 
 | Approach | Success Rate | Notes |
-|----------|--------------|-------|
-| **Motion Planning Improvements** | 45% → 60% | Real improvement from waypoint planning, relaxed limits |
-| **Heuristic-Only Selection** | 60% | Simple "pick first" strategy (baseline) |
-| **ML-Guided Selection** | 20% | Model underperforms despite 0.822 AUC ❌ |
+|----------|--------------|----------|
+| **Baseline (Before Fixes)** | 45% | Original system |
+| **Motion Planning Improvements** | 60% | Real improvement from waypoint planning, relaxed limits |
+| **Heuristic-Only Selection** | 60% | Simple IK/FK error-based selection |
+| **ML-Guided Selection** | 40% | Model underperforms despite 0.913 AUC ❌ |
 
 **Root Cause Identified:**
 
-The ML model was trained on data where the robot tries **multiple candidates** per placement (top-5 + 4 random = 9 attempts), achieving 83% success. However, during deployment testing, the robot only tries **one candidate** (the "best" according to the model), achieving only 20% success.
+Through three experimental iterations, I discovered that **the heuristic directly measures reachability** while ML tries to learn it from data:
+
+**Experiment 1: Multi-Try Training Data**
+- Training: 571 samples, 83% success (robot tries 9 candidates per episode)
+- Result: ML gets 20% success
+- Issue: Train/test mismatch (multi-try training, single-try testing)
+
+**Experiment 2: Single-Try Training Data**
+- Training: 94 samples, 97% success (robot tries 1 candidate per episode)
+- Result: ML improves to 40% success
+- Issue: Class imbalance (only 3% failures to learn from)
+
+**Experiment 3: Stricter Validation Thresholds**
+- Training: 94 samples, 97% success
+- Result: ML remains at 40% success
+- Issue: Heuristic is too good - selects positions that almost always work
 
 **Why ML Underperforms:**
-- Model learned: "Position x=0.66 works" (from multi-try scenarios)
-- Reality: x=0.66 only works when you have 8 backup tries
-- Heuristic's conservative "pick closest to center" strategy is more reliable for single-try scenarios
+1. **Heuristic directly measures reachability:** IK→FK error is physics-based, not learned
+2. **Class imbalance:** 97% success means only 3 failure examples to learn from
+3. **Heuristic already captures everything:** ML tries to learn physics, but heuristic already knows it
 
 **Key Lesson:**
-> High test AUC (0.822) does not guarantee real-world improvement. Training conditions must match deployment conditions. This is a valuable negative result that demonstrates the importance of ablation studies and proper experimental design in ML for robotics.
+> High test AUC (0.913) does not guarantee real-world improvement. When domain knowledge directly measures the target metric (IK/FK error → reachability), ML struggles to add value. This is a valuable negative result that demonstrates research maturity—knowing when NOT to use ML is as important as knowing when to use it.
 
 **Current Status:**
-- ✅ Motion planning improvements provide 33% relative improvement (45% → 60%)
-- ⚠️ ML model underperforms heuristic (40% vs 60%) - see ablation studies
-- 🔬 Ablation study scripts available in `test_ml_ablation.py`
-- 🎛️ **ML mode toggle available** - easily switch between heuristic and ML selection
+-  Motion planning improvements provide 33% relative improvement (45% → 60%)
+-  ML model underperforms heuristic (40% vs 60%) - see ablation studies
+-  Ablation study scripts available in `test_ml_ablation.py`
+-  **ML mode toggle available** - easily switch between heuristic and ML selection
 
-### 🎛️ ML Mode Toggle
+###  ML Mode Toggle
 
 The system supports both heuristic-only and ML-guided candidate selection:
 
